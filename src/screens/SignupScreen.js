@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import {useNavigate} from "react-router-dom";
 
 export default function SignupScreen() {
     const[mobileNo, setMobile] = useState('');
+    const navigate = useNavigate();
+    const enterOtp=()=>{
+        navigate("/otpscreen")
+    }
     return (
         <div>
             <div  className="center">
@@ -18,7 +23,7 @@ export default function SignupScreen() {
                             onChange={ e => setMobile(e.target.value)}></input>
                             <label htmlFor="mobileNo">Enter your Phone Number</label>
                         </div>
-                        <button type="submit" className="btn" style={{width:"100%", minHeight:"2.5rem"}}>Next</button>
+                        <button type="submit" className="btn" style={{width:"100%", minHeight:"2.5rem"}} onClick={enterOtp}>Next</button>
                     </form>
             </div>
             <h2 style={{color: "#00365B"}}><span>OR SIGN UP USING</span></h2>

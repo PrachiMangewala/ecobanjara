@@ -60,7 +60,7 @@ export default function DestinationScreen() {
 
     return (
         <div>
-            <img src={location.images} alt="img" className="dest-backimage"></img>
+            <img src={process.env.PUBLIC_URL +  '/images/tajmahal.jpg'} alt="img" className="dest-backimage"></img>
             <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%"}}><i class="fas fa-map-marker-alt loc-icon"></i></span>
             <div className="destination-info">
                 <div>

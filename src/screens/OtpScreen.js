@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 
 export default function OtpScreen() {
     const[mobileNo, setMobile] = useState('');
+    const navigate = useNavigate();
     const[otp, setOtp] = useState(new Array(4).fill(""));
     const handleChange = (element, index) => {
         if(isNaN(element.value)) return false;
@@ -11,8 +13,12 @@ export default function OtpScreen() {
             element.nextSibling.focus()
         }
     }
+    const enterDetails=()=>{
+        navigate("/enterdetails")
+    }
     return (
         <div>
+            <form>
             <div class="signinform" style={{position:"relative", top:"65px"}}>
                 <div>
                     <p className="otp-text">Confirm your Phone Number</p>
@@ -44,8 +50,9 @@ export default function OtpScreen() {
                         )}
                     )}  
                 </div>
-                <button type="submit" className="btn" style={{width:"100%", minHeight:"2.5rem"}}>Next</button>
+                <button type="submit" className="btn" style={{width:"100%", minHeight:"2.5rem"}} onClick={enterDetails}>Next</button>
                 </div>
+                </form>
         </div>
     )
 }

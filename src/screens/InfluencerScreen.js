@@ -7,7 +7,7 @@ export default function InfluencerScreen() {
         <div>
             <div className="display-flex my-1 mx-1">
                 <img src={image} alt="hello" className="image" style={{width:"4rem", height:"4rem"}}></img>
-                <p className="name">Kiran Tej</p>
+                <p className="name-i">Kiran Tej</p>
                 <p className="city">Rohini, Delhi</p>
                 <div className="d-flex-row">
                     <img src={process.env.PUBLIC_URL +  'images/premiumicon.png'} alt="premium-icon" className="premium-icon"></img>

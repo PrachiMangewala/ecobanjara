@@ -27,7 +27,7 @@ export default function BlogsScreen() {
             <div className="my-2">
                 <div class="mx-175 d-flex my-1">
                     {/* blogs.map(blog) */}
-                    <img src="images/tajmahal.jpg" alt="img" className="blog-image"></img>
+                    <img src={process.env.PUBLIC_URL +  '/images/tajmahal.jpg'} alt="img" className="blog-image"></img>
                     <div>
                     <div style={{marginBottom: "1rem"}}>
                         <p className="dest-name" style={{margin: "0 0 0 0.5rem", color:"#121212"}}>Rishikesh</p>
