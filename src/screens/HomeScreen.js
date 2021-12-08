@@ -26,11 +26,12 @@ export default function HomeScreen() {
     const { userInfo } = userSignin;
     const localsList = useSelector((state) => state.localsList);
     const {loading, locals} = localsList;
-    
+    console.log(locals);
     useEffect(()=>{
-      dispatch(listLocals());
-    },[dispatch])
-    // console.log(loading);
+      dispatch(listLocals(userInfo));
+    },[dispatch, userInfo]);
+
+    console.log(loading);
 
     useEffect(()=>{
         const fetchdata = async() => {

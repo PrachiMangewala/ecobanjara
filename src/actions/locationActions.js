@@ -1,10 +1,7 @@
 import Axios from "axios";
-import { useSelector } from "react-redux";
 import { LOCATION_DETAILS_FAIL, LOCATION_DETAILS_REQUEST, LOCATION_DETAILS_SUCCESS, LOCATION_LIST_FAIL, LOCATION_LIST_SUCCESS, SAVE_LOCATION } from "../constants/locationConstants";
 
-export const listLocations = () => async (dispatch) => {
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+export const listLocations = (userInfo) => async (dispatch) => {
   try {
     const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/destinations/all', 
             { headers: {

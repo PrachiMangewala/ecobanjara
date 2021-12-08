@@ -1,4 +1,4 @@
-import { LOCALS_LIST_FAIL, LOCALS_LIST_SUCCESS } from "../constants/localsConstant";
+import { LOCALS_LIST_FAIL, LOCALS_LIST_REQUEST, LOCALS_LIST_SUCCESS } from "../constants/localsConstant";
 
 export const localsListReducer = (state = { locals: [] }, action) => {
     switch(action.type){
