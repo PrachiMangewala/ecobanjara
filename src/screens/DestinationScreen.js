@@ -5,36 +5,24 @@ import TravelExperts from '../TravelExperts';
 import TravelExpert from '../components/TravelExpert';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailsLocation } from '../actions/locationActions';
-import Axios from "axios";
 
 export default function DestinationScreen() {
     // const[image, setImage] = useState('/tajmahal.jpg');
-    const[error, setError] = useState(false);
-    const[location, setLocation] = useState({});
+    // const[error, setError] = useState(false);
+    // const[location, setLocation] = useState({});
     const {id} = useParams();
     console.log(id);
     const dispatch = useDispatch();
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
-    // const locationId = props.match.params.id;
-    // const locationDetails = useSelector((state) => state.locationDetails);
-    // const { loading, error, location } = locationDetails;
+    const locationDetails = useSelector((state) => state.locationDetails);
+    const { error, location } = locationDetails;
+
     useEffect(()=>{
-        const fetchdata = async() => {
-          try{
-            const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/destination', id,
-            { headers: {
-                "x-access-token": `${userInfo.accesstoken}`,
-            }})
-            setLocation(data);
-            console.log(location);
-          } catch(err){
-            setError(err.message);
-            console.log(error);
-          }
-        };
-        fetchdata();
-    },[error, id, location, userInfo])
+      dispatch(detailsLocation(userInfo, id));
+    },[dispatch, userInfo, id]);
+    console.log(error);
+
     var settings2 = {
         dots: true,
         infinite: false,
@@ -72,24 +60,24 @@ export default function DestinationScreen() {
 
     return (
         <div>
-            <img src={process.env.PUBLIC_URL + "/images/tajmahal.jpg"} alt="img" className="dest-backimage"></img>
+            <img src={location.images} alt="img" className="dest-backimage"></img>
             <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%"}}><i class="fas fa-map-marker-alt loc-icon"></i></span>
             <div className="destination-info">
                 <div>
-                <p className="mx-1 dest-name">Rishikesh</p>
-                <p className="mx-1 dest-area"><span class="icon"><i class="fas fa-map-marker-alt marker"></i></span>Uttarakhand</p>
+                <p className="mx-1 dest-name">{location.city}</p>
+                <p className="mx-1 dest-area"><span class="icon"><i class="fas fa-map-marker-alt marker"></i></span>{location.address}</p>
             </div>
             <div>
                     <ul className="mx-1 dest-text">
                         <li><a href="/" class="active" style={{color: "#6F7789"}}>About</a></li>
-                        <li><a href="/blogscreen" class="loc-hover" style={{color: "#6F7789"}}>Blogs</a></li>
+                        <li><Link to={`/blogscreen/${id}`} class="loc-hover" style={{color: "#6F7789"}}>Blogs</Link></li>
                         <li><a href="/" class="loc-hover" style={{color: "#6F7789"}}>Photo</a></li>
                         <li><a href="/" class="loc-hover" style={{color: "#6F7789"}}>Videos</a></li>
                     </ul>
             </div>
             <div>
                 <p className="mx-1 dest-name" style={{fontSize: "0.9rem", marginTop: "1.5rem"}}>Description</p>
-                <p className="mx-1 dest-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu amet tempor, in massa, habitasse habitasse fermentum, sed faucibus. Augue arcu, ac proin accumsan urna morbi diam nunc, tincidunt. Ac turpis amet vitae dui aliquam vitae nunc. Non enim, lorem duis maecenas odio <span><Link to="/" className="font-yellow">Read More</Link></span></p>
+                <p className="mx-1 dest-p">{location.about? location.about.substring(0,5): ''}<span><Link to="/" className="font-yellow"> Read More</Link></span></p>
             </div>
             <div>
                 <div class="text">

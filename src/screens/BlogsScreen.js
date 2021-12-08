@@ -1,6 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 export default function BlogsScreen() {
+    const blogsList = useSelector((state) => state.blogsList);
+    const { error, blogs} = blogsList;
+
     return (
         <div>
             <div>
@@ -22,6 +26,7 @@ export default function BlogsScreen() {
             </div>
             <div className="my-2">
                 <div class="mx-175 d-flex my-1">
+                    {/* blogs.map(blog) */}
                     <img src="images/tajmahal.jpg" alt="img" className="blog-image"></img>
                     <div>
                     <div style={{marginBottom: "1rem"}}>

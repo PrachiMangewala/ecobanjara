@@ -1,7 +1,9 @@
 import { applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
+import { blogListReducer } from './reducers/blogReducers';
 import { localsListReducer } from './reducers/localsReducers';
-import { locationDetailsReducer, locationListReducer, saveLocationReducer } from './reducers/locationReducers';
+import { locationDetailsReducer, locationListReducer } from './reducers/locationReducers';
+import { savelocationsReducer } from './reducers/savelocationsReducers';
 import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 
 const initialState = {
@@ -23,7 +25,8 @@ const reducer = combineReducers({
     locationsList: locationListReducer,
     locationDetails: locationDetailsReducer,
     localsList: localsListReducer,
-    savedLocationsList: saveLocationReducer,
+    savedLocationsList: savelocationsReducer,
+    blogsList: blogListReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose ;

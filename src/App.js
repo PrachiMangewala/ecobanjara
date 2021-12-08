@@ -9,6 +9,8 @@ import OtpScreen from './screens/OtpScreen';
 import SignupDetailsScreen from './screens/SignupDetailsScreen';
 import DestinationScreen from './screens/DestinationScreen';
 import BlogsScreen from './screens/BlogsScreen';
+import BlogScreen from './screens/BlogScreen';
+import InfluencerScreen from './screens/InfluencerScreen';
 
 function App() {
   return (
@@ -24,7 +26,9 @@ function App() {
           <Route path="/enterdetails" element={<SignupDetailsScreen />} exact></Route>
           <Route path="/otpscreen" element={<OtpScreen/>} exact></Route>
           <Route path="/destination/:id" element={<DestinationScreen/>} exact></Route>
-          <Route path="/blogscreen" element={<BlogsScreen/>} exact></Route>
+          <Route path="/blogscreen/:id" element={<BlogsScreen/>} exact></Route>
+          <Route path="/blog" element={<BlogScreen/>} exact></Route>
+          <Route path="/influencerscreen" element={<InfluencerScreen/>} exact></Route>
         </Routes>
       </main>
     </div>

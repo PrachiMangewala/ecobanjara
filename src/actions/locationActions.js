@@ -13,15 +13,15 @@ export const listLocations = (userInfo) => async (dispatch) => {
   }
 }
 
-export const detailsLocation = (id) => async(dispatch) => {
-  dispatch({type: LOCATION_DETAILS_REQUEST, payload: id})
+export const detailsLocation = (userInfo, id) => async(dispatch) => {
+  // dispatch({type: LOCATION_DETAILS_REQUEST, payload: id})
   try{
-    Axios.post('https://ecobanjarabackend.herokuapp.com/api/destination', id)
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
-    // dispatch({type: LOCATION_DETAILS_SUCCESS, payload: res});
+      const {data} = await Axios.get(`https://ecobanjarabackend.herokuapp.com/api/destination/single/${id}`,
+      { headers: {
+          "x-access-token": `${userInfo.accesstoken}`,
+      }});
+      console.log(data);
+    dispatch({type: LOCATION_DETAILS_SUCCESS, payload: data});
   } catch(error){
     dispatch({type: LOCATION_DETAILS_FAIL, payload: error.response && error.response.data.message
       ? error.response.data.message
@@ -29,9 +29,15 @@ export const detailsLocation = (id) => async(dispatch) => {
   }
 }
 
-export const saveLocation = (locationId) => async(dispatch) => {
-    const {data} = await Axios.get(`https://ecobanjarabackend.herokuapp.com/api/destination/${locationId}`);
+export const saveLocation = (locationId, userInfo) => async(dispatch, getState) => {
+    
+    const {data} = await Axios.get(`https://ecobanjarabackend.herokuapp.com/api/destination/single/${locationId}`,
+    { headers: {
+      "x-access-token": `${userInfo.accesstoken}`,
+    }});
+    console.log(data);
     dispatch({
-        type: SAVE_LOCATION, payload: data
+        type: SAVE_LOCATION, payload: {data}
     });
+    localStorage.setItem('savedLocations', JSON.stringify(getState().savedLocations))
 }

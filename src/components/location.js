@@ -1,11 +1,13 @@
 // import { useEffect } from 'react';
 import {useEffect, useState} from 'react';
 import { saveLocation } from '../actions/locationActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 export default function Location(props){
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
     const [saved, setSaved] =  useState(false);
     const {location} = props;
     const [image, setImage] = useState("");
@@ -25,7 +27,8 @@ export default function Location(props){
     const AddToSavedLocations = () => {
         setSaved(true);
         if(location._id){
-            dispatch(saveLocation(location._id));
+            console.log(location._id);
+            dispatch(saveLocation(location._id, userInfo));
         }
     }
 

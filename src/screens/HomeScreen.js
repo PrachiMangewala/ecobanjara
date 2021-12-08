@@ -1,55 +1,39 @@
 import React from 'react'
 import Location from '../components/location';
-import data from '../data';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import TravelExperts from '../TravelExperts';
 import TravelExpert from '../components/TravelExpert';
-import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import LoadingBox from '../components/LoadingBox';
+// import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Sidebar from '../components/Sidebar';
 import { listLocals } from '../actions/localsActions';
+import { listLocations } from '../actions/locationActions';
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
-    const[locations, setLocations] = useState([]);
-    // const[loading, setLoading] = useState(false);
-    const[error, setError] = useState(false);
     const[sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const localsList = useSelector((state) => state.localsList);
     const {loading, locals} = localsList;
+    const locationsList = useSelector((state) => state.locationsList);
+    const { error, locations} = locationsList;
     console.log(locals);
     useEffect(()=>{
       dispatch(listLocals(userInfo));
     },[dispatch, userInfo]);
 
-    console.log(loading);
-
     useEffect(()=>{
-        const fetchdata = async() => {
-          try{
-            // setLoading(true);
-            const {data} = await axios.get('https://ecobanjarabackend.herokuapp.com/api/destinations/all', 
-            { headers: {
-                "x-access-token": `${userInfo.accesstoken}`,
-            }});
-            // setLoading(false);
-            setLocations(data);
-          } catch(err){
-            setError(err.message);
-            // setLoading(false);
-          }
-        };
-        fetchdata();
-    });
+      dispatch(listLocations(userInfo));
+    },[dispatch, userInfo]);
+
+    console.log(loading);
 
     var settings = {
         dots: true,
