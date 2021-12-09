@@ -17,7 +17,7 @@ export default function Sidebar() {
 
     useEffect(() => {
         if(bool){
-            navigate("/");
+            navigate("/")
         }
     })
 

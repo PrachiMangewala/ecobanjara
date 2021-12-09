@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT } from "../constants/userConstants";
+import { USER_REGISTER_FAIL, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT } from "../constants/userConstants";
 
 export const register = (email, password, name, role, mobileNo, image, dob, gender) => async(dispatch) => {
     // dispatch({ type: USER_REGISTER_REQUEST, payload: { mobileNo, password } });

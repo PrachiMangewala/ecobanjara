@@ -1,9 +1,9 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 export default function BlogsScreen() {
-    const blogsList = useSelector((state) => state.blogsList);
-    const { error, blogs} = blogsList;
+    // const blogsList = useSelector((state) => state.blogsList);
+    // const { error, blogs} = blogsList;
 
     return (
         <div>
