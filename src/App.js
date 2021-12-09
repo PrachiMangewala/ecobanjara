@@ -22,9 +22,9 @@ function App() {
           <Route path="/onboardrole" element={<OnBoardRoleScreen />} exact></Route>
           <Route path="/signin" element={<SignInScreen/>} exact></Route>
           <Route path="/home" element={<HomeScreen/>} exact></Route>
-          <Route path="/signup" element={<SignupScreen/>} exact></Route>
+          <Route path="/signup/:role" element={<SignupScreen/>} exact></Route>
           <Route path="/enterdetails" element={<SignupDetailsScreen />} exact></Route>
-          <Route path="/otpscreen" element={<OtpScreen/>} exact></Route>
+          <Route path="/otpscreen/:role" element={<OtpScreen/>} exact></Route>
           <Route path="/destination/:id" element={<DestinationScreen/>} exact></Route>
           <Route path="/blogscreen/:id" element={<BlogsScreen/>} exact></Route>
           <Route path="/blog" element={<BlogScreen/>} exact></Route>

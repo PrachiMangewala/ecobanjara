@@ -391,6 +391,7 @@ a{
   letter-spacing: 0.1em;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
+  width:100%;
 }
 
 .search-box{
@@ -454,6 +455,7 @@ a{
   display: flex;
   justify-content: space-between;
   margin: 2rem 0 6rem 0;
+  cursor:pointer;
 }
 
 .button{

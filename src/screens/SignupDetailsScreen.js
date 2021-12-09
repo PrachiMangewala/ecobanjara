@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { register } from '../actions/userActions';
 
 export default function SignupDetailsScreen() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [birthday, setBirthday] = useState('');
+    const [dob, setBirthday] = useState('');
     const [gender, setGender] = useState('');
     const [image, setImage] = useState('images/profile.png')
+    const location = useLocation();
+    const [role] = useState(location.state.role);
+    const [mobileNo] = useState(location.state.mobileNo);
+    const navigate = useNavigate();
+
     const imageHandler = (e) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -19,13 +25,31 @@ export default function SignupDetailsScreen() {
         reader.readAsDataURL(e.target.files[0])
     } 
 
+    const userRegister = useSelector(state => state.userRegister);
+    const { userInfo } = userRegister;
+
+
     // const userRegister = useSelector(state => state.userRegister);
     // const { userInfo, loading, error } = userRegister;
     const dispatch = useDispatch();
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(register(image, name, email, birthday, gender, password));
+        console.log(email);
+        console.log(password);
+        console.log(name);
+        console.log(role);
+        console.log(mobileNo);
+        console.log(image);
+        console.log(dob);
+        console.log(gender);
+        dispatch(register(email, password, name, role, mobileNo, image, dob, gender));
     };
+
+    useEffect(() => {
+        if(userInfo) {
+            navigate('/home');
+        }
+    });
 
     return (
         <div className="overflow">

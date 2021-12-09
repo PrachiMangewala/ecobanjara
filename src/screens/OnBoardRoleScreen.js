@@ -1,7 +1,23 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 
 export default function OnBoardRoleScreen() {
+    const[role, setRole] = useState('');
+    const[bool, setBool] = useState(false);
+    const navigate = useNavigate();
+
+    const saveRole = (a) => {
+        console.log(a);
+        setRole(a);
+        setBool(true);
+    }
+
+    useEffect(() => {
+        if(bool){
+            navigate(`/signup/${role}`);
+        }
+    })
+
     return (
         <div>
             <div  className="center">
@@ -13,11 +29,11 @@ export default function OnBoardRoleScreen() {
                 <p style={{fontWeight: "600", fontSize:"0.8rem"}}>Please select what best describes you.</p>
             </div>
             <div className="my-1">
-                <Link to ="/signup" className="btn my-2">I am a Traveller</Link>
+                <button className="btn my-2" onClick={() => saveRole('TRAVELLER')}>I am a Traveller</button>
                 <h2><span>OR</span></h2>
                 <div className="btns">
-                    <Link to ="/signup" className="button"><span className="star"><i className="fas fa-star star" style={{padding:"2px"}}></i></span><span style={{marginLeft:"4px"}}>Travel Expert</span></Link>
-                    <Link to ="/signup" className="button"><span><img className="star" src="images/robot.png" alt="robot" style={{padding:"4px"}}></img></span><span style={{marginLeft:"4px"}}>Local Guide</span></Link>
+                    <button className="button" onClick={() => saveRole('INFLUENCER')}><span className="star"><i className="fas fa-star star" style={{padding:"2px"}}></i></span><span style={{marginLeft:"4px"}}>Travel Expert</span></button>
+                    <button  className="button" onClick={() => saveRole('LOCAL')}><span><img className="star" src="images/robot.png" alt="robot" style={{padding:"4px"}}></img></span><span style={{marginLeft:"4px"}}>Local Guide</span></button>
                 </div>
             </div>
             <div className="center-onboard my-1">

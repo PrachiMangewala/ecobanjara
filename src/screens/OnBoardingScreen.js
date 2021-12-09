@@ -15,7 +15,7 @@ export default function OnBoardingScreen() {
                 <p style={{fontWeight: "500", fontSize:"0.8rem"}}>Loading Trip conversations platform.</p>
             </div>
             <div>
-                <Link to="/onboardrole" className="btn">Get Started</Link>
+                <Link to="/onboardrole" className="btn" style={{width: "auto"}}>Get Started</Link>
             </div>
             <div className="center-onboard my-1">
                 <p className="font-blue">Already have an account?</p>
