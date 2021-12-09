@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 import { signout } from '../actions/userActions';
 
 export default function Sidebar() {
+    const[bool,setBool] = useState(false)
     const userSignin = useSelector((state) => state.userSignin);
     const {userInfo} = userSignin;
     console.log(userInfo);
@@ -11,8 +12,15 @@ export default function Sidebar() {
     const dispatch = useDispatch();
     const signoutHandler = () => {
         dispatch(signout());
-        navigate("/");
-  }
+        setBool(true);
+    }
+
+    useEffect(() => {
+        if(bool){
+            navigate("/");
+        }
+    })
+
     return (
         <div className="back-blue">   
             <div className="mx-1 edit-div"><img src="images/edit.png" alt="edit"></img><span style={{color: "rgb(255,255,255,1)", marginLeft: "0.25rem"}}>Edit</span></div>        
