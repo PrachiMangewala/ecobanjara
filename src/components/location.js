@@ -1,8 +1,9 @@
 // import { useEffect } from 'react';
-import { useState } from 'react';
-import { saveLocation } from '../actions/locationActions';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
+import { getsavedLocations } from '../actions/locationActions';
+import { saveEntity } from '../actions/saveentitiesActions';
 // import axios from 'axios';
 
 export default function Location(props){
@@ -10,25 +11,28 @@ export default function Location(props){
     const { userInfo } = userSignin;
     const [saved, setSaved] =  useState(false);
     const {location} = props;
-    // const [image, setImage] = useState("");
     const dispatch = useDispatch();
-    // useEffect(()=>{
-    //     const fetchImage = async() => {
-    //       try{
-    //         const data = await axios.get('https://ecobanjarabackend.herokuapp.com/api/image/05e4bc6a-e561-4a65-856d-1bae6f9eccb2.jpg');
-    //         setImage(data);
-    //     } catch(err){
-    //         console.log(err);
-    //       }
-    //     };
-    //     fetchImage();
-    // })
+    const savedLocationsList = useSelector((state) => state.savedLocationsList);
+    const {savedlocations} = savedLocationsList;
+    // console.log(savedlocations)
 
-    const AddToSavedLocations = () => {
-        setSaved(true);
-        if(location._id){
-            console.log(location._id);
-            dispatch(saveLocation(location._id, userInfo));
+    useEffect(()=>{
+        dispatch(getsavedLocations(userInfo));
+      },[dispatch, userInfo]);
+
+    const AddToSavedLocations = (locationId) => {
+        if(savedlocations){
+            const locationindex = savedlocations.find((location) => location._id === locationId)
+            if(!locationindex){
+                dispatch(saveEntity(userInfo, locationId))
+                dispatch(getsavedLocations(userInfo));
+                alert('This location has been saved.')
+                setSaved(true);
+            }else{
+                console.log('i am there');
+            }
+        }else{
+            alert('Saved locations list is empty.')
         }
     }
 
@@ -40,8 +44,8 @@ export default function Location(props){
     <div key={location._id} className="card">
               <div>
                 <img src='https://ecobanjarabackend.herokuapp.com/api/image/05e4bc6a-e561-4a65-856d-1bae6f9eccb2.jpg' alt={location.name}></img>
-                {!saved &&  <span className="overlay" onClick={AddToSavedLocations}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
-                {saved &&  <span className="overlay2" onClick={RemoveFromSavedLocations}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
+                {!(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
+                {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay2" onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
               </div>
               {/* <p>{location.city}</p> */}
               <Link to={`/destination/${location._id}`}>{location.city}</Link>

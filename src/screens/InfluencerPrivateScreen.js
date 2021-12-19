@@ -2,27 +2,34 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import { listTravelexperts } from '../actions/travelexpertsActions';
-import Popup from '../components/Popup';
+import Sidebar from '../components/Sidebar';
 
-export default function InfluencerScreen() {
+export default function InfluencerPrivateScreen() {
     const {id} = useParams();
     const [image] = useState(process.env.PUBLIC_URL +  '/images/profile.png');
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
-    const [buttonPopup, setTimedPopup] = useState(true);
     const travelexpertsList = useSelector((state) => state.travelexpertsList);
     const {travelexperts} = travelexpertsList;
     const TravelExpert = travelexperts.find((travelexpert) => travelexpert._id === id);
+    console.log(TravelExpert);
     const dispatch = useDispatch();
+    const[sidebar, setSidebar] = useState(false);
+    const showSidebar = () => setSidebar(!sidebar);
 
 
     useEffect(()=>{
       dispatch(listTravelexperts(userInfo));
     },[dispatch, userInfo]);
     return (
-        <div>
-            <Popup trigger={buttonPopup} setTrigger={setTimedPopup}></Popup>
-            <div className="display-flex my-1 mx-1">
+        <div className='py-1'>
+            <div>
+          <span><i class="fas fa-bars nav-icon" onClick={showSidebar}></i></span>
+            <div className={sidebar ? 'nav-menu active': 'nav-menu'}>
+                <span className="navbar-toggle"><i class="fas fa-times cross-icon" onClick={showSidebar}></i></span>
+                <Sidebar />
+            </div>
+            <div className="display-flex">
                 <img src={image} alt="hello" className="image" style={{width:"4rem", height:"4rem"}}></img>
                 <p className="name-i">{
                     TravelExpert? TravelExpert.name: ""}</p>
@@ -32,12 +39,9 @@ export default function InfluencerScreen() {
                     <div className="city" style={{margin:"0"}}>Premium Traveller</div>
                 </div>
             </div>
+            <div className='edit-box'>{TravelExpert? <Link to={`/edit/influencer/${TravelExpert._id}`}>Edit</Link> : "Edit"}<img src="/images/blue-edit.png" alt="edit" style={{marginLeft: "5px"}}></img></div>
+            </div>
             <div className="influencer-stuff py-1 px-1">
-                <div className="rating-component">
-                    <p className="heading">Rating:</p>
-                    <p className="star-icon"><i class="fas fa-star"></i><span style={{fontWeight: "500", fontSize: "12px", color: "#6F7789", marginLeft: "0.3rem"}}>4.8</span></p>
-                    <p className="reviews"><Link to="/" style={{color: "#FC7E00"}}>Reviews</Link></p>
-                </div>
                 <div className="rating-component">
                 <p className="heading" style={{fontSize: "0.8rem"}}>Languages Known:</p>
                 <p className="city" style={{fontSize: "0.6rem", margin:"0"}}>Hindi, Punjabi, English</p>
@@ -88,10 +92,6 @@ export default function InfluencerScreen() {
                      3N/4D itenary
                     </div>
                 </div>
-                </div>
-                <div className="fixed-bar">
-                    <p style={{marginRight:"0.5rem"}}>Plan your trip with me</p>
-                    <button className="btn">Connect</button>
                 </div>
             </div>
         </div>

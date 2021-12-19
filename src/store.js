@@ -1,10 +1,11 @@
 import { applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import { blogListReducer } from './reducers/blogReducers';
+import { fixedItineraryListReducer } from './reducers/fixedItineraryReducers';
 import { localsListReducer } from './reducers/localsReducers';
-import { locationDetailsReducer, locationListReducer } from './reducers/locationReducers';
-import { savelocationsReducer } from './reducers/savelocationsReducers';
-import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
+import { locationDetailsReducer, locationListReducer, savedlocationsListReducer } from './reducers/locationReducers';
+import { travelexpertsListReducer } from './reducers/travelexpertsReducers';
+import { userRegisterReducer, userSigninReducer, usersListReducer } from './reducers/userReducers';
 
 const initialState = {
     userSignin: {
@@ -12,11 +13,6 @@ const initialState = {
         ? JSON.parse(localStorage.getItem('userInfo'))
         : null,
     },  
-    savedLocationsList: {
-        savedLocations: localStorage.getItem('savedLocations')
-        ? JSON.parse(localStorage.getItem('savedLocations'))
-        : null,
-    }  
 }
 
 const reducer = combineReducers({
@@ -25,8 +21,11 @@ const reducer = combineReducers({
     locationsList: locationListReducer,
     locationDetails: locationDetailsReducer,
     localsList: localsListReducer,
-    savedLocationsList: savelocationsReducer,
-    blogsList: blogListReducer
+    travelexpertsList: travelexpertsListReducer,
+    savedLocationsList: savedlocationsListReducer,
+    blogsList: blogListReducer,
+    usersList: usersListReducer,
+    fixedItineraryList: fixedItineraryListReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose ;

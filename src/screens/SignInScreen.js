@@ -24,7 +24,11 @@ export default function SignInScreen(res) {
 
     useEffect(() => {
         if(userInfo){
-           navigate("/home")
+            if(userInfo.role==="TRAVELLER" || userInfo.role==="LOCAL"){
+                navigate("/home")
+            }else{
+                navigate(`/home/influencer/${userInfo.data._id}`)
+            }
         }
     },[navigate, userInfo]);
 

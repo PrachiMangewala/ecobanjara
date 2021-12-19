@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { USER_REGISTER_FAIL, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT } from "../constants/userConstants";
+import { USERS_LIST_FAIL, USERS_LIST_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT } from "../constants/userConstants";
 
 export const register = (email, password, name, role, mobileNo, image, dob, gender) => async(dispatch) => {
     // dispatch({ type: USER_REGISTER_REQUEST, payload: { mobileNo, password } });
@@ -39,3 +39,13 @@ export const signout = () => async(dispatch) => {
     localStorage.removeItem('userInfo');
     dispatch({type: USER_SIGNOUT});
 };
+
+export const getAllUsers = (userInfo) => async (dispatch) => {
+    try {
+      const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/users/all');
+      console.log(data);
+      dispatch({ type: USERS_LIST_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({ type: USERS_LIST_FAIL, payload: error.message });
+    }
+}

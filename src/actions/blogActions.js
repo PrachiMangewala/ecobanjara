@@ -6,13 +6,13 @@ export const listBlogs = (userInfo, id) => async(dispatch) => {
     try{
         const {data} = await Axios.get(`https://ecobanjarabackend.herokuapp.com/api/destination/blog/get/${id}`,
         { headers: {
-            "x-access-token": `${userInfo.accesstoken}`,
+            "x-access-token": `${userInfo.accessToken}`,
         }});
-        console.log(data);
+        // console.log(data);
       dispatch({type: BLOG_LIST_SUCCESS, payload: data});
     } catch(error){
       dispatch({type: BLOG_LIST_FAIL, payload: error.response && error.response.data.message
         ? error.response.data.message
         : error.message,})
     }
-  }
+}

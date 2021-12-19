@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from 'react-router-dom';
 
 export default function TravelExpert(props) {
     const {TravelExpert} = props;
@@ -6,7 +7,7 @@ export default function TravelExpert(props) {
     return (
         <div class="Expert">
            <img class="expertImage" src={TravelExpert.image? TravelExpert.image : image} alt={TravelExpert.name}></img> 
-           <p class="Name">{TravelExpert.name}</p>
+           <Link to={`/influencer/${TravelExpert._id}`} className="Name">{TravelExpert.name}</Link>
         </div>
     )
 }

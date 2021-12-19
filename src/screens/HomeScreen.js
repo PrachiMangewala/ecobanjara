@@ -3,7 +3,6 @@ import Location from '../components/location';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import TravelExperts from '../TravelExperts';
 import TravelExpert from '../components/TravelExpert';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -13,6 +12,7 @@ import MessageBox from '../components/MessageBox';
 import Sidebar from '../components/Sidebar';
 import { listLocals } from '../actions/localsActions';
 import { listLocations } from '../actions/locationActions';
+import { listTravelexperts } from '../actions/travelexpertsActions';
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
@@ -21,10 +21,13 @@ export default function HomeScreen() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const localsList = useSelector((state) => state.localsList);
-    const {loading, locals} = localsList;
+    const { locals} = localsList;
+    console.log(locals);
+    const travelexpertsList = useSelector((state) => state.travelexpertsList);
+    const {travelexperts} = travelexpertsList;
+    console.log(travelexperts);
     const locationsList = useSelector((state) => state.locationsList);
     const { error, locations} = locationsList;
-    console.log(locals);
     useEffect(()=>{
       dispatch(listLocals(userInfo));
     },[dispatch, userInfo]);
@@ -33,7 +36,9 @@ export default function HomeScreen() {
       dispatch(listLocations(userInfo));
     },[dispatch, userInfo]);
 
-    console.log(loading);
+    useEffect(()=>{
+      dispatch(listTravelexperts(userInfo));
+    },[dispatch, userInfo]);
 
     var settings = {
         dots: true,
@@ -153,8 +158,8 @@ export default function HomeScreen() {
                 </div>
                 <div class="Slide">
                 <Slider {...settings2}>
-                    {
-                        TravelExperts.TravelExp.map((Travelexpert) => (
+                    { 
+                        travelexperts.map((Travelexpert) => (
                             <TravelExpert key={Travelexpert._id} TravelExpert={Travelexpert}></TravelExpert>
                         ))
                     }

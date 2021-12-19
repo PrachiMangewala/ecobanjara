@@ -1,11 +1,11 @@
 import Axios from "axios";
-import { LOCATION_DETAILS_FAIL, LOCATION_DETAILS_SUCCESS, LOCATION_LIST_FAIL, LOCATION_LIST_SUCCESS, SAVE_LOCATION } from "../constants/locationConstants";
+import { LOCATION_DETAILS_FAIL, LOCATION_DETAILS_SUCCESS, LOCATION_LIST_FAIL, LOCATION_LIST_SUCCESS, SAVED_LOCATION_LIST_FAIL, SAVED_LOCATION_LIST_SUCCESS } from "../constants/locationConstants";
 
 export const listLocations = (userInfo) => async (dispatch) => {
   try {
     const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/destinations/all', 
             { headers: {
-                "x-access-token": `${userInfo.accesstoken}`,
+                "x-access-token": `${userInfo.accessToken}`,
             }});
     dispatch({ type: LOCATION_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -18,7 +18,7 @@ export const detailsLocation = (userInfo, id) => async(dispatch) => {
   try{
       const {data} = await Axios.get(`https://ecobanjarabackend.herokuapp.com/api/destination/single/${id}`,
       { headers: {
-          "x-access-token": `${userInfo.accesstoken}`,
+          "x-access-token": `${userInfo.accessToken}`,
       }});
       console.log(data);
     dispatch({type: LOCATION_DETAILS_SUCCESS, payload: data});
@@ -29,15 +29,18 @@ export const detailsLocation = (userInfo, id) => async(dispatch) => {
   }
 }
 
-export const saveLocation = (locationId, userInfo) => async(dispatch, getState) => {
-    
-    const {data} = await Axios.get(`https://ecobanjarabackend.herokuapp.com/api/destination/single/${locationId}`,
-    { headers: {
-      "x-access-token": `${userInfo.accesstoken}`,
-    }});
-    console.log(data);
-    dispatch({
-        type: SAVE_LOCATION, payload: {data}
-    });
-    localStorage.setItem('savedLocations', JSON.stringify(getState().savedLocations))
+export const getsavedLocations = (userInfo) => async(dispatch) => {
+  try{
+      // console.log(userInfo.accessToken);
+      const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/user/saved/destinations',
+      { headers: {
+          "x-access-token": `${userInfo.accessToken}`,
+      }});
+      console.log(data);
+    dispatch({type: SAVED_LOCATION_LIST_SUCCESS, payload: data});
+  } catch(error){
+    dispatch({type: SAVED_LOCATION_LIST_FAIL, payload: error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message,})
+  }
 }
