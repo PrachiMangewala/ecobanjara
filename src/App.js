@@ -51,7 +51,7 @@ function App() {
           <Route path="/itinerary/addperdayiteneraries/:id" element={<AddItenerariesScreen/>} exact></Route>
           <Route path="/iteneraryday/:day" element={<IteneraryDayScreen/>} exact></Route>
           <Route path="/itenerary" element={<IteneraryScreen/>} exact></Route>
-          <Route path="/wholeitenerary" element={<WholeIteneraryScreen/>} exact></Route>
+          <Route path="/wholeitinerary/:id" element={<WholeIteneraryScreen/>} exact></Route>
         </Routes>
       </main>
     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
+import { listFixedItinerary } from '../actions/fixedItineraryActions';
 import { listTravelexperts } from '../actions/travelexpertsActions';
 import Sidebar from '../components/Sidebar';
 
@@ -16,6 +17,13 @@ export default function InfluencerPrivateScreen() {
     const dispatch = useDispatch();
     const[sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
+    const fixedItineraryList = useSelector((state) => state.fixedItineraryList);
+    const {fixedItinerary} = fixedItineraryList;
+    console.log(fixedItinerary)
+
+    useEffect(()=>{
+        dispatch(listFixedItinerary(userInfo));
+    },[dispatch, userInfo]);
 
 
     useEffect(()=>{
@@ -80,18 +88,22 @@ export default function InfluencerPrivateScreen() {
                     <p>Fixed Itenaries</p>
                     <a href="/">View All</a>
                 </div>
-                <div class="d-flex my-1" style={{backgroundColor: "#FFFFFF"}}>
-                    {/* blogs.map(blog) */}
-                    <img src={process.env.PUBLIC_URL +  '/images/tajmahal.jpg'} alt="img" className="blog-image"></img>
-                <div style={{marginLeft: "5px"}}>
-                    <div style={{marginBottom: "1rem"}}>
-                        <p className="dest-name" style={{margin: "0 0 0 0.5rem", color:"#121212"}}>User Driven</p>
-                        <p className="blog-area"><span class="icon"><i class="fas fa-map-marker-alt marker" style={{fontSize:  "0.6rem", paddingRight:"0", margin: "0 0 0 0.5rem"}}></i></span>Uttarakhand</p>
+                <div>
+                {
+                    fixedItinerary?
+                    (
+                                fixedItinerary.map((fixedIt) => (
+                    <div class="d-flex" style={{backgroundColor: "#ffffff", marginBottom: "1rem"}}>
+                        <img src={process.env.PUBLIC_URL +  '/images/tajmahal.jpg'} alt="img" className="blog-image"></img>
+                        <div style={{marginBottom: "1rem"}}>
+                            <Link to={`/wholeitinerary/${fixedIt._id}`} className="dest-name" style={{margin: "0 0 0 0.5rem", color:"#121212"}}>{fixedIt.itineraryName}</Link>
+                            <p className="blog-area"><span class="icon"><i class="fas fa-map-marker-alt marker" style={{fontSize:  "0.6rem", paddingRight:"0", margin: "0 0 0 0.5rem"}}></i></span>Uttarakhand</p>
+                            <p className="blog-area" style={{fontSize:  "0.6rem", paddingRight:"0", margin: "0 0 0 0.5rem"}}>{fixedIt.noofDays - 1}N/{fixedIt.noofDays}D itinerary</p>
+                        </div>
+                        <p className='price'>Rs {fixedIt.price}/-</p>
                     </div>
-                    <div className="blog-p">
-                     3N/4D itenary
-                    </div>
-                </div>
+                        ))
+                        ) : " "}
                 </div>
             </div>
         </div>
