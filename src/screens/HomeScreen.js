@@ -109,7 +109,7 @@ export default function HomeScreen() {
         ]
       };
     return (
-        <div style={{ backgroundColor: "#f6f6f6" }}>  
+        <div style={{ backgroundColor: "#f6f6f6", height: "100vh" }}>  
           <div>
           <span><i class="fas fa-bars nav-icon" onClick={showSidebar}></i></span>
           <div className={sidebar ? 'nav-menu active': 'nav-menu'}>
