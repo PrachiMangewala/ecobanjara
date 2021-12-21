@@ -38,6 +38,10 @@ a{
   margin-bottom: 2rem;
 }
 
+.pb-5{
+  padding-bottom:5rem;
+}
+
 .py-1{
   padding-top: 1rem;
   padding-bottom:1rem;
@@ -67,6 +71,29 @@ a{
 
 .font-white{
   color:#ffffff;
+}
+
+.navigation{
+  background-color: #00365B;
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  padding: 15px 10px;
+  border-radius: 16px;
+  align-items: center;
+  position: fixed;
+  bottom: 0.5rem;
+}
+
+.selected{
+  border-bottom: 3px solid #ffffff;
+  padding-bottom: 9px;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+.padding9{
+  padding-bottom: 9px;
 }
 
 .back-blue{
@@ -207,7 +234,8 @@ a{
   display: flex;
   justify-content: center;
   margin:5px auto;
-  max-width: 8rem;
+  width: 7.5rem;
+  border-radius: 13px;
 }
 
 .card-text{
@@ -318,7 +346,7 @@ a{
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   line-height: 18px;
   color: #00365B;
 }
@@ -709,13 +737,13 @@ h2 span{
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 1px solid #FFCC00;
+  border: 1px solid #885B37;
   border-radius: 100px;
   padding: 0.3rem 0.7rem 0.3rem 0.3rem;
 }
 
 .premium-icon{
-  background-color: #FFCC00;
+  background-color: #885B37;
   padding: 5px 5px;
   border-radius: 100%;
   margin-right: 6px;
@@ -1315,6 +1343,49 @@ h2 span{
   letter-spacing: 0.03em;
   color: #353535;
   margin-bottom: 1rem;
+}
+
+.info-icon{
+  border-radius: 50%;
+  background-color: #00365b;
+  padding: 1px 6px;
+  font-size: 0.6rem;
+  color: #ffffff;
+  height: fit-content;
+}
+
+.premium{
+  padding: 9px;
+  background-color: #885b37;
+  border-radius: 50%;
+  margin: 1rem;
+}
+
+.profile-heading{
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  color: #828282;
+}
+
+.profile-value{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #B6B6B6;
+  width: auto;
+  height: 56px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding:0px 10px;
 }
 
 @media screen and (max-width:600px){

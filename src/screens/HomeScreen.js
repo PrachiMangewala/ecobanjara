@@ -13,6 +13,7 @@ import Sidebar from '../components/Sidebar';
 import { listLocals } from '../actions/localsActions';
 import { listLocations } from '../actions/locationActions';
 import { listTravelexperts } from '../actions/travelexpertsActions';
+import {Link} from 'react-router-dom';
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function HomeScreen() {
     const showSidebar = () => setSidebar(!sidebar);
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
+    console.log(userInfo);
     const localsList = useSelector((state) => state.localsList);
     const { locals} = localsList;
     console.log(locals);
@@ -68,6 +70,13 @@ export default function HomeScreen() {
           {
             breakpoint: 480,
             settings: {
+              slidesToShow: 2.5,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 300,
+            settings: {
               slidesToShow: 2,
               slidesToScroll: 1
             }
@@ -109,7 +118,7 @@ export default function HomeScreen() {
         ]
       };
     return (
-        <div style={{ backgroundColor: "#f6f6f6", height: "100vh" }}>  
+        <div style={{ backgroundColor: "#f6f6f6", height: "900px" }}>  
           <div>
           <span><i class="fas fa-bars nav-icon" onClick={showSidebar}></i></span>
           <div className={sidebar ? 'nav-menu active': 'nav-menu'}>
@@ -158,29 +167,44 @@ export default function HomeScreen() {
                 </div>
                 <div class="Slide">
                 <Slider {...settings2}>
-                    { 
+                    { travelexperts? 
                         travelexperts.map((Travelexpert) => (
                             <TravelExpert key={Travelexpert._id} TravelExpert={Travelexpert}></TravelExpert>
-                        ))
+                        )) : ""
                     }
                      </Slider>
                 </div>
             </div>
-            <div>
+            <div className='pb-5'>
                 <div class="text">
                     <p>Locals</p>
                     <a href="/">View All</a>
                 </div>
                 <div class="Slide">
                 <Slider {...settings2}>
-                    {
+                    { locals? 
                         locals.map((local) => (
                             <TravelExpert key={local._id} TravelExpert={local}></TravelExpert>
-                        ))
+                        )) : ""
                     }
                      </Slider>
                 </div>
+              </div> 
+                <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                
+                  {
+                    userInfo?
+                    userInfo.data?(
+                  <div className="navigation">
+                  <Link to={`/saved/${userInfo.data._id}`}><img src={process.env.PUBLIC_URL +  "/images/home-selected.png"} alt="home" className='selected'></img></Link>
+                  <Link to={`/saved/${userInfo.data._id}`}><img src={process.env.PUBLIC_URL +  "/images/like.png"} alt="like" className="padding9"></img></Link>
+                  <Link to={`/notifications/${userInfo.data._id}`}><img src={process.env.PUBLIC_URL +  "/images/bell.png"} alt="bell" className="padding9"></img></Link>
+                  <Link to={`/chat/${userInfo.data._id}`}><img src={process.env.PUBLIC_URL +  "/images/chat.png"} alt="chat" className="padding9"></img></Link>
+                  </div>
+                  ) : ""
+                  : ""
+                  }
+                </div>
             </div>
-        </div>
     )
 }

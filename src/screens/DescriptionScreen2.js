@@ -1,28 +1,54 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { getItineraryPrice } from '../actions/fixedItineraryActions';
 
 export default function DescriptionScreen2() {
     const {id} = useParams();
     const [days, setDays] = useState(0);
     const [name, setName] = useState(0);
     const [description, setDescription] = useState(0);
-    const [price, setPrice] = useState(0);
     const navigate = useNavigate();
     const location = useLocation();
     const [destinations] = useState(location.state.destinations);
     const [destinationsWhole] = useState(location.state.destinationsWhole);
-    // console.log(destinations);
-    // console.log(destinationsWhole);
+    const ItineraryPrice = useSelector((state) => state.ItineraryPrice);
+    const { price } = ItineraryPrice; 
+    const dispatch = useDispatch();
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+    const userId = id;
+    const [trip, setTrip] = useState("");
+    const type = "CUSTOM"
 
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(days);
-        navigate(`/itinerary/addperdayiteneraries/${id}`, {state:{days: days}})
+        navigate(`/itinerary/addperdayiteneraries/${id}`, {state:{destinations:destinations, noofDays: days, type:type, trip: trip, itineraryName: name, description: description, price:price}})
     };
-    console.log(days);
-    console.log(name);
-    console.log(description);
-    console.log(price);
+
+    useEffect(()=>{
+        if(userInfo && userId && destinations && days && type){
+        if(days<=3){
+            setTrip("0-3")
+        } else if(days>3 && days <=7){
+            setTrip("4-7")
+        } else if(days>7 && days<=10){
+            setTrip("8-10")
+        } else if(days>10 && days<=15){
+            setTrip("11-15")
+        }else{
+            setTrip("15+")
+        }
+        dispatch(getItineraryPrice(userInfo, userId, destinations, trip, type));
+    }},[dispatch, userInfo, userId, destinations, trip, type, days]);
+
+    // console.log(days);
+    // console.log(name);
+    // console.log(description);
+    // console.log(destinations);
+    // console.log(price);
+    // console.log(trip);
 
     return (
         <div>
@@ -64,7 +90,7 @@ export default function DescriptionScreen2() {
                         <option>15</option>
                     </select>
                     <label className="heading-dest" style={{color: "#00365B", margin: "1rem 0 0.5rem 0"}} htmlFor="price">Price of Itinerary</label>
-                    <input type="number" className='iten-input' id="price" placeholder='Enter price of Itinerary in rupees' min="0" onChange={ e => setPrice(e.target.value)} required></input>
+                    <div>Rs {price? price : ""}/-</div>
                     <label className="heading-dest" style={{color: "#00365B", margin: "1rem 0 0.5rem 0"}} htmlFor="description">Description</label>
                     <textarea id="description" name="bio" rows="5" maxLength={1000} className="textarea" placeholder="Enter Description" style={{marginBottom: "1rem", color: "#B6B6B6"}} onChange={ e => setDescription(e.target.value)} required></textarea>
                     <button className='btn'>Next</button>

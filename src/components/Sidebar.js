@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 import { signout } from '../actions/userActions';
+import MessageBox from './MessageBox';
 
 export default function Sidebar() {
     const[bool,setBool] = useState(false);
     const [image] = useState(process.env.PUBLIC_URL +  '/images/profile.png');
     const userSignin = useSelector((state) => state.userSignin);
-    const {userInfo} = userSignin;
+    const {error, userInfo} = userSignin;
     console.log(userInfo);
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -22,12 +23,12 @@ export default function Sidebar() {
             <div className="user-flex mx-1">
                 <div className="form-group">
                     <label htmlFor="image-input"><i class="fas fa-camera camera-icon"  style={{top:"27px", left:"49px"}}></i></label>
-                    <img src={userInfo.data.profileImg} alt="profile" className="image" style={{width:"4rem", height:"4rem"}}></img>
+                    <img src={userInfo? (userInfo.data? userInfo.data.profileImg : image) : image} alt="profile" className="image" style={{width:"4rem", height:"4rem"}}></img>
                     <input className="display" type="file" name="image-upload" id="image-input" accept="image/*"/>
                 </div>
                 <div>
-                    <p className="name">{userInfo.data.name}</p>
-                    <p className="email">{userInfo.data.email}</p>
+                    <Link to={`/profilescreen/${userInfo.data._id}`} className="name">{userInfo? userInfo.data.name : ""}</Link>
+                    <p className="email">{userInfo? userInfo.data.email : ""}</p>
                 </div>
             </div>
             <div className="list py-1">

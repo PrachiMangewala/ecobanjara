@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import { listFixedItinerary } from '../actions/fixedItineraryActions';
 import { listTravelexperts } from '../actions/travelexpertsActions';
+import InfluencerInfoPopup from '../components/InfluencerInfoPopup';
 import Sidebar from '../components/Sidebar';
 
 export default function InfluencerPrivateScreen() {
     const {id} = useParams();
     const [image] = useState(process.env.PUBLIC_URL +  '/images/profile.png');
+    const [buttonPopup, setTimedPopup] = useState(false);
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const travelexpertsList = useSelector((state) => state.travelexpertsList);
@@ -24,6 +26,10 @@ export default function InfluencerPrivateScreen() {
     useEffect(()=>{
         dispatch(listFixedItinerary(userInfo));
     },[dispatch, userInfo]);
+
+    const setTrigger = () => (
+        setTimedPopup(true)
+    )
 
 
     useEffect(()=>{
@@ -42,9 +48,13 @@ export default function InfluencerPrivateScreen() {
                 <p className="name-i">{
                     TravelExpert? TravelExpert.name: ""}</p>
                 <p className="city">Rohini, Delhi</p>
+                <div style={{display: "flex"}}>
                 <div className="d-flex-row">
-                    <img src={process.env.PUBLIC_URL +  '/images/premiumicon.png'} alt="premium-icon" className="premium-icon"></img>
+                    <img src={process.env.PUBLIC_URL +  '/images/premium.png'} alt="premium-icon" className="premium-icon"></img>
                     <div className="city" style={{margin:"0"}}>Premium Traveller</div>
+                </div>
+                <div className='info-icon' onClick={setTrigger}>i</div>
+                <InfluencerInfoPopup trigger={buttonPopup} setTrigger={setTimedPopup}></InfluencerInfoPopup>
                 </div>
             </div>
             <div className='edit-box'>{TravelExpert? <Link to={`/edit/influencer/${TravelExpert._id}`}>Edit</Link> : "Edit"}<img src="/images/blue-edit.png" alt="edit" style={{marginLeft: "5px"}}></img></div>
@@ -106,6 +116,14 @@ export default function InfluencerPrivateScreen() {
                         ) : " "}
                 </div>
             </div>
+            <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                <div className="navigation">
+                  <img src={process.env.PUBLIC_URL +  "/images/home-selected.png"} alt="home" className='selected'></img>
+                  <img src={process.env.PUBLIC_URL +  "/images/calender.png"} alt="calender" className="padding9"></img>
+                  <img src={process.env.PUBLIC_URL +  "/images/bell.png"} alt="bell" className="padding9"></img>
+                  <img src={process.env.PUBLIC_URL +  "/images/chat.png"} alt="chat" className="padding9"></img>
+                </div>
+                </div>
         </div>
     )
 }

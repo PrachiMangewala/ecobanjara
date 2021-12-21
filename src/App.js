@@ -22,6 +22,9 @@ import WholeIteneraryScreen from './screens/WholeIteneraryScreen';
 import TravelExpertRoute from './components/InfluencerRoute';
 import InfluencerPrivateScreen from './screens/InfluencerPrivateScreen';
 import EditInfluencerScreen from './screens/EditInfluencerScreen';
+import SavedEntitiesScreen from './screens/SavedEntitiesScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ProfileEditScreen from './screens/ProfileEditScreen';
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
           <Route path="/onboardrole" element={<OnBoardRoleScreen />} exact></Route>
           <Route path="/signin" element={<SignInScreen/>} exact></Route>
           <Route path="/home" element={<HomeScreen/>} exact></Route>
+          <Route path="/profilescreen/:id" element={<ProfileScreen/>} exact></Route>
+          <Route path="/edit/:id" element={<ProfileEditScreen/>} exact></Route>
+          <Route path="/saved/:id" element={<SavedEntitiesScreen/>} exact></Route>
           <Route path="/signup/:role" element={<SignupScreen/>} exact></Route>
           <Route path="/enterdetails" element={<SignupDetailsScreen />} exact></Route>
           <Route path="/otpscreen/:role" element={<OtpScreen/>} exact></Route>

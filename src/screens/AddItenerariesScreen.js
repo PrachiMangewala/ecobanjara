@@ -4,10 +4,17 @@ import {Link} from 'react-router-dom';
 
 export default function AddItenerariesScreen() {
     const location = useLocation();
-    const [days] = useState(location.state.days);
-    // console.log(days);
+    const [noofDays] = useState(location.state.noofDays);
+    const [price] = useState(location.state.price);
+    const [description] = useState(location.state.description);
+    const [trip] = useState(location.state.trip);
+    const [itineraryName] = useState(location.state.itineraryName);
+    const [type] = useState(location.state.type);
+    const [destinations] = useState(location.state.destinations);
+    const [schedule] = useState(location.state.schedule);
+    console.log(schedule);
     // const i = 1; 
-    const n = Number(days);
+    const n = Number(noofDays);
     console.log(n)
     return (
         <div className='mx-1 my-1'>
@@ -19,7 +26,7 @@ export default function AddItenerariesScreen() {
                     <p className='heading-dest' style={{color: "#9C9C9C"}}>Next</p>
                 </div>
                 {[...Array(n)].map((x,i) =>(
-                    <div>
+                    <div key={i + 1}>
                     <div style={{display:"flex", alignItems:"center", height:"25px"}}>
                         <span className='blue-circle'></span>
                         <div className='day'>Day {i + 1}</div>

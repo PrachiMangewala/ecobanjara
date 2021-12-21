@@ -1,11 +1,11 @@
 import { applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import { blogListReducer } from './reducers/blogReducers';
-import { fixedItineraryListReducer } from './reducers/fixedItineraryReducers';
-import { localsListReducer } from './reducers/localsReducers';
+import { fixedItineraryListReducer, getItineraryPriceReducer } from './reducers/fixedItineraryReducers';
+import { localsListReducer, savedlocalsListReducer } from './reducers/localsReducers';
 import { locationDetailsReducer, locationListReducer, savedlocationsListReducer } from './reducers/locationReducers';
-import { travelexpertsListReducer } from './reducers/travelexpertsReducers';
-import { userRegisterReducer, userSigninReducer, usersListReducer } from './reducers/userReducers';
+import { savedTravelexpertsListReducer, travelexpertsListReducer } from './reducers/travelexpertsReducers';
+import { userRegisterReducer, userSigninReducer, usersListReducer, userUpdateProfileReducer } from './reducers/userReducers';
 
 const initialState = {
     userSignin: {
@@ -23,9 +23,13 @@ const reducer = combineReducers({
     localsList: localsListReducer,
     travelexpertsList: travelexpertsListReducer,
     savedLocationsList: savedlocationsListReducer,
+    savedTravelExpertsList: savedTravelexpertsListReducer,
+    savedLocalsList: savedlocalsListReducer,
     blogsList: blogListReducer,
     usersList: usersListReducer,
-    fixedItineraryList: fixedItineraryListReducer
+    fixedItineraryList: fixedItineraryListReducer,
+    ItineraryPrice: getItineraryPriceReducer,
+    userUpdateProfile: userUpdateProfileReducer,
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose ;

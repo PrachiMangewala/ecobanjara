@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { LOCALS_LIST_FAIL, LOCALS_LIST_SUCCESS } from "../constants/localsConstant";
+import { LOCALS_LIST_FAIL, LOCALS_LIST_SUCCESS, SAVED_LOCALS_LIST_FAIL, SAVED_LOCALS_LIST_SUCCESS } from "../constants/localsConstant";
 
 export const listLocals = (userInfo) => async (dispatch) => {
     try {
@@ -12,4 +12,20 @@ export const listLocals = (userInfo) => async (dispatch) => {
     } catch (error) {
       dispatch({ type: LOCALS_LIST_FAIL, payload: error.message });
     }
+}
+
+export const getsavedLocals = (userInfo) => async(dispatch) => {
+  try{
+      // console.log(userInfo.accessToken);
+      const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/user/saved/locals',
+      { headers: {
+          "x-access-token": `${userInfo.accessToken}`,
+      }});
+      console.log(data);
+    dispatch({type: SAVED_LOCALS_LIST_SUCCESS, payload: data});
+  } catch(error){
+    dispatch({type: SAVED_LOCALS_LIST_FAIL, payload: error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message,})
   }
+}

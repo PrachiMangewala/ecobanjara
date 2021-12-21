@@ -9,7 +9,7 @@ export default function SignupDetailsScreen() {
     const [password, setPassword] = useState('');
     const [dob, setBirthday] = useState('');
     const [gender, setGender] = useState('');
-    const [image, setImage] = useState('images/profile.png')
+    const [profileImg, setImage] = useState('images/profile.png')
     const location = useLocation();
     const [role] = useState(location.state.role);
     const [mobileNo] = useState(location.state.mobileNo);
@@ -39,10 +39,10 @@ export default function SignupDetailsScreen() {
         console.log(name);
         console.log(role);
         console.log(mobileNo);
-        console.log(image);
+        console.log(profileImg);
         console.log(dob);
         console.log(gender);
-        dispatch(register(email, password, name, role, mobileNo, image, dob, gender));
+        dispatch(register(email, password, name, role, mobileNo, profileImg, dob, gender));
     };
 
     useEffect(() => {
@@ -64,7 +64,7 @@ export default function SignupDetailsScreen() {
             <form className="signinform" style={{top:"0px"}} onSubmit={submitHandler}>
                 <div className="form-group">
                     <label htmlFor="image-input"><i class="fas fa-camera camera-icon"></i></label>
-                    <img src={image} alt="profile" className="image"></img>
+                    <img src={profileImg} alt="profile" className="image"></img>
                     <input className="display" type="file" name="image-upload" id="image-input" accept="image/*" onChange={imageHandler}/>
                 </div>
                 <div className="form-group">
