@@ -1,6 +1,6 @@
 import { SAVE_ENTITY_FAIL, SAVE_ENTITY_REQUEST, SAVE_ENTITY_SUCCESS } from "../constants/saveentitiesConstants";
 
-export const userRegisterReducer = ( state = {}, action) => {
+export const saveEntitiesReducer = ( state = {}, action) => {
     switch(action.type){
         case SAVE_ENTITY_REQUEST:
             return {loading: true};

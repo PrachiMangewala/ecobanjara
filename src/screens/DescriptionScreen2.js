@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getItineraryPrice } from '../actions/fixedItineraryActions';
+import { getItineraryPrice, saveFixedItinerary } from '../actions/fixedItineraryActions';
 
 export default function DescriptionScreen2() {
     const {id} = useParams();
     const [days, setDays] = useState(0);
-    const [name, setName] = useState(0);
+    const [itineraryName, setName] = useState(0);
     const [description, setDescription] = useState(0);
     const navigate = useNavigate();
     const location = useLocation();
@@ -19,12 +19,17 @@ export default function DescriptionScreen2() {
     const { userInfo } = userSignin;
     const userId = id;
     const [trip, setTrip] = useState("");
-    const type = "CUSTOM"
+    const type = "FIXED";
+    const fixedItineraryDetails = useSelector((state) => state.fixedItineraryDetails);
+    const { fixedItinerary } = fixedItineraryDetails; 
+    console.log(fixedItinerary)
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(days);
-        navigate(`/itinerary/addperdayiteneraries/${id}`, {state:{destinations:destinations, noofDays: days, type:type, trip: trip, itineraryName: name, description: description, price:price}})
+        dispatch(saveFixedItinerary(userInfo, destinations, itineraryName, trip, description));
+        if(fixedItinerary.data){
+        navigate(`/itinerary/addperdayiteneraries/${id}`, {state:{itineraryId: fixedItinerary.data._id, days: days, destinationsWhole: destinationsWhole}})
+        }
     };
 
     useEffect(()=>{

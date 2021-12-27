@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import { listFixedItinerary } from '../actions/fixedItineraryActions';
 import { listTravelexperts } from '../actions/travelexpertsActions';
+import InfluencerInfoPopup from '../components/InfluencerInfoPopup';
 import Popup from '../components/Popup';
 
 export default function InfluencerScreen() {
@@ -11,6 +12,7 @@ export default function InfluencerScreen() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const [buttonPopup, setTimedPopup] = useState(true);
+    const [clickedPopup, setClickedPopup] = useState(false);
     const travelexpertsList = useSelector((state) => state.travelexpertsList);
     const {travelexperts} = travelexpertsList;
     const TravelExpert = travelexperts.find((travelexpert) => travelexpert._id === id);
@@ -23,6 +25,9 @@ export default function InfluencerScreen() {
         dispatch(listFixedItinerary(userInfo));
     },[dispatch, userInfo]);
 
+    const setTrigger = () => (
+        setClickedPopup(true)
+    )
 
     useEffect(()=>{
       dispatch(listTravelexperts(userInfo));
@@ -35,9 +40,13 @@ export default function InfluencerScreen() {
                 <p className="name-i">{
                     TravelExpert? TravelExpert.name: ""}</p>
                 <p className="city">Rohini, Delhi</p>
+                <div style={{display: "flex"}}>
                 <div className="d-flex-row">
-                    <img src={process.env.PUBLIC_URL +  '/images/premiumicon.png'} alt="premium-icon" className="premium-icon"></img>
+                    <img src={process.env.PUBLIC_URL +  '/images/premium.png'} alt="premium-icon" className="premium-icon"></img>
                     <div className="city" style={{margin:"0"}}>Premium Traveller</div>
+                </div>
+                <div className='info-icon' onClick={setTrigger}>i</div>
+                <InfluencerInfoPopup trigger={clickedPopup} setTrigger={setClickedPopup}></InfluencerInfoPopup>
                 </div>
             </div>
             <div className="influencer-stuff py-1 px-1">
@@ -102,8 +111,11 @@ export default function InfluencerScreen() {
                         ) : " "}
                 </div>
                 <div className="fixed-bar">
-                    <p style={{marginRight:"0.5rem"}}>Plan your trip with me</p>
-                    <button className="btn">Connect</button>
+                    <div>
+                    <p style={{marginBottom:"0.5rem"}}>Plan your trip with me</p>
+                    <Link to="/" className="add-new">How it works</Link>
+                    </div>
+                    <button className="btn" style={{width: "fit-content", position:"relative", left:"42px"}}><Link to={`/connect/${userInfo.data._id}/${id}`} style={{color: "#ffffff"}}>Connect</Link></button>
                 </div>
             </div>
         </div>

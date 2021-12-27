@@ -14,6 +14,7 @@ import { listLocals } from '../actions/localsActions';
 import { listLocations } from '../actions/locationActions';
 import { listTravelexperts } from '../actions/travelexpertsActions';
 import {Link} from 'react-router-dom';
+import SearchBar from '../components/SearchBar';
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
@@ -30,6 +31,8 @@ export default function HomeScreen() {
     console.log(travelexperts);
     const locationsList = useSelector((state) => state.locationsList);
     const { error, locations} = locationsList;
+    const newLocations = locations.slice(0, 5);
+    console.log(newLocations)
     useEffect(()=>{
       dispatch(listLocals(userInfo));
     },[dispatch, userInfo]);
@@ -118,7 +121,7 @@ export default function HomeScreen() {
         ]
       };
     return (
-        <div style={{ backgroundColor: "#f6f6f6", height: "900px" }}>  
+        <div style={{ backgroundColor: "#f6f6f6", height: "900px", overflow: "hidden" }}>  
           <div>
           <span><i class="fas fa-bars nav-icon" onClick={showSidebar}></i></span>
           <div className={sidebar ? 'nav-menu active': 'nav-menu'}>
@@ -129,10 +132,13 @@ export default function HomeScreen() {
                 <img src='images/logo.png' alt="logo"></img>
             </nav>
             </div>
-            <div className='search-box'>
+            <div>
+              <SearchBar data={locations}></SearchBar>
+            </div>
+            {/* <div className='search-box'>
                 <input type="text" placeholder="Search" class="search"></input>
                 <i class="fas fa-search search-icon"></i>
-            </div>
+            </div> */}
             <div>
                 <div>
                     <ul className="loc-text">
@@ -150,10 +156,11 @@ export default function HomeScreen() {
                 // {console.log(locations['data'])}
                 <Slider {...settings}>
                     {
-                          locations.map((location) => (
+                          newLocations.map((location) => (
                             <Location key={location._id} location={location}></Location>
                         ))
                     }
+                    <div><Link to="/destinations/all" style={{position: "relative", top:"79px", margin: "0px 30px"}}>View All</Link></div>
                 </Slider>
               )
               }
@@ -163,7 +170,7 @@ export default function HomeScreen() {
             <div>
                 <div class="text">
                     <p>Top Travel Experts</p>
-                    <a href="/">View All</a>
+                    <Link to="/travelexperts/rating">View All</Link>
                 </div>
                 <div class="Slide">
                 <Slider {...settings2}>
@@ -177,7 +184,7 @@ export default function HomeScreen() {
             </div>
             <div className='pb-5'>
                 <div class="text">
-                    <p>Locals</p>
+                    <p>Top Locals</p>
                     <a href="/">View All</a>
                 </div>
                 <div class="Slide">

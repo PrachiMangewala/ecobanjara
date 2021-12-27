@@ -1,20 +1,29 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { saveContent } from '../actions/fixedItineraryActions';
 
 export default function IteneraryDayScreen() {
-    const {day} = useParams();
+    const {dayNo} = useParams();
+    const {itineraryId} = useParams();
+    const dispatch = useDispatch()
     const [image, setImage] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [schedule, setSchedule] = useState({});
     const navigate = useNavigate();
-
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+    const fixedItineraryContent = useSelector((state) => state.fixedItineraryContent);
+    const { ItineraryContent } = fixedItineraryContent;
+    console.log(ItineraryContent);
     const submitHandler = (e) => {
         e.preventDefault();
-        setSchedule({day, title, description, image});
-        navigate(-1, {state:{schedule: schedule}})
+        dispatch(saveContent(userInfo, itineraryId, dayNo, title, description))
+        if(ItineraryContent){
+            navigate(-1)
+        }
     };
-    console.log(schedule);
+
     const imageHandler = (e) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -28,7 +37,7 @@ export default function IteneraryDayScreen() {
         <div className='py-1 px-1'>
             <div className='py-1' style={{ display: "flex", alignItems: "center", backgroundColor: "#FFFFFF" }}>
                 <p><i class="fas fa-chevron-left" style={{ fontSize: "1.2rem" }}></i></p>
-                <p className='connect' style={{color: "#000000"}}>Day {day}</p>
+                <p className='connect' style={{color: "#000000"}}>Day {dayNo}</p>
             </div>
             <div className='form-container py-1 px-1'>
             <form onSubmit={submitHandler}>

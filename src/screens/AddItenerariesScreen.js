@@ -1,34 +1,66 @@
-import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import { getsingleFixedItinerary } from '../actions/fixedItineraryActions';
 
 export default function AddItenerariesScreen() {
     const location = useLocation();
-    const [noofDays] = useState(location.state.noofDays);
-    const [price] = useState(location.state.price);
-    const [description] = useState(location.state.description);
-    const [trip] = useState(location.state.trip);
-    const [itineraryName] = useState(location.state.itineraryName);
-    const [type] = useState(location.state.type);
-    const [destinations] = useState(location.state.destinations);
-    const [schedule] = useState(location.state.schedule);
-    console.log(schedule);
-    // const i = 1; 
-    const n = Number(noofDays);
-    console.log(n)
+    const [days] = useState(location.state.days);
+    const [itineraryId] = useState(location.state.itineraryId);
+    const [destinationsWhole] = useState(location.state.destinationsWhole);
+    // console.log(itineraryId);
+    const singleFixedItinerary = useSelector((state) => state.singleFixedItinerary);
+    const { fixedItinerary } = singleFixedItinerary;
+    const [length, setLength] = useState(fixedItinerary && fixedItinerary.content? fixedItinerary.content.length : 0);
+    console.log(length);
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+    const dispatch = useDispatch();
+    const n = Number(days);
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+            if(itineraryId){
+                dispatch (getsingleFixedItinerary(userInfo, itineraryId));
+            }
+    },[dispatch, userInfo, itineraryId]);
+
+    useEffect(() => {
+        if(fixedItinerary && fixedItinerary.content){
+            setLength(fixedItinerary.content.length);
+        }
+    },[setLength, fixedItinerary]);
+
+    const showItinerary = () => {
+        if(String(length)!==days){
+            alert('Please add itinerary for all the days')
+        }else{
+            navigate(`/itinerary/${itineraryId}`, {state: {fixedItinerary: fixedItinerary, destinationsWhole: destinationsWhole}})
+        }
+    }
+    // console.log(fixedItinerary);
+    // console.log(n)
     return (
         <div className='mx-1 my-1'>
                 <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
                 <div className='py-1' style={{ display: "flex", alignItems: "center", backgroundColor: "#FFFFFF" }}>
-                    <p><i class="fas fa-chevron-left" style={{ fontSize: "1.2rem" }}></i></p>
+                    <p><i className="fas fa-chevron-left" style={{ fontSize: "1.2rem" }}></i></p>
                     <p className='connect' style={{color: "#000000"}}>Add Itineraries</p>
                 </div>
-                    <p className='heading-dest' style={{color: "#9C9C9C"}}>Next</p>
+                    <p className='heading-dest' style={{color: "#9C9C9C", cursor: "pointer"}} onClick={showItinerary}>Next</p>
                 </div>
                 {[...Array(n)].map((x,i) =>(
                     <div key={i + 1}>
                     <div style={{display:"flex", alignItems:"center", height:"25px"}}>
-                        <span className='blue-circle'></span>
+                        {
+                            length?
+                            i < length ?
+                            <span className='blue-circle' style={{backgroundColor: "#00365B", display: "flex", alignItems: "center", justifyContent: "center"}}><i class="fas fa-check" style={{color: "#ffffff", fontWeight: "500"}}></i></span>
+                            :
+                            <span className='blue-circle'></span>
+                            : <span className='blue-circle'></span>
+                        }
                         <div className='day'>Day {i + 1}</div>
                     </div>
                     <div style={{display:"flex", alignItems:"center"}}>
@@ -39,7 +71,15 @@ export default function AddItenerariesScreen() {
                         <div className='blue-side-border'></div>
                     </div>
                     }
-                    <Link to={`/iteneraryday/${i+1}`} className='add-new' style={{position:"relative", left:"53px", textDecoration:"underline"}}><span><i class="fas fa-plus" style={{marginRight: "0.1rem", fontSize: "0.6rem"}}></i></span>Add Day {i + 1} itenerary</Link>
+                    {
+                        length!==undefined?
+                        i<length ?
+                        <div className='add-new' style={{position:"relative", left:"53px", textDecoration:"underline"}}>Added</div>
+                        :
+                        <Link to={`/itineraryday/${itineraryId}/${i+1}`} className='add-new' style={{position:"relative", left:"53px", textDecoration:"underline"}}><span><i class="fas fa-plus" style={{marginRight: "0.1rem", fontSize: "0.6rem"}}></i></span>Add Day {i + 1} itenerary</Link>
+                        :
+                        ""
+                    }
                     </div>
                     </div>
                 ))}
