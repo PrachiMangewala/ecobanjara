@@ -4,7 +4,8 @@ import Slider from "react-slick";
 import TravelExperts from '../TravelExperts';
 import TravelExpert from '../components/TravelExpert';
 import { useDispatch, useSelector } from 'react-redux';
-import { detailsLocation } from '../actions/locationActions';
+import { detailsLocation, getsavedLocations } from '../actions/locationActions';
+import { removeEntity, saveEntity } from '../actions/saveentitiesActions';
 
 export default function DestinationScreen() {
     // const[image, setImage] = useState('/tajmahal.jpg');
@@ -17,6 +18,45 @@ export default function DestinationScreen() {
     const { userInfo } = userSignin;
     const locationDetails = useSelector((state) => state.locationDetails);
     const { error, location } = locationDetails;
+    console.log(location);
+    const savedLocationsList = useSelector((state) => state.savedLocationsList);
+    const {savedlocations} = savedLocationsList;
+
+    useEffect(()=>{
+        dispatch(getsavedLocations(userInfo));
+      },[dispatch, userInfo]);
+
+    const AddToSavedLocations = (locationId) => {
+        if(savedlocations){
+            const locationindex = savedlocations.find((location) => location._id === locationId)
+            if(!locationindex){
+                dispatch(saveEntity(userInfo, locationId))
+                dispatch(getsavedLocations(userInfo));
+                alert('This location has been saved.')
+            }else{
+                console.log('i am there');
+            }
+        }else{
+            alert('Saved locations list is empty.')
+        }
+    }
+
+    const RemoveFromSavedLocations = (locationId) => {
+        if(savedlocations){
+            const locationindex = savedlocations.find((location) => location._id === locationId)
+            if(!locationindex){
+                // dispatch(saveEntity(userInfo, locationId))
+                // dispatch(getsavedLocations(userInfo));
+                alert('This location is already not saved.')
+            }else{
+                dispatch(removeEntity(userInfo, locationId));
+                dispatch(getsavedLocations(userInfo));
+                alert('Location removed')
+            }
+        }else{
+            alert('Saved locations list is empty.')
+        }
+    }
 
     useEffect(()=>{
       dispatch(detailsLocation(userInfo, id));
@@ -61,18 +101,20 @@ export default function DestinationScreen() {
     return (
         <div>
             <img src={process.env.PUBLIC_URL +  '/images/tajmahal.jpg'} alt="img" className="dest-backimage"></img>
-            <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%"}}><i class="fas fa-map-marker-alt loc-icon"></i></span>
+            {!(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%"}} onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
+                {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay2" style={{padding: "6px 8px 6px 8px", left:"84%"}} onClick={() => RemoveFromSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
+            {/* <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%"}}><i class="fas fa-map-marker-alt loc-icon"></i></span> */}
             <div className="destination-info">
                 <div>
                 <p className="mx-1 dest-name">{location.city}</p>
                 <p className="mx-1 dest-area"><span class="icon"><i class="fas fa-map-marker-alt marker"></i></span>{location.address}</p>
             </div>
             <div>
-                    <ul className="mx-1 dest-text">
-                        <li><a href="/" class="active" style={{color: "#6F7789"}}>About</a></li>
+                    <ul className="mx-175 dest-text">
+                        <li><Link to={`/destination/${id}`} class="active" style={{color: "#6F7789"}}>About</Link></li>
                         <li><Link to={`/blogscreen/${id}`} class="loc-hover" style={{color: "#6F7789"}}>Blogs</Link></li>
-                        <li><a href="/" class="loc-hover" style={{color: "#6F7789"}}>Photo</a></li>
-                        <li><a href="/" class="loc-hover" style={{color: "#6F7789"}}>Videos</a></li>
+                        <li><Link to={`/blogscreen/${id}`} class="loc-hover" style={{color: "#6F7789"}}>Photos</Link></li>
+                        <li><Link to={`/videos/${id}`} class="loc-hover" style={{color: "#6F7789"}}>Videos</Link></li>
                     </ul>
             </div>
             <div>

@@ -36,6 +36,7 @@ export default function CheckoutScreen() {
                             "x-access-token": `${userInfo.accessToken}`,
                         }
                     });
+                console.log(result);    
                 const { amount, id, currency } = result.data;
                 const options = {
                     key: 'rzp_test_vuVpE4Rt5weTYa',
@@ -45,7 +46,7 @@ export default function CheckoutScreen() {
                     description: `Custom Itinerary with Travel Expert ${TravelExpert.name}`,
                     id: id,
                     handler: async function (response) {
-                        const result = await axios.post('https://ecobanjarabackend.herokuapp.com/api/itinerary/order/custom', {
+                        const result = await axios.post('https://ecobanjarabackend.herokuapp.com/api/itinerary/order/purchase/custom', {
                             orderCreationId: id,
                             razorpayPaymentId: response.razorpay_payment_id,
                             razorpaySignature: response.razorpay_signature,
@@ -58,8 +59,8 @@ export default function CheckoutScreen() {
                                 "x-access-token": `${userInfo.accessToken}`,
                             }
                         });
-                        // console.log(response);
-                        // alert(response.razorpay_payment_id);
+                        console.log(response);
+                        alert(response.razorpay_payment_id);
                         if(typeof response.razorpay_payment_id === 'undefined' || response.razorpay_payment_id <1){
                             alert('Payment not successful')
                         }else{

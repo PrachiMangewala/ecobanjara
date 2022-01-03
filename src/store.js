@@ -7,6 +7,7 @@ import { localsListReducer, savedlocalsListReducer } from './reducers/localsRedu
 import { locationDetailsReducer, locationListReducer, newestlocationListReducer, popularlocationListReducer, savedlocationsListReducer } from './reducers/locationReducers';
 import { savedTravelexpertsListReducer, travelexpertsListReducer } from './reducers/travelexpertsReducers';
 import { userRegisterReducer, userSigninReducer, usersListReducer, userUpdateProfileReducer } from './reducers/userReducers';
+import { videoDetailsReducer } from './reducers/videoReducers';
 
 const initialState = {
     userSignin: {
@@ -42,6 +43,7 @@ const reducer = combineReducers({
     fixedItineraryDetails: saveFixedItineraryReducer,
     fixedItineraryContent: saveContentReducer,
     customItineraryDetails: getCustomItineraryreducer,
+    videoDetails: videoDetailsReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose ;

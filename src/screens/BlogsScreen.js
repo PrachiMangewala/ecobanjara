@@ -40,10 +40,10 @@ export default function BlogsScreen() {
             </div>
             <div>
                     <ul className="mx-175 dest-text">
-                        <li><a href="/" class="loc-hover" style={{color: "#6F7789"}}>About</a></li>
+                        <li><Link to={`/destination/${id}`} class="loc-hover" style={{color: "#6F7789"}}>About</Link></li>
                         <li><Link to={`/blogscreen/${id}`} class="active-blog">Blogs</Link></li>
-                        <li><a href="/" class="loc-hover" style={{color: "#6F7789"}}>Photo</a></li>
-                        <li><a href="/" class="loc-hover" style={{color: "#6F7789"}}>Videos</a></li>
+                        <li><Link to={`/blogscreen/${id}`} class="loc-hover" style={{color: "#6F7789"}}>Photos</Link></li>
+                        <li><Link to={`/videos/${id}`}  class="loc-hover" style={{color: "#6F7789"}}>Videos</Link></li>
                     </ul>
             </div>
             <div className="my-2">

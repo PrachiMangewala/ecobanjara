@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { getsavedLocations } from '../actions/locationActions';
-import { saveEntity } from '../actions/saveentitiesActions';
+import { removeEntity, saveEntity } from '../actions/saveentitiesActions';
 // import axios from 'axios';
 
 export default function Location(props){
@@ -14,7 +14,7 @@ export default function Location(props){
     const dispatch = useDispatch();
     const savedLocationsList = useSelector((state) => state.savedLocationsList);
     const {savedlocations} = savedLocationsList;
-    // console.log(savedlocations)
+    console.log(savedlocations)
 
     useEffect(()=>{
         dispatch(getsavedLocations(userInfo));
@@ -36,8 +36,22 @@ export default function Location(props){
         }
     }
 
-    const RemoveFromSavedLocations = () => {
-        setSaved(false);
+    const RemoveFromSavedLocations = (locationId) => {
+        if(savedlocations){
+            const locationindex = savedlocations.find((location) => location._id === locationId)
+            if(!locationindex){
+                dispatch(saveEntity(userInfo, locationId))
+                dispatch(getsavedLocations(userInfo));
+                alert('This location is already not saved.')
+                setSaved(true);
+            }else{
+                dispatch(removeEntity(userInfo, locationId));
+                dispatch(getsavedLocations(userInfo));
+                alert('Location removed')
+            }
+        }else{
+            alert('Saved locations list is empty.')
+        }
     }
     
     return(
@@ -45,7 +59,7 @@ export default function Location(props){
               <div>
                 <img src='https://ecobanjarabackend.herokuapp.com/api/image/05e4bc6a-e561-4a65-856d-1bae6f9eccb2.jpg' alt={location.name}></img>
                 {!(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
-                {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay2" onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
+                {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay2" onClick={() => RemoveFromSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
               </div>
               {/* <p>{location.city}</p> */}
               <Link to={`/destination/${location._id}`}>{location.city}</Link>

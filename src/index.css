@@ -464,6 +464,24 @@ input:focus{
   width:100%;
 }
 
+.sign-up-btn{
+  border: 1px solid #00365B;
+  background-color: #ffffff;
+  margin-bottom: 1rem;
+  border-radius: 36px;
+  color: #00365b;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  min-height: 2.5rem;
+  font-weight: 900;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+}
+
 .search-box{
   display: flex;
   justify-content: center;

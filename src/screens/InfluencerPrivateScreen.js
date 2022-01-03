@@ -118,10 +118,10 @@ export default function InfluencerPrivateScreen() {
             </div>
             <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                 <div className="navigation">
-                  <img src={process.env.PUBLIC_URL +  "/images/home-selected.png"} alt="home" className='selected'></img>
-                  <img src={process.env.PUBLIC_URL +  "/images/calender.png"} alt="calender" className="padding9"></img>
-                  <img src={process.env.PUBLIC_URL +  "/images/bell.png"} alt="bell" className="padding9"></img>
-                  <img src={process.env.PUBLIC_URL +  "/images/chat.png"} alt="chat" className="padding9"></img>
+                  <Link to={`/home/influencer/${userInfo.data._id}`}><img src={process.env.PUBLIC_URL +  "/images/home-selected.png"} alt="home" className='selected'></img></Link>
+                  <Link to="/meeting"><img src={process.env.PUBLIC_URL +  "/images/calender.png"} alt="calender" className="padding9"></img></Link>
+                  <Link to="#"><img src={process.env.PUBLIC_URL +  "/images/bell.png"} alt="bell" className="padding9"></img></Link>
+                  <Link to="#"><img src={process.env.PUBLIC_URL +  "/images/chat.png"} alt="chat" className="padding9"></img></Link>
                 </div>
                 </div>
         </div>

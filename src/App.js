@@ -33,6 +33,8 @@ import ChatScreen from './screens/ChatScreen';
 import ChatInfluencerScreen from './screens/ChatInfluencerScreen';
 import AddCustomItineraryScreen from './screens/AddCustomItineraryScreen';
 import AddItinerarySectionScreen from './screens/AddItinerarySectionScreen';
+import SetMeetingScreen from './screens/SetMeetingScreen';
+import VideosScreen from './screens/VideosScreen';
 
 function App() {
   return (
@@ -56,6 +58,7 @@ function App() {
           <Route path="/otpscreen/:role" element={<OtpScreen/>} exact></Route>
           <Route path="/destination/:id" element={<DestinationScreen/>} exact></Route>
           <Route path="/blogscreen/:id" element={<BlogsScreen/>} exact></Route>
+          <Route path="/videos/:id" element={<VideosScreen/>} exact></Route>
           <Route path="/blog/:locationId/:id" element={<BlogScreen/>} exact></Route>
           <Route path="/influencer/:id" element={<InfluencerScreen/>} exact></Route>
           <Route path="/connect/:id/:influencer" element={<ConnectScreen/>} exact></Route>
@@ -75,6 +78,7 @@ function App() {
             <Route path="/itineraryday/:itineraryId/:dayNo" element={<IteneraryDayScreen/>} exact></Route>
             <Route path="/itinerary/:itineraryId" element={<IteneraryScreen/>} exact></Route>
             <Route path="/congratulations/:itineraryId" element={<CongratulationsScreen/>} exact></Route>
+            <Route path="/meeting" element={<SetMeetingScreen/>} exact></Route>
           </Route>
           <Route path="/wholeitinerary/:id" element={<WholeIteneraryScreen/>} exact></Route>
         </Routes>
