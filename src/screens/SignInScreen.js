@@ -26,8 +26,10 @@ export default function SignInScreen(res) {
         if(userInfo){
             if(userInfo.role==="TRAVELLER" || userInfo.role==="LOCAL"){
                 navigate("/home")
-            }else{
+            }else if(userInfo.role==="INFLUENCER"){
                 navigate(`/home/influencer/${userInfo.data._id}`)
+            }else{
+                navigate("/admin")
             }
         }
     },[navigate, userInfo]);

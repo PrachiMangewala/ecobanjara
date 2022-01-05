@@ -4,8 +4,8 @@ import { blogListReducer } from './reducers/blogReducers';
 import { getCustomItineraryreducer } from './reducers/customItineraryReducers';
 import { fixedItineraryListReducer, getItineraryPriceReducer, saveContentReducer, saveFixedItineraryReducer, singleFixedItineraryreducer } from './reducers/fixedItineraryReducers';
 import { localsListReducer, savedlocalsListReducer } from './reducers/localsReducers';
-import { locationDetailsReducer, locationListReducer, newestlocationListReducer, popularlocationListReducer, savedlocationsListReducer } from './reducers/locationReducers';
-import { savedTravelexpertsListReducer, travelexpertsListReducer } from './reducers/travelexpertsReducers';
+import { addLocationReducer, locationDetailsReducer, locationListReducer, newestlocationListReducer, popularlocationListReducer, savedlocationsListReducer } from './reducers/locationReducers';
+import { getTravelExpertReducer, savedTravelexpertsListReducer, travelexpertsListReducer } from './reducers/travelexpertsReducers';
 import { userRegisterReducer, userSigninReducer, usersListReducer, userUpdateProfileReducer } from './reducers/userReducers';
 import { videoDetailsReducer } from './reducers/videoReducers';
 
@@ -43,7 +43,9 @@ const reducer = combineReducers({
     fixedItineraryDetails: saveFixedItineraryReducer,
     fixedItineraryContent: saveContentReducer,
     customItineraryDetails: getCustomItineraryreducer,
-    videoDetails: videoDetailsReducer
+    videoDetails: videoDetailsReducer,
+    travelExpertInfo: getTravelExpertReducer,
+    locationAdded: addLocationReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose ;

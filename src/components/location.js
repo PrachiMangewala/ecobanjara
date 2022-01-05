@@ -1,15 +1,13 @@
-// import { useEffect } from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { getsavedLocations } from '../actions/locationActions';
 import { removeEntity, saveEntity } from '../actions/saveentitiesActions';
-// import axios from 'axios';
 
 export default function Location(props){
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
-    const [saved, setSaved] =  useState(false);
+    const [setSaved] =  useState(false);
     const {location} = props;
     const dispatch = useDispatch();
     const savedLocationsList = useSelector((state) => state.savedLocationsList);
@@ -61,7 +59,6 @@ export default function Location(props){
                 {!(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
                 {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay2" onClick={() => RemoveFromSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
               </div>
-              {/* <p>{location.city}</p> */}
               <Link to={`/destination/${location._id}`}>{location.city}</Link>
               <div className="card-text">
                 <span class="icon"><i class="fas fa-map-marker-alt"></i></span>

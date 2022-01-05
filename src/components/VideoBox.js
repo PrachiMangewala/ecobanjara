@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
 import getVideoId from 'get-video-id';
 import { useDispatch, useSelector } from 'react-redux';
 import { getvideoDetails } from '../actions/videoActions';
@@ -12,7 +11,6 @@ export default function VideoBox(props) {
     console.log(url);
     console.log(videoUrl)
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const videoDetails = useSelector((state) => state.videoDetails);
     const {loading, error, video} = videoDetails;
 
@@ -21,10 +19,6 @@ export default function VideoBox(props) {
     useEffect(() => {
         dispatch(getvideoDetails(id));
     }, [dispatch, id]);
-
-    const goToYoutube = () => {
-        navigate(url);
-    }
 
     return (
         <div className="my-2">

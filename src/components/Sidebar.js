@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 import { signout } from '../actions/userActions';
-import MessageBox from './MessageBox';
 
 export default function Sidebar() {
-    const[bool,setBool] = useState(false);
     const [image] = useState(process.env.PUBLIC_URL +  '/images/profile.png');
     const userSignin = useSelector((state) => state.userSignin);
-    const {error, userInfo} = userSignin;
+    const {userInfo} = userSignin;
     console.log(userInfo);
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -39,7 +37,7 @@ export default function Sidebar() {
                    <Link to="/"><img src={process.env.PUBLIC_URL +  "/images/refer.png"} alt="refer"></img>Refer a Friend</Link>
                    <Link to="/"><img src={process.env.PUBLIC_URL +  "/images/settings.png"} alt="settings"></img>Settings</Link>
                    <Link to="/"><img src={process.env.PUBLIC_URL +  "/images/help.png"} alt="help"></img>Help & Support</Link>
-                   <Link to="#signout" style={{color: "#FF4040", position: "relative", bottom: "-18px"}} onClick={()=>{signoutHandler()}}><img src={process.env.PUBLIC_URL +  "/images/logout.png"} alt="logout"></img>Log out</Link>
+                   <div style={{color: "#FF4040", position: "relative", bottom: "-18px", cursor:"pointer", fontSize:"0.9rem", fontWeight:"900"}} onClick={()=>{signoutHandler()}}><img src={process.env.PUBLIC_URL +  "/images/logout.png"} alt="logout"></img>Log out</div>
                </ul>
             </div>
         </div>

@@ -11,7 +11,7 @@ export default function ChatScreen() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const locationsList = useSelector((state) => state.locationsList);
-    const { error, locations} = locationsList;
+    const { locations} = locationsList;
     const dispatch = useDispatch();
     const [image] = useState(process.env.PUBLIC_URL +  '/images/profile.png')
 

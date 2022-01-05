@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { LOCATION_DETAILS_FAIL, LOCATION_DETAILS_SUCCESS, LOCATION_LIST_FAIL, LOCATION_LIST_SUCCESS, NEWEST_LOCATION_LIST_FAIL, NEWEST_LOCATION_LIST_SUCCESS, POPULAR_LOCATION_LIST_FAIL, POPULAR_LOCATION_LIST_SUCCESS, SAVED_LOCATION_LIST_FAIL, SAVED_LOCATION_LIST_SUCCESS } from "../constants/locationConstants";
+import { ADD_LOCATION_FAIL, ADD_LOCATION_SUCCESS, LOCATION_DETAILS_FAIL, LOCATION_DETAILS_SUCCESS, LOCATION_LIST_FAIL, LOCATION_LIST_SUCCESS, NEWEST_LOCATION_LIST_FAIL, NEWEST_LOCATION_LIST_SUCCESS, POPULAR_LOCATION_LIST_FAIL, POPULAR_LOCATION_LIST_SUCCESS, SAVED_LOCATION_LIST_FAIL, SAVED_LOCATION_LIST_SUCCESS } from "../constants/locationConstants";
 
 export const listLocations = (userInfo) => async (dispatch) => {
   try {
@@ -39,12 +39,13 @@ export const listNewestLocations = (userInfo) => async (dispatch) => {
 
 export const detailsLocation = (userInfo, id) => async(dispatch) => {
   // dispatch({type: LOCATION_DETAILS_REQUEST, payload: id})
+  // console.log(id);
   try{
       const {data} = await Axios.get(`https://ecobanjarabackend.herokuapp.com/api/destination/single/${id}`,
       { headers: {
           "x-access-token": `${userInfo.accessToken}`,
       }});
-      console.log(data);
+      // console.log(data);
     dispatch({type: LOCATION_DETAILS_SUCCESS, payload: data});
   } catch(error){
     dispatch({type: LOCATION_DETAILS_FAIL, payload: error.response && error.response.data.message
@@ -66,5 +67,21 @@ export const getsavedLocations = (userInfo) => async(dispatch) => {
     dispatch({type: SAVED_LOCATION_LIST_FAIL, payload: error.response && error.response.data.message
       ? error.response.data.message
       : error.message,})
+  }
+}
+
+export const addDestination = (userInfo, name, city, state, address, about, videos, geography, category, images) => async(dispatch) => {
+  try{
+      const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/destinations/add', {name, city, state, address, about, videos, geography, category, images},
+      { headers: {
+          "x-access-token": `${userInfo.accessToken}`,
+      }});
+      console.log(data);
+    dispatch({type: ADD_LOCATION_SUCCESS, payload: data});
+  } catch(error){
+    dispatch({type: ADD_LOCATION_FAIL, payload: error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message,})
+    console.log(error);
   }
 }

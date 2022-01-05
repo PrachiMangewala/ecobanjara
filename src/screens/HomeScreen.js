@@ -31,8 +31,6 @@ export default function HomeScreen() {
     console.log(travelexperts);
     const locationsList = useSelector((state) => state.locationsList);
     const { error, locations} = locationsList;
-    const newLocations = locations.slice(0, 5);
-    console.log(newLocations)
     useEffect(()=>{
       dispatch(listLocals(userInfo));
     },[dispatch, userInfo]);
@@ -156,7 +154,7 @@ export default function HomeScreen() {
                 // {console.log(locations['data'])}
                 <Slider {...settings}>
                     {
-                          newLocations.map((location) => (
+                          locations.slice(0,5).map((location) => (
                             <Location key={location._id} location={location}></Location>
                         ))
                     }

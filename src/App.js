@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AdminRoute from './components/AdminRoute';
 import HomeScreen from './screens/HomeScreen';
 // import SignupScreen from './screens/SignupScreen';
 import SignInScreen from './screens/SignInScreen';
@@ -35,6 +36,11 @@ import AddCustomItineraryScreen from './screens/AddCustomItineraryScreen';
 import AddItinerarySectionScreen from './screens/AddItinerarySectionScreen';
 import SetMeetingScreen from './screens/SetMeetingScreen';
 import VideosScreen from './screens/VideosScreen';
+import AdminUserListScreen from './screens/AdminUserListScreen';
+import AddDestinationsScreen from './screens/AddDestinationsScreen';
+import AllFixedItinerariesScreen from './screens/AllFixedItinerariesScreen';
+import DisplayItineraryScreen from './screens/DisplayItineraryScreen';
+import FixedItineraryCheckoutScreen from './screens/FixedItineraryCheckoutScreen';
 
 function App() {
   return (
@@ -68,6 +74,10 @@ function App() {
           <Route path="/chat/influencer" element={<ChatInfluencerScreen/>} exact></Route>
           <Route path="/customitinerary" element={<AddCustomItineraryScreen/>} exact></Route>
           <Route path="/itinerarysection/:day" element={<AddItinerarySectionScreen/>} exact></Route>
+          <Route path="/wholeitinerary/:id" element={<WholeIteneraryScreen/>} exact></Route>
+          <Route path="/fixeditineraries/:id" element={<AllFixedItinerariesScreen/>} exact></Route>
+          <Route path="/fixeditinerary/:id" element={<DisplayItineraryScreen/>} exact></Route>
+          <Route path="/fixeditinerary/checkout/:id" element={<FixedItineraryCheckoutScreen/>} exact></Route>
           <Route element={<TravelExpertRoute/>}>
             <Route path="/home/influencer/:id" element={<InfluencerPrivateScreen />} exact></Route>
             <Route path="/itinerary/addlocations/:id" element={<AddLocationsScreen/>} exact></Route>
@@ -80,7 +90,10 @@ function App() {
             <Route path="/congratulations/:itineraryId" element={<CongratulationsScreen/>} exact></Route>
             <Route path="/meeting" element={<SetMeetingScreen/>} exact></Route>
           </Route>
-          <Route path="/wholeitinerary/:id" element={<WholeIteneraryScreen/>} exact></Route>
+          <Route element={<AdminRoute/>}>
+            <Route path="/admin" element={<AdminUserListScreen/>} exact></Route>
+            <Route path="/adddestination" element={<AddDestinationsScreen/>} exact></Route>
+          </Route>
         </Routes>
       </main>
     </div>

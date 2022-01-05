@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { SAVED_TRAVELEXPERTS_LIST_FAIL, SAVED_TRAVELEXPERTS_LIST_SUCCESS, TRAVELEXPERTS_LIST_FAIL, TRAVELEXPERTS_LIST_SUCCESS } from "../constants/TravelExpertsConstants";
+import { GET_TRAVEL_EXPERT_FAIL, GET_TRAVEL_EXPERT_SUCCESS, SAVED_TRAVELEXPERTS_LIST_FAIL, SAVED_TRAVELEXPERTS_LIST_SUCCESS, TRAVELEXPERTS_LIST_FAIL, TRAVELEXPERTS_LIST_SUCCESS } from "../constants/TravelExpertsConstants";
 
 export const listTravelexperts = (userInfo) => async (dispatch) => {
     try {
@@ -26,6 +26,19 @@ export const getsavedTravelExperts = (userInfo) => async(dispatch) => {
     dispatch({type: SAVED_TRAVELEXPERTS_LIST_SUCCESS, payload: data});
   } catch(error){
     dispatch({type: SAVED_TRAVELEXPERTS_LIST_FAIL, payload: error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message,})
+  }
+}
+
+export const getTravelExpert = (influencerId) => async(dispatch) => {
+  try{
+      // console.log(userInfo.accessToken);
+      const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/profile/byid', {influencerId});
+      // console.log(data);
+    dispatch({type: GET_TRAVEL_EXPERT_SUCCESS, payload: data});
+  } catch(error){
+    dispatch({type:  GET_TRAVEL_EXPERT_FAIL, payload: error.response && error.response.data.message
       ? error.response.data.message
       : error.message,})
   }

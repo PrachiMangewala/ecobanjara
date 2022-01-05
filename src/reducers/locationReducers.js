@@ -1,4 +1,4 @@
-import { LOCATION_DETAILS_FAIL, LOCATION_DETAILS_SUCCESS, LOCATION_LIST_FAIL, LOCATION_LIST_SUCCESS, NEWEST_LOCATION_LIST_FAIL, NEWEST_LOCATION_LIST_SUCCESS, POPULAR_LOCATION_LIST_FAIL, POPULAR_LOCATION_LIST_SUCCESS, SAVED_LOCATION_LIST_FAIL, SAVED_LOCATION_LIST_SUCCESS } from "../constants/locationConstants";
+import { ADD_LOCATION_FAIL, ADD_LOCATION_SUCCESS, LOCATION_DETAILS_FAIL, LOCATION_DETAILS_SUCCESS, LOCATION_LIST_FAIL, LOCATION_LIST_SUCCESS, NEWEST_LOCATION_LIST_FAIL, NEWEST_LOCATION_LIST_SUCCESS, POPULAR_LOCATION_LIST_FAIL, POPULAR_LOCATION_LIST_SUCCESS, SAVED_LOCATION_LIST_FAIL, SAVED_LOCATION_LIST_SUCCESS } from "../constants/locationConstants";
 
 export const locationListReducer = (state = {loading: true, locations: [] }, action) => {
     switch(action.type){
@@ -56,3 +56,14 @@ export const savedlocationsListReducer = (state = {loading: true, savedlocations
             return state;
     }
 }
+
+export const addLocationReducer = (state = {loading: true, location: {}}, action) => {
+    switch (action.type) {
+      case ADD_LOCATION_SUCCESS:
+        return { loading: false, success: true, location: action.payload };
+      case ADD_LOCATION_FAIL:
+        return { loading: false, error: action.payload };
+      default:
+        return state;
+    }
+};

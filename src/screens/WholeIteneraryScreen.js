@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { listFixedItinerary } from '../actions/fixedItineraryActions';
+import { getsingleFixedItinerary, listFixedItinerary } from '../actions/fixedItineraryActions';
 
 export default function WholeIteneraryScreen() {
     const {id} = useParams();
+    const itineraryId = id;
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
-    const fixedItineraryList = useSelector((state) => state.fixedItineraryList);
-    const {fixedItinerary} = fixedItineraryList;
-    const itinerary = fixedItinerary.find((itinerary) => itinerary._id === id);
-    console.log(itinerary)
+    // const fixedItineraryList = useSelector((state) => state.fixedItineraryList);
+    // const {fixedItinerary} = fixedItineraryList;
+    // const itinerary = fixedItinerary.find((itinerary) => itinerary._id === id);
+    // console.log(itinerary)
     const dispatch = useDispatch();
     // const days = useState(itinerary? Number(itinerary.content.length) : 1);
 
     useEffect(()=>{
-        dispatch(listFixedItinerary(userInfo));
-    },[dispatch, userInfo]);
+        dispatch(getsingleFixedItinerary(userInfo, itineraryId));
+    },[dispatch, userInfo, itineraryId]);
 
     return (
         <div>
@@ -24,7 +25,7 @@ export default function WholeIteneraryScreen() {
                 <p><i class="fas fa-chevron-left" style={{ fontSize: "1.2rem" }}></i></p>
                 <p className='connect' style={{color: "#000000"}}>Fixed Itinerary</p>
             </div>
-            <div className='mx-1'>
+            {/* <div className='mx-1'>
             {itinerary?
             itinerary.content.map((schedule) =>(
                     <div key={schedule.day}>
@@ -41,7 +42,7 @@ export default function WholeIteneraryScreen() {
                     </div>
                     </div>
                 )): ""}
-            </div>
+            </div> */}
         </div>
     )
 }
