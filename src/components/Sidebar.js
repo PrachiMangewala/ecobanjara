@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import { signout } from '../actions/userActions';
 
 export default function Sidebar() {
-    const [image] = useState(process.env.PUBLIC_URL +  '/images/profile.png');
+    const [image] = useState(process.env.PUBLIC_URL +  '/images/People.jpg');
     const userSignin = useSelector((state) => state.userSignin);
     const {userInfo} = userSignin;
     console.log(userInfo);
@@ -21,7 +21,7 @@ export default function Sidebar() {
             <div className="user-flex mx-1">
                 <div className="form-group">
                     <label htmlFor="image-input"><i class="fas fa-camera camera-icon"  style={{top:"27px", left:"49px"}}></i></label>
-                    <img src={userInfo? (userInfo.data? userInfo.data.profileImg : image) : image} alt="profile" className="image" style={{width:"4rem", height:"4rem"}}></img>
+                    <img src={image} alt="profile" className="image" style={{width:"4rem", height:"4rem"}}></img>
                     <input className="display" type="file" name="image-upload" id="image-input" accept="image/*"/>
                 </div>
                 <div>

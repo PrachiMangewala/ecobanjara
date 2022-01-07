@@ -41,6 +41,10 @@ import AddDestinationsScreen from './screens/AddDestinationsScreen';
 import AllFixedItinerariesScreen from './screens/AllFixedItinerariesScreen';
 import DisplayItineraryScreen from './screens/DisplayItineraryScreen';
 import FixedItineraryCheckoutScreen from './screens/FixedItineraryCheckoutScreen';
+import InfluencerSignupScreen from './screens/InfluencerSignupScreen';
+import InfluencerDetailsScreen from './screens/InfluencerDetailsScreen';
+import InfluencerDetailsPage2 from './screens/InfluencerDetailsPage2';
+import InfluencerDetailsPage3 from './screens/InfluencerDetailsPage3';
 
 function App() {
   return (
@@ -60,7 +64,11 @@ function App() {
           <Route path="/edit/:id" element={<ProfileEditScreen/>} exact></Route>
           <Route path="/saved/:id" element={<SavedEntitiesScreen/>} exact></Route>
           <Route path="/signup/:role" element={<SignupScreen/>} exact></Route>
+          <Route path="/signup/influencer" element={<InfluencerSignupScreen/>} exact></Route>
           <Route path="/enterdetails" element={<SignupDetailsScreen />} exact></Route>
+          <Route path="/enterdetails/influencer" element={<InfluencerDetailsScreen />} exact></Route>
+          <Route path="/enterdetails/page2/influencer" element={<InfluencerDetailsPage2 />} exact></Route>
+          <Route path="/enterdetails/page3/influencer" element={<InfluencerDetailsPage3 />} exact></Route>
           <Route path="/otpscreen/:role" element={<OtpScreen/>} exact></Route>
           <Route path="/destination/:id" element={<DestinationScreen/>} exact></Route>
           <Route path="/blogscreen/:id" element={<BlogsScreen/>} exact></Route>
@@ -71,7 +79,7 @@ function App() {
           <Route path="/checkout/:id" element={<CheckoutScreen/>} exact></Route>
           <Route path="/description" element={<DescriptionScreen/>} exact></Route>
           <Route path="/chat" element={<ChatScreen/>} exact></Route>
-          <Route path="/chat/influencer" element={<ChatInfluencerScreen/>} exact></Route>
+          <Route path="/chat/influencer/:id" element={<ChatInfluencerScreen/>} exact></Route>
           <Route path="/customitinerary" element={<AddCustomItineraryScreen/>} exact></Route>
           <Route path="/itinerarysection/:day" element={<AddItinerarySectionScreen/>} exact></Route>
           <Route path="/wholeitinerary/:id" element={<WholeIteneraryScreen/>} exact></Route>

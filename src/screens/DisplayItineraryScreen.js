@@ -75,6 +75,7 @@ export default function DisplayItineraryScreen() {
                     ))}
                 </div> */}
                 <div className="mx-1 my-1">
+                    <button className='btn' style={{marginBottom:"12px"}}><Link to={`/wholeitinerary/${id}`} style={{color:"#ffffff"}}>View Full Itinerary</Link></button>
                     <button className='btn' onClick={checkout}>Buy for Rs {fixedItinerary.price}/-</button>
                 </div>
             </div>

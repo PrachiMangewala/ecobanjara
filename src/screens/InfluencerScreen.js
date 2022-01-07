@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import { getTravelExpert } from '../actions/travelexpertsActions';
-import DestinationName from '../components/DestinationName';
 import FixedItineraryBox from '../components/FixedItineraryBox';
 import InfluencerInfoPopup from '../components/InfluencerInfoPopup';
 import Popup from '../components/Popup';

@@ -7,7 +7,7 @@ import { removeEntity, saveEntity } from '../actions/saveentitiesActions';
 export default function Location(props){
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
-    const [setSaved] =  useState(false);
+    const [saved, setSaved] =  useState(false);
     const {location} = props;
     const dispatch = useDispatch();
     const savedLocationsList = useSelector((state) => state.savedLocationsList);

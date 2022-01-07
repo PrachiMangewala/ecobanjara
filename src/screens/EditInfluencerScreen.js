@@ -1,37 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { listTravelexperts } from '../actions/travelexpertsActions';
+import { getTravelExpert } from '../actions/travelexpertsActions';
 import {Link} from 'react-router-dom';
-import { listFixedItinerary } from '../actions/fixedItineraryActions';
 
 export default function EditInfluencerScreen() {
     const {id} = useParams();
+    const influencerId = id;
     console.log(id);
     const dispatch = useDispatch();
-    const userSignin = useSelector((state) => state.userSignin);
-    const { userInfo } = userSignin;
-    const travelexpertsList = useSelector((state) => state.travelexpertsList);
-    const {travelexperts} = travelexpertsList;
-    // console.log(travelexperts);
-    const TravelExpert = travelexperts.find((travelexpert) => travelexpert._id === id);
-    // console.log(TravelExpert);
-    const fixedItineraryList = useSelector((state) => state.fixedItineraryList);
-    const {fixedItinerary} = fixedItineraryList;
-    console.log(fixedItinerary)
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [bio, setBio] = useState('');
+    const travelExpertInfo = useSelector((state) => state.travelExpertInfo);
+    const { travelexpert } = travelExpertInfo;
 
     useEffect(()=>{
-        dispatch(listTravelexperts(userInfo));
-    },[dispatch, userInfo]);
+        dispatch(getTravelExpert(influencerId));
+    },[dispatch, influencerId]);
 
-    useEffect(()=>{
-        dispatch(listFixedItinerary(userInfo));
-    },[dispatch, userInfo]);
 
-    return (
+    return (travelexpert?
         <div>
             <div className='py-1 px-1' style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <p><i class="fas fa-chevron-left" style={{ fontSize: "1.2rem" }}></i></p>
@@ -41,12 +30,12 @@ export default function EditInfluencerScreen() {
             <form style={{top:"0px"}}>
                 <div className="form-group">
                     <label  htmlFor="name" className="form-heading">Name</label>
-                    <input type="text" id="name"  className="textarea" placeholder="Full name" value={TravelExpert? TravelExpert.name : ""} required 
+                    <input type="text" id="name"  className="textarea" placeholder="Full name" value={travelexpert.data? travelexpert.data.name : ""} required 
                         onChange={ e => setName(e.target.value)}></input>
                 </div>
                 <div className="form-group">
                     <label  htmlFor="location" className="form-heading">Location</label>
-                    <input type="text" id="name"  className="textarea"  placeholder="Enter your city" value={TravelExpert? TravelExpert.city : ""} required 
+                    <input type="text" id="name"  className="textarea"  placeholder="Enter your city" value={travelexpert.data? travelexpert.data.city : ""} required 
                         onChange={ e => setLocation(e.target.value)}></input>
                 </div>
                 <div style={{marginBottom: "2rem"}}>
@@ -55,21 +44,21 @@ export default function EditInfluencerScreen() {
                         <p className='add-new'>Add new<span><i class="fas fa-plus" style={{marginLeft: "0.1rem", fontSize: "0.6rem"}}></i></span></p>
                     </div>
                     <div className='language-container'>
-                        {TravelExpert? (
-                            (TravelExpert.languages.length!==0) ?(
+                        {travelexpert.data? (
+                            (travelexpert.data.languages.length!==0) ?(
                         <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
-                            {TravelExpert.languages.map((language) => (
+                            {travelexpert.data.languages.map((language) => (
                                 <div className='language-box add-new' style={{color: "#00365B"}}><img src="/images/lang.png" alt="lang" className="image-lang"></img>{language}</div>
                             ))}
                         </div>    
-                            ) : <div>Add Locations</div>
-                        ) : <div>Add Locations</div>
+                            ) : <div>Add Languages</div>
+                        ) : <div>Add Languages</div>
                         }
                     </div>
                 </div>
                 <div className="form-group">
                 <label className="form-heading">My Bio</label>
-                    <textarea id="bio" name="bio" rows="5" maxLength={1000} className="textarea" required placeholder='Enter description' value={TravelExpert? TravelExpert.profileDescription : ""}onChange={ e => setBio(e.target.value)}></textarea>
+                    <textarea id="bio" name="bio" rows="5" maxLength={1000} className="textarea" required placeholder='Enter description' value={travelexpert.data? travelexpert.data.profileDescription : ""}onChange={ e => setBio(e.target.value)}></textarea>
                 </div>
 
                 <div>
@@ -79,14 +68,14 @@ export default function EditInfluencerScreen() {
                     </div>
                     <div style={{border: "1px solid #D1D1D1", boxSizing: "border-box", borderRadius: "16px"}}>
                         {
-                            fixedItinerary?(
-                                fixedItinerary.map((fixedIt) => (
+                            travelexpert.fixeditinerary?(
+                                travelexpert.fixeditinerary.map((fixedIt) => (
                     <div class="d-flex" style={{backgroundColor: "#ffffff"}}>
                         <img src={process.env.PUBLIC_URL +  '/images/tajmahal.jpg'} alt="img" className="blog-image"></img>
                         <div style={{marginBottom: "1rem"}}>
                             <p className="dest-name" style={{margin: "0 0 0 0.5rem", color:"#121212"}}>{fixedIt.itineraryName}</p>
                             <p className="blog-area"><span class="icon"><i class="fas fa-map-marker-alt marker" style={{fontSize:  "0.6rem", paddingRight:"0", margin: "0 0 0 0.5rem"}}></i></span>Uttarakhand</p>
-                            <p className="blog-area" style={{fontSize:  "0.6rem", paddingRight:"0", margin: "0 0 0 0.5rem"}}>{fixedIt.noofDays - 1}N/{fixedIt.noofDays}D itinerary</p>
+                            <p className="blog-area" style={{fontSize:  "0.6rem", paddingRight:"0", margin: "0 0 0 0.5rem"}}>{fixedIt.trip} Days</p>
                         </div>
                         <p className='price'>Rs {fixedIt.price}/-</p>
                         </div>
@@ -111,5 +100,6 @@ export default function EditInfluencerScreen() {
             </form>
             </div>
         </div>
+        : ""
     )
 }

@@ -67,7 +67,7 @@ export default function CheckoutScreen() {
                             alert('Payment not successful')
                         }else{
                             alert('Payment Successful');
-                            navigate(`/chat/${userInfo.data._id}/${influencerId}`)
+                            navigate(`/chat/influencer/${influencerId}`)
                         }
                     },
                 prefill: {

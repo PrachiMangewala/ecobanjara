@@ -18,7 +18,7 @@ export default function ChatInfluencerScreen() {
                 </div>
                 </div>
                 <div style={{display:"flex", alignItems: "flex-start"}}>
-                    <img src={process.env.PUBLIC_URL +  '/images/call.png'} alt="call" className="call-image" style={{marginRight:"10px", backgroundColor:"rgb(242,242,242,1)", padding:"22px", borderRadius:"50%"}}></img>
+                    <img src={process.env.PUBLIC_URL +  '/images/call.png'} alt="call" className="call-image" style={{marginRight:"10px", backgroundColor:"rgb(242,242,242,1)", padding:"11px", borderRadius:"50%"}}></img>
                     <Link to="/customitinerary"><img src={process.env.PUBLIC_URL +  '/images/itinerary.png'} alt="itinerary"></img></Link>
                 </div>
             </div>

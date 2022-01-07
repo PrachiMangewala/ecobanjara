@@ -123,7 +123,7 @@ export default function HomeScreen() {
           <div>
           <span><i class="fas fa-bars nav-icon" onClick={showSidebar}></i></span>
           <div className={sidebar ? 'nav-menu active': 'nav-menu'}>
-            <span className="navbar-toggle"><i class="fas fa-times cross-icon" onClick={showSidebar}></i></span>
+            <span className="navbar-toggle"><i class="fas fa-times cross-icon" onClick={showSidebar} style={{left:"17rem"}}></i></span>
             <Sidebar />
           </div>
             <nav className='navigation-bar'>

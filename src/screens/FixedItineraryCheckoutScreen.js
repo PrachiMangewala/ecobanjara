@@ -96,7 +96,7 @@ export default function FixedItineraryCheckoutScreen() {
                 <p className='connect'>Checkout</p>
             </div>
             <div>
-                <p className='heading-locs' style={{ fontSize: "16px", textDecoration: "underline" }}>Custom Itinerary Summary</p>
+                <p className='heading-locs' style={{ fontSize: "16px", textDecoration: "underline" }}>Fixed Itinerary Summary</p>
                 <p className='heading-locs mt-2' style={{ fontSize: "14px" }}>Travel Expert:</p>
                 <div style={{ display: "flex" }}>
                     <img className="expertImage" src={image} alt="img"></img>

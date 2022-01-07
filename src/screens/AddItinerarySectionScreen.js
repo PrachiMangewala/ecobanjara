@@ -1,18 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
+import { addSectioninItinerary } from '../actions/customItineraryActions';
 
 export default function AddItinerarySectionScreen() {
     const {day} = useParams();
-    const [title, setTitle] = useState('');
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+    // const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
+    const dispatch = useDispatch();
+    const customId = '61d425f1b3fd7e6b330be8d0';
+    const dayNo = day;
+
+
+    const itinerarySection = useSelector((state) => state.itinerarySection);
+    const { section } = itinerarySection;
+    console.log(section);
+
+    // useEffect(() => (
+    //     dispatch (addSectioninItinerary(customId, dayNo, startTime, endTime, description))
+    // ))
 
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(startTime);
         console.log(endTime);
-        console.log(title);
+        // console.log(title);
         console.log(description);
         const start = startTime.split(":")
         console.log(start);
@@ -23,7 +39,7 @@ export default function AddItinerarySectionScreen() {
         }else if(start[0]===end[0] && start[1]>end[1]){
             console.log('bye')
         }else{
-            console.log('wohooo')
+            dispatch (addSectioninItinerary(userInfo, customId, dayNo, startTime, endTime, description));
         }
     };
 
@@ -45,8 +61,8 @@ export default function AddItinerarySectionScreen() {
                     <input type="time" className='iten-input' placeholder='Enter end time' onChange={ e => setEndTime(e.target.value)} required></input>
                     </div>
                     </div>
-                    <label className="heading-dest" style={{color: "#00365B", marginBottom: "0.5rem"}}>Title of the activity</label>
-                    <input type="text" className='iten-input' placeholder='Enter the title' onChange={ e => setTitle(e.target.value)} required></input>
+                    {/* <label className="heading-dest" style={{color: "#00365B", marginBottom: "0.5rem"}}>Title of the activity</label>
+                    <input type="text" className='iten-input' placeholder='Enter the title' onChange={ e => setTitle(e.target.value)} required></input> */}
                     <label className="heading-dest" style={{color: "#00365B", margin: "1rem 0 0.5rem 0"}}>Description</label>
                     <textarea id="bio" name="bio" rows="5" maxLength={1000} className="textarea" required style={{marginBottom: "1rem"}} placeholder='Enter description' onChange={ e => setDescription(e.target.value)}></textarea>
                     <button className='btn'>Save</button>

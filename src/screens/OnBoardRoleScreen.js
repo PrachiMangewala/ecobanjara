@@ -14,7 +14,11 @@ export default function OnBoardRoleScreen() {
 
     useEffect(() => {
         if(bool){
-            navigate(`/signup/${role}`);
+            if(role==="INFLUENCER"){
+                navigate("/signup/influencer")
+            }else{
+                navigate(`/signup/${role}`);
+            }
         }
     })
 
@@ -25,7 +29,7 @@ export default function OnBoardRoleScreen() {
             </div>
             <div className="mx-1" style={{position: "relative", top:"49px"}}>
             <div className="left-text my-1 ">
-                <p style={{fontWeight: "600", fontSize:"1.1rem"}}><span className="l-icon" style={{position: "relative", bottom:"3px"}}><i class="fas fa-map-marker-alt l-icon"></i></span ><span style={{marginLeft:"3px"}}>Welcome</span></p>
+                <p style={{fontWeight: "600", fontSize:"1.1rem"}}><span className="l-icon" style={{position: "relative", bottom:"3px"}}><i className="fas fa-map-marker-alt l-icon"></i></span ><span style={{marginLeft:"3px"}}>Welcome</span></p>
                 <p style={{fontWeight: "600", fontSize:"0.8rem"}}>Please select what best describes you.</p>
             </div>
             <div className="my-1">

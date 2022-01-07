@@ -1562,6 +1562,40 @@ h2 span{
   margin: 0 0.2rem;
 }
 
+.comment{
+  width: fit-content;
+  font-size: 0.7rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 5px;
+  color: #00365B;
+}
+
+.chat-input{
+  width: 90%;
+  box-sizing: border-box;
+  /* width: 100%; */
+  padding: 0.3rem 0.75rem;
+  border: none;
+  /* min-height: 3rem; */
+  border-radius: 10px;
+  background-color: #E8E8E8;
+  font-family: 'Poppins', sans-serif;
+  margin: 10px 10px 10px 0px;
+  color: #303030;
+  font-size: 12px;
+}
+
+.send-button{
+  background-color: #00365B;
+  border: none;
+  border-radius: 25px;
+  /* box-sizing: content-box; */
+  padding: 6px 10px 5px 10px;
+}
+
 @media screen and (max-width:600px){
   .loc-text{
     margin: 0rem 1rem;
