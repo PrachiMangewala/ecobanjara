@@ -10,7 +10,7 @@ export default function OnBoardingScreen() {
             </div>
             <div className="mx-1">
             <div className="left-text">
-                <p style={{fontWeight: "600", fontSize:"1.1rem"}}><span className="l-icon" style={{position: "relative", bottom:"3px"}}><i class="fas fa-map-marker-alt l-icon"></i></span ><span style={{marginLeft:"3px"}}>Welcome</span></p>
+                <p style={{fontWeight: "600", fontSize:"1.1rem"}}><span className="l-icon" style={{position: "relative", bottom:"3px"}}><i className="fas fa-map-marker-alt l-icon"></i></span ><span style={{marginLeft:"3px"}}>Welcome</span></p>
                 <p style={{fontWeight: "600", fontSize:"0.9rem"}}>Welcome to Triponvo leading trip conversations platform.</p>
                 <p style={{fontWeight: "500", fontSize:"0.8rem"}}>Loading Trip conversations platform.</p>
             </div>

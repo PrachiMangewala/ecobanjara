@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function CheckoutScreen() {
@@ -121,6 +121,7 @@ export default function CheckoutScreen() {
                 <div className='mt-2 mb-4' style={{ textAlign: "center", color: "#333333" }}>
                     This is where your journey begins with Triponvo, Bon Voyage!<span><img src={process.env.PUBLIC_URL + '/images/yoyo.png'} alt="logo" style={{ position: "relative", top: "5px", left: "5px" }}></img></span>
                 </div>
+                <div className='add-new my-1'><Link to="/couponcode">Have a coupon code?</Link></div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <div style={{ color: "#000000", opacity: "0.6", letterSpacing: "0.2px", fontWeight: "600" }}>Total Amount</div>
                     <div>

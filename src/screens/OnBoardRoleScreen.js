@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import Popup from '../components/Popup';
 
 export default function OnBoardRoleScreen() {
     const[role, setRole] = useState('');
     const[bool, setBool] = useState(false);
+    const [buttonPopup, setTimedPopup] = useState(true);
     const navigate = useNavigate();
 
     const saveRole = (a) => {
@@ -24,7 +26,8 @@ export default function OnBoardRoleScreen() {
 
     return (
         <div>
-            <div  className="center">
+            <Popup trigger={buttonPopup} setTrigger={setTimedPopup}></Popup>
+            <div className="center">
                 <img src='images/logo2.png' alt='logo2'></img>
             </div>
             <div className="mx-1" style={{position: "relative", top:"49px"}}>

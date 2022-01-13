@@ -6,11 +6,13 @@ import { getsingleFixedItinerary } from '../actions/fixedItineraryActions';
 export default function WholeIteneraryScreen() {
     const {id} = useParams();
     const itineraryId = id;
+    console.log(itineraryId)
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const singleFixedItinerary = useSelector((state) => state.singleFixedItinerary);
     const { fixedItinerary } = singleFixedItinerary;
     const dispatch = useDispatch();
+    console.log(fixedItinerary)
 
     useEffect(()=>{
         dispatch(getsingleFixedItinerary(userInfo, itineraryId));
@@ -31,7 +33,7 @@ export default function WholeIteneraryScreen() {
                         <div className='day'>Day {schedule.dayNo}</div>
                     </div>
                     <div style={{display:"flex", alignItems:"center"}}>
-                    <div className='blue-side-border2 px-1 py-2' style={{left:"10px"}}>
+                    <div className='blue-side-border2 px-1 py-2' style={{left:"10px", width:"100%"}}>
                         <p className='itinery-name'>{schedule.title}</p>
                         <img src="/images/tajmahal.jpg" alt="img" className='image-box'></img>
                         <p className='dest-p'>{schedule.description}</p>

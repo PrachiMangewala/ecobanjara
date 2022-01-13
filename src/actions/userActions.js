@@ -22,7 +22,58 @@ export const register = (email, password, name, role, mobileNo, profileImg, dob,
 export const signin = (mobileNo, password) => async(dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: { mobileNo, password } });
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/auth/signin', {mobileNo, password});
+        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/mobile/password', {mobileNo, password});
+        console.log(data);
+        dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+        localStorage.setItem('userInfo', JSON.stringify(data));
+    } catch(error) {
+        dispatch({ type: USER_SIGNIN_FAIL, 
+            payload:
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message 
+    });
+    }
+};
+
+export const Otpsignin = (accessToken) => async(dispatch) => {
+    dispatch({ type: USER_SIGNIN_REQUEST, payload: { accessToken } });
+    try{
+        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/signin/mobile/otp', {accessToken});
+        console.log(data);
+        dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+        localStorage.setItem('userInfo', JSON.stringify(data));
+    } catch(error) {
+        dispatch({ type: USER_SIGNIN_FAIL, 
+            payload:
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message 
+    });
+    }
+};
+
+export const SocialMediasignin = (accessToken) => async(dispatch) => {
+    dispatch({ type: USER_SIGNIN_REQUEST, payload: { accessToken } });
+    try{
+        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/signin/social/media', {accessToken});
+        console.log(data);
+        dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+        localStorage.setItem('userInfo', JSON.stringify(data));
+    } catch(error) {
+        dispatch({ type: USER_SIGNIN_FAIL, 
+            payload:
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message 
+    });
+    }
+};
+
+export const InstaSignin = (state) => async(dispatch) => {
+    dispatch({ type: USER_SIGNIN_REQUEST, payload: {state} });
+    try{
+        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/insta/auth/url', {state});
         console.log(data);
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));

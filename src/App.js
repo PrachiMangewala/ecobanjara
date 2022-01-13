@@ -45,6 +45,12 @@ import InfluencerSignupScreen from './screens/InfluencerSignupScreen';
 import InfluencerDetailsScreen from './screens/InfluencerDetailsScreen';
 import InfluencerDetailsPage2 from './screens/InfluencerDetailsPage2';
 import InfluencerDetailsPage3 from './screens/InfluencerDetailsPage3';
+import DisplayItineraryAfterPaymentScreen from './screens/DisplayItineraryAfterPaymentScreen';
+import CouponCodeScreen from './screens/CouponCodeScreen';
+import SettingsPage from './screens/SettingsPage';
+import PaymentHistoryPage from './screens/PaymentHistoryPage';
+import OrderScreen from './screens/OrderScreen';
+import OtpsigninScreen from './screens/OtpsigninScreen';
 
 function App() {
   return (
@@ -55,6 +61,7 @@ function App() {
           <Route path="/" element={<OnBoardingScreen />} exact></Route>
           <Route path="/onboardrole" element={<OnBoardRoleScreen />} exact></Route>
           <Route path="/signin" element={<SignInScreen/>} exact></Route>
+          <Route path="/signin/otpscreen" element={<OtpsigninScreen/>} exact></Route>
           <Route path="/home" element={<HomeScreen/>} exact></Route>
           <Route path="/destinations/all" element={<AllDestinationsScreen type="all"/>} exact></Route>
           <Route path="/destinations/popular" element={<AllDestinationsScreen type="popular"/>} exact></Route>
@@ -77,6 +84,7 @@ function App() {
           <Route path="/influencer/:id" element={<InfluencerScreen/>} exact></Route>
           <Route path="/connect/:id/:influencer" element={<ConnectScreen/>} exact></Route>
           <Route path="/checkout/:id" element={<CheckoutScreen/>} exact></Route>
+          <Route path="/couponcode" element={<CouponCodeScreen/>} exact></Route>
           <Route path="/description" element={<DescriptionScreen/>} exact></Route>
           <Route path="/chat" element={<ChatScreen/>} exact></Route>
           <Route path="/chat/influencer/:id" element={<ChatInfluencerScreen/>} exact></Route>
@@ -85,7 +93,11 @@ function App() {
           <Route path="/wholeitinerary/:id" element={<WholeIteneraryScreen/>} exact></Route>
           <Route path="/fixeditineraries/:id" element={<AllFixedItinerariesScreen/>} exact></Route>
           <Route path="/fixeditinerary/:id" element={<DisplayItineraryScreen/>} exact></Route>
+          <Route path="/fixeditinerary/:id/payment" element={<DisplayItineraryAfterPaymentScreen/>} exact></Route>
           <Route path="/fixeditinerary/checkout/:id" element={<FixedItineraryCheckoutScreen/>} exact></Route>
+          <Route path="/settings" element={<SettingsPage/>} exact></Route>
+          <Route path="/paymenthistory" element={<PaymentHistoryPage/>} exact></Route>
+          <Route path="/order/:id" element={<OrderScreen/>} exact></Route>
           <Route element={<TravelExpertRoute/>}>
             <Route path="/home/influencer/:id" element={<InfluencerPrivateScreen />} exact></Route>
             <Route path="/itinerary/addlocations/:id" element={<AddLocationsScreen/>} exact></Route>

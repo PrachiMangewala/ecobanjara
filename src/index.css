@@ -138,7 +138,8 @@ input:focus{
   color: #ffffff;
   position: relative;
   top: 21px;
-  left: 12rem;
+  /* left: 12rem; */
+  margin: 0 1rem;
 }
 
 .edit-div{
@@ -163,7 +164,7 @@ input:focus{
 
 .email{
   color: rgb(255,255,255,1);
-  font-size: 0.6rem;
+  font-size: 12px;
   margin: 0 0 0.5rem 1rem;
 }
 
@@ -235,8 +236,8 @@ input:focus{
   margin: 0rem 3rem;
   font-family: 'Poppins';
   font-style: normal;
-  font-weight: 900;
-  font-size: 1rem;  
+  font-weight: 600;
+  font-size: 14px;  
   color: #00365B;
 }
 
@@ -255,30 +256,27 @@ input:focus{
 
 .card{
   position: relative;
-  width: 8rem;
-  height: 10rem;
-  /* left: 32px; */
+  width: 213px;
+  height: 195px;
   border-radius: 13px;
   background-color: #ffffff;
-  margin: 1rem 1rem 0.5rem 1rem;
 }
 
 .card img{
   display: flex;
   justify-content: center;
-  margin:5px auto;
-  width: 7.5rem;
+  margin: 5px auto;
+  width: 197px;
   border-radius: 13px;
+  height: 119px;
 }
 
 .card-text{
   position: relative;
-  /* width: 144px; */
   height: 18px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-weight: bold;
-  font-size: 0.55rem;
+  font-size: 12px;
   line-height: 18px;
   color: #6F7789;
   margin: 0.25rem 0rem 0.25rem 0.45rem;
@@ -286,13 +284,11 @@ input:focus{
 
 .card a{
   position: relative;
-  /* width: 41px; */
   height: 21px;
-  /* top: 325px; */
   font-family: 'Poppins', sans-serif;
   font-style: normal;
-  font-weight: bold;
-  font-size: 0.75rem;
+  font-weight: 900;
+  font-size: 14px;
   line-height: 21px;
   color: #00365B;
   margin: 0.25rem 0rem 0.25rem 0.45rem;
@@ -341,8 +337,8 @@ input:focus{
   justify-content: space-between;
   font-family: 'Poppins';
   font-style: normal;
-  font-weight: 1000;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 18px;
   /* line-height: 27px; */
   color: #00365B;
   padding: 0rem;
@@ -351,7 +347,7 @@ input:focus{
 .text a{
   margin: 1.25rem 1rem 0.5rem 1rem;
   font-weight: 500;
-  font-size: 0.75rem;
+  font-size: 14px;
 }
 
 /* .slick-slider{
@@ -369,8 +365,8 @@ input:focus{
 }
 
 .expertImage{
-  max-width: 3rem;
-  max-height: 3rem;
+  width: 54px;
+  height: 54px;
   /* display: block; */
   border-radius: 50% 50%;
 }
@@ -422,7 +418,7 @@ input:focus{
 .font-icon{
   position: absolute;
   left:10px;
-  top:10px;
+  top:14px;
   color: #828282;
 }
 
@@ -443,6 +439,10 @@ input:focus{
   border-radius: 10px;
   background-color: #F3F3F3;
   font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  font-size: 14px;
+  color: #959595;
 }
 
 .btn{
@@ -600,15 +600,15 @@ h2 span{
 
 .otp-text{
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.3rem;
   margin-bottom: 2rem;
   color:#00365B;
 }
 
 .otp-field{
-  width:38px;
+  width:33px;
   margin-right: 10px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding-left: 12px;
   height: 40px;
   border:none;
@@ -616,6 +616,18 @@ h2 span{
   border-radius: 10px;
   background-color: #F3F3F3;
   font-family: 'Poppins', sans-serif;
+}
+
+.resend{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  color: #828282;
+  cursor: pointer;
 }
 
 .display{
@@ -668,7 +680,7 @@ h2 span{
 .dest-name{
   color:#00365B;
   font-size:1rem;
-  font-weight:bold;
+  font-weight:600;
   margin-bottom: 0.5rem;
   cursor:pointer;
 }
@@ -687,7 +699,7 @@ h2 span{
 }
 
 .dest-text{
-  font-size: 0.7rem;
+  font-size: 14px;
   display:flex;
   justify-content: space-between;
   list-style: none;
@@ -697,8 +709,8 @@ h2 span{
 }
 
 .dest-p{
-  color: #6F7789;
-  font-size: 0.7rem;
+  color: #939393;
+  font-size: 12px;
   margin-bottom: 1rem;
   margin-top: 0.5rem;
   font-weight: 300;
@@ -843,7 +855,7 @@ h2 span{
 
 .reviews{
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 12px;
   line-height: 18px;
   text-decoration-line: underline;
@@ -864,8 +876,8 @@ h2 span{
   justify-content: space-between;
   align-items: center;
   font-style: normal;
-  font-weight: 1000;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 18px;
   margin: 1rem 0 1rem 0;
   color: #00365B;
   padding: 0rem;
@@ -873,7 +885,7 @@ h2 span{
 
 .influencer-travel a {
   font-weight: 500;
-  font-size: 0.75rem;
+  font-size: 14px;
   color: #121212
 }
 
@@ -894,7 +906,7 @@ h2 span{
 
 .connect{
   font-style: normal;
-  font-weight: 900;
+  font-weight: 600;
   font-size: 1.1rem;
   color: #00365B;
   margin-left: 1rem
@@ -1314,7 +1326,7 @@ h2 span{
 
 .day{
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 18px;
   line-height: 27px;
   color: #00365B;  
@@ -1596,9 +1608,50 @@ h2 span{
   padding: 6px 10px 5px 10px;
 }
 
+.video-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: -3%;
+  background-color: rgb(0,0,0,0.2);
+}
+
+.apply{
+    position: relative;
+    top: -43px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 10px;
+    color: #00365B;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.view{
+  position: relative;
+  top: -8%;
+  text-decoration: underline;
+  cursor: pointer;
+  margin: 0 0 0.5rem 1.2rem;
+  font-size:12px;
+  color: rgb(255,255,255,1);
+}
+
+.settings-image{
+  background: #00365B;
+  padding: 6px;
+  border-radius: 50%;
+  height: 15px;
+}
+
 @media screen and (max-width:600px){
   .loc-text{
     margin: 0rem 1rem;
-    font-size:0.75rem;
+    font-size:14px;
   }
 }

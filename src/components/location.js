@@ -53,7 +53,7 @@ export default function Location(props){
     }
     
     return(
-    <div key={location._id} className="card">
+    <div key={location._id} className="card my-1">
               <div>
                 <img src='https://ecobanjarabackend.herokuapp.com/api/image/05e4bc6a-e561-4a65-856d-1bae6f9eccb2.jpg' alt={location.name}></img>
                 {!(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}

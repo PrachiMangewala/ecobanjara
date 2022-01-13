@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getTravelExpert } from '../actions/travelexpertsActions';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default function FixedItineraryCheckoutScreen() {
     const location = useLocation();
@@ -64,7 +65,7 @@ export default function FixedItineraryCheckoutScreen() {
                             alert('Payment not successful')
                         }else{
                             alert('Payment Successful');
-                            // navigate(`/chat/${userInfo.data._id}/${influencerId}`, );
+                            navigate(`/fixeditinerary/${itinararyId}/payment`, {state: {status: true}});
                         }
                     },
                 prefill: {
@@ -119,6 +120,7 @@ export default function FixedItineraryCheckoutScreen() {
                 <div className='mt-2 mb-4' style={{ textAlign: "center", color: "#333333" }}>
                     This is where your journey begins with Triponvo, Bon Voyage!<span><img src={process.env.PUBLIC_URL + '/images/yoyo.png'} alt="logo" style={{ position: "relative", top: "5px", left: "5px" }}></img></span>
                 </div>
+                <div className='add-new my-1'><Link to="/couponcode">Have a coupon code?</Link></div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <div style={{ color: "#000000", opacity: "0.6", letterSpacing: "0.2px", fontWeight: "600" }}>Total Amount</div>
                     <div>

@@ -4,16 +4,32 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { register } from '../actions/userActions';
 
 export default function SignupDetailsScreen() {
+    const location = useLocation();
+    console.log(location)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [dob, setBirthday] = useState('');
-    const [gender, setGender] = useState('');
-    const [profileImg, setImage] = useState('images/profile.png')
-    const location = useLocation();
-    const [role] = useState(location.state.role);
-    const [mobileNo] = useState(location.state.mobileNo);
+    const [password, setPassword] = useState(null);
+    const [dob, setBirthday] = useState(null);
+    const [gender, setGender] = useState(null);
+    const [image] = useState(process.env.PUBLIC_URL + '/images/profile.png')
+    const [profileImg, setImage] = useState('')
+    const [role, setRole] = useState("");
+    const [mobileNo, setMobile] = useState("");
+    // const [user, setUser] = useState("");
+    // console.log(role);
+    // console.log(mobileNo);
+    // console.log(user);
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(location.state){
+            setRole(location.state.role);
+            setMobile(location.state.mobileNo);
+            setName(location.state.name);
+            setImage(location.state.image);
+            setEmail(location.state.email);
+        }
+    })
 
     const imageHandler = (e) => {
         const reader = new FileReader();
@@ -58,47 +74,43 @@ export default function SignupDetailsScreen() {
     return (
         <div className="overflow">
             <div style={{margin: "3rem 1rem 2rem 1rem"}} className="left-text">
-                <p style={{fontWeight: "600", fontSize:"1.4rem", margin:"0"}}>Welcome</p>
-                <p style={{fontWeight: "600", fontSize:"0.9rem", margin:"0"}}>Sign Up</p>
+                <p style={{fontWeight: "600", fontSize:"1.4rem", margin:"0"}}>Welcome Traveller</p>
+                <p style={{fontWeight: "600", fontSize:"1.1rem", margin:"0"}}>Sign Up</p>
             </div>
             <form className="signinform" style={{top:"0px"}} onSubmit={submitHandler}>
                 <div className="form-group">
-                    <label htmlFor="image-input"><i class="fas fa-camera camera-icon"></i></label>
-                    <img src={profileImg} alt="profile" className="image"></img>
+                    <label htmlFor="image-input"><i className="fas fa-camera camera-icon"></i></label>
+                    <img src={profileImg? profileImg : image} alt="profile" className="image"></img>
                     <input className="display" type="file" name="image-upload" id="image-input" accept="image/*" onChange={imageHandler}/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="Name">Name</label>
-                    <input type="text" id="name"  className="form-control" placeholder="Full name" required 
+                    <label htmlFor="Name">Name<span className='required' style={{marginLeft:"0.25rem"}}>*</span></label>
+                    <input type="text" id="name"  className="form-control" placeholder="Full name" value={name} required 
                     onChange={ e => setName(e.target.value)}></input>
-                    <p className="required">*Required</p>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="Email">Email</label>
-                    <input type="email" id="email"  className="form-control" placeholder="xyz@gmail.com" required 
+                    <label htmlFor="Email">Email<span className='required' style={{marginLeft:"0.25rem"}}>*</span></label>
+                    <input type="email" id="email"  className="form-control" placeholder="xyz@gmail.com" value={email} required 
                     onChange={ e => setEmail(e.target.value)}></input>
-                    <p className="required">*Required</p>
+                    {/* <p className="required">*Required</p> */}
                 </div>
                 <div className="form-group">
                     <label htmlFor="birthday">Date of Birth</label>
-                    <input type="date" id="birthday"  className="form-control" placeholder="Enter Date of Birth" required 
+                    <input type="date" id="birthday"  className="form-control" placeholder="Enter Date of Birth" 
                     onChange={ e => setBirthday(e.target.value)}></input>
-                    <p className="required">*Required</p>
                 </div>
                 <div className="form-group">
                     <label htmlFor="gender">Gender</label>
-                    <input type="text" id="gender"  className="form-control" placeholder="Enter Gender" required 
+                    <input type="text" id="gender"  className="form-control" placeholder="Enter Gender" 
                     onChange={ e => setGender(e.target.value)}></input>
-                    <p className="required">*Required</p>
                 </div>
                 <div className="form-group" style={{position: "relative"}}>
                     <label htmlFor="Password">Password</label>
-                    <input style={{paddingLeft: "2rem"}} type="password" id="password"  className="form-control" placeholder="Create Password" required 
+                    <input style={{paddingLeft: "2rem"}} type="password" id="password"  className="form-control" placeholder="Create Password" 
                     onChange={ e => setPassword(e.target.value)}></input>
-                    <i style={{top: "32px"}} className="fas fa-unlock font-icon"></i>
-                    <p className="required">*Required</p>
+                    <i style={{top: "36px"}} className="fas fa-unlock font-icon"></i>
                 </div>
-                <button type="submit" className="btn" style={{minWidth:"100%"}}>Register</button>
+                <button type="submit" className="btn" style={{minWidth:"100%"}}>Sign up</button>
             </form>
         </div>
     )

@@ -4,7 +4,7 @@ export default function Popup(props) {
     return (props.trigger)? (
         <div>
                 <div className='popup-box'>
-                <div className="close-icon"><i class="fas fa-times" onClick={() => props.setTrigger(false)}></i></div>
+                <div className="close-icon"><i className="fas fa-times" onClick={() => props.setTrigger(false)}></i></div>
                 <div className="popup-inner py-1">
                     <p className='itinery-name px-1' style={{color: "#00365B"}}>Plan your trip with real human beings and not search engines :)</p>
                     <p className='itinery-name px-1' style={{color: "#00365B", fontWeight: "500", textDecoration: "underline"}}>How it works</p>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
-import { listFixedItinerary } from '../actions/fixedItineraryActions';
-import { getTravelExpert, listTravelexperts } from '../actions/travelexpertsActions';
+import { getTravelExpert } from '../actions/travelexpertsActions';
 import InfluencerInfoPopup from '../components/InfluencerInfoPopup';
 import Sidebar from '../components/Sidebar';
 

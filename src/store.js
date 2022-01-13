@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { blogListReducer } from './reducers/blogReducers';
 import { addDayReducer, addSectionReducer, getCommentsReducer, getCustomItineraryreducer } from './reducers/customItineraryReducers';
 import { fixedItineraryListReducer, getItineraryPriceReducer, saveContentReducer, saveFixedItineraryReducer, singleFixedItineraryreducer } from './reducers/fixedItineraryReducers';
+import { journeyListReducer } from './reducers/journeyReducers';
 import { localsListReducer, savedlocalsListReducer } from './reducers/localsReducers';
 import { addLocationReducer, locationDetailsReducer, locationListReducer, newestlocationListReducer, popularlocationListReducer, savedlocationsListReducer } from './reducers/locationReducers';
 import { getTravelExpertReducer, savedTravelexpertsListReducer, travelexpertsListReducer } from './reducers/travelexpertsReducers';
@@ -49,6 +50,7 @@ const reducer = combineReducers({
     itinerarySection: addSectionReducer,
     itineraryDay: addDayReducer,
     sectionComments: getCommentsReducer,
+    journeyList: journeyListReducer,
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose ;

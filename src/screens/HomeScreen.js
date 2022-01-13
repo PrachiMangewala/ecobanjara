@@ -47,15 +47,15 @@ export default function HomeScreen() {
         dots: true,
         infinite: false,
         speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 4,
+        slidesToShow: 4,
+        slidesToScroll: 2,
         initialSlide: 0,
         responsive: [
           {
             breakpoint: 1024,
             settings: {
-              slidesToShow: 5,
-              slidesToScroll: 3,
+              slidesToShow: 3,
+              slidesToScroll: 2,
               infinite: true,
               dots: true
             }
@@ -63,7 +63,7 @@ export default function HomeScreen() {
           {
             breakpoint: 600,
             settings: {
-              slidesToShow: 3,
+              slidesToShow: 2,
               slidesToScroll: 2,
               initialSlide: 2
             }
@@ -71,14 +71,14 @@ export default function HomeScreen() {
           {
             breakpoint: 480,
             settings: {
-              slidesToShow: 2.5,
+              slidesToShow: 1.5,
               slidesToScroll: 1
             }
           },
           {
             breakpoint: 300,
             settings: {
-              slidesToShow: 2,
+              slidesToShow: 1,
               slidesToScroll: 1
             }
           }
@@ -121,9 +121,9 @@ export default function HomeScreen() {
     return (
         <div style={{ backgroundColor: "#f6f6f6", height: "900px", overflow: "hidden" }}>  
           <div>
-          <span><i class="fas fa-bars nav-icon" onClick={showSidebar}></i></span>
+          <span><i className="fas fa-bars nav-icon" onClick={showSidebar}></i></span>
           <div className={sidebar ? 'nav-menu active': 'nav-menu'}>
-            <span className="navbar-toggle"><i class="fas fa-times cross-icon" onClick={showSidebar} style={{left:"17rem"}}></i></span>
+            <span className="navbar-toggle" style={{width:"80vw", display:"flex", justifyContent:"flex-end"}}><i className="fas fa-times cross-icon" onClick={showSidebar}></i></span>
             <Sidebar />
           </div>
             <nav className='navigation-bar'>
@@ -134,19 +134,19 @@ export default function HomeScreen() {
               <SearchBar data={locations}></SearchBar>
             </div>
             {/* <div className='search-box'>
-                <input type="text" placeholder="Search" class="search"></input>
-                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Search" className="search"></input>
+                <i className="fas fa-search search-icon"></i>
             </div> */}
             <div>
-                <div>
+                <div className='my-1'>
                     <ul className="loc-text">
-                        <li><a href="/" class="active">All</a></li>
-                        <li><a href="/" class="loc-hover">Popular</a></li>
-                        <li><a href="/" class="loc-hover">Nearby</a></li>
-                        <li><a href="/" class="loc-hover">Recommended</a></li>
+                        <li><a href="/" className="active">All</a></li>
+                        <li><a href="/" className="loc-hover">Popular</a></li>
+                        <li><a href="/" className="loc-hover">Nearby</a></li>
+                        <li><a href="/" className="loc-hover">Recommended</a></li>
                     </ul>
                 </div>
-                <div class="Slide">
+                <div className="Slide" style={{marginLeft:"1rem"}}>
                 {
                 error? (<MessageBox>{error}</MessageBox>)
                 : 
@@ -158,7 +158,13 @@ export default function HomeScreen() {
                             <Location key={location._id} location={location}></Location>
                         ))
                     }
-                    <div><Link to="/destinations/all" style={{position: "relative", top:"79px", margin: "0px 30px"}}>View All</Link></div>
+                    <div>
+                    <div className='card my-1' style={{width:"213px"}}>
+                      <div style={{display:"flex", alignItems:"center", justifyContent:"center", width:"100%", height:"100%"}}>
+                      <Link to="/destinations/all">View All</Link>
+                      </div>
+                    </div>
+                    </div>
                 </Slider>
               )
               }
@@ -166,11 +172,11 @@ export default function HomeScreen() {
 
             </div>
             <div>
-                <div class="text">
+                <div className="text">
                     <p>Top Travel Experts</p>
                     <Link to="/travelexperts/rating">View All</Link>
                 </div>
-                <div class="Slide">
+                <div className="Slide">
                 <Slider {...settings2}>
                     { travelexperts? 
                         travelexperts.map((Travelexpert) => (
@@ -181,11 +187,11 @@ export default function HomeScreen() {
                 </div>
             </div>
             <div className='pb-5'>
-                <div class="text">
+                <div className="text">
                     <p>Top Locals</p>
                     <a href="/">View All</a>
                 </div>
-                <div class="Slide">
+                <div className="Slide">
                 <Slider {...settings2}>
                     { locals? 
                         locals.map((local) => (

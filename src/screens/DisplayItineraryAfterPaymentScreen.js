@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getsingleFixedItinerary } from '../actions/fixedItineraryActions';
 import {Link} from 'react-router-dom';
 
-export default function DisplayItineraryScreen() {
+export default function DisplayItineraryAfterPaymentScreen() {
     const {id} = useParams();
     const itineraryId = id;
     const userSignin = useSelector((state) => state.userSignin);
@@ -12,7 +12,10 @@ export default function DisplayItineraryScreen() {
     const singleFixedItinerary = useSelector((state) => state.singleFixedItinerary);
     const { fixedItinerary } = singleFixedItinerary;
     const dispatch = useDispatch();
+    const location = useLocation();
+    const [status] = useState(location.state.status? location.state.status : false)
     // const days = useState(itinerary? Number(itinerary.content.length) : 1);
+    const tempid = '61c42bd5f0997abb5c39772a';
 
     useEffect(()=>{
         dispatch(getsingleFixedItinerary(userInfo, itineraryId));
@@ -75,7 +78,12 @@ export default function DisplayItineraryScreen() {
                     ))}
                 </div> */}
                 <div className="mx-1 my-1">
-                    <button className='btn' onClick={checkout}>Buy for Rs {fixedItinerary.price}/-</button>
+                    {
+                        status?
+                        <button className='btn' style={{marginBottom:"12px"}}><Link to={`/wholeitinerary/${tempid}`} style={{color:"#ffffff"}}>View Full Itinerary</Link></button>
+                        :
+                        <button className='btn' onClick={checkout}>Buy for Rs {fixedItinerary.price}/-</button>
+                    }
                 </div>
             </div>
             </div>

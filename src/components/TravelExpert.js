@@ -7,7 +7,7 @@ export default function TravelExpert(props) {
     return (
         <div class="Expert">
            <img class="expertImage" src={TravelExpert.image? TravelExpert.image : image} alt={TravelExpert.name}></img> 
-           <Link to={`/influencer/${TravelExpert._id}`} className="Name">{TravelExpert.name}</Link>
+           <Link to={`/influencer/${TravelExpert._id}`} className="Name my-1">{TravelExpert.name}</Link>
         </div>
     )
 }

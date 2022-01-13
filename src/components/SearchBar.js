@@ -37,50 +37,50 @@ export default function SearchBar({placeholder, data}) {
     }
 
     var settings = {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 4,
-        initialSlide: 0,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 5,
-              slidesToScroll: 3,
-              infinite: true,
-              dots: true
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 2,
-              initialSlide: 2
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 2.5,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 300,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1
-            }
+      dots: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 2,
+      initialSlide: 0,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 2,
+            infinite: true,
+            dots: true
           }
-        ]
-      };
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1.5,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 300,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    };
 
     return (
         <div>
-            <div className='search-box'>
+            <div className='search-box my-1'>
             <input type="text" placeholder="Search" className='search' value={wordEntered} onChange={handleFilter}></input>
             {filteredData.length === 0 ?
                <i class="fas fa-search search-icon"></i>
@@ -93,7 +93,7 @@ export default function SearchBar({placeholder, data}) {
                     <div class="text">
                     <p style={{margin:"0"}}>Top Destinations</p>
                     </div>
-                    <div class="Slide">
+                    <div class="Slide" style={{marginLeft:"1rem"}}>
                     <Slider {...settings}>
                         {
                               locations.slice(0,5).map((location) => (
@@ -102,7 +102,7 @@ export default function SearchBar({placeholder, data}) {
                         }
                     </Slider>
                     </div>
-                    <div className='py-2'>
+                    <div className='py-2' style={{paddingBottom:"300px"}}>
                     <div class="text">
                     <p style={{margin:"0"}}>Search Results</p>
                     </div>

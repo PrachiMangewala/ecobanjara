@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { Otpsignin } from '../actions/userActions';
 
-export default function OtpScreen() {
-    // const[mobileNo, setMobile] = useState('');
-    const {role} = useParams();
+
+export default function OtpsigninScreen() {
     const location = useLocation();
     const mobileNo = useState(location.state.mobileNo);
     console.log(mobileNo);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const userSignin = useSelector((state) => state.userSignin);
+    const {userInfo, loading, error} = userSignin;
     const[otp, setOtp] = useState(new Array(6).fill(""));
+
+    useEffect(() => {
+        if(userInfo){
+            if(userInfo.role==="TRAVELLER" || userInfo.role==="LOCAL"){
+                navigate("/home")
+            }else if(userInfo.role==="INFLUENCER"){
+                navigate(`/home/influencer/${userInfo.data._id}`)
+            }else{
+                navigate("/admin")
+            }
+        }
+    },[navigate, userInfo]);
+
     const handleChange = (element, index) => {
         if(isNaN(element.value)) return false;
         setOtp([...otp.map((d, idx) => (idx===index) ? element.value : d )]);
@@ -27,9 +44,9 @@ export default function OtpScreen() {
         window.confirmationResult.confirm(code).then((result) => {
             const user = result.user;
             console.log(user);
-            console.log(role);
             console.log(mobileNo[0]);
-            navigate('/enterdetails', {state:{role: role, mobileNo: mobileNo[0]}})
+            console.log(user._delegate.accessToken);
+            dispatch(Otpsignin(user._delegate.accessToken));
         }).catch((error) => {
             console.log(error);
             alert(error);
@@ -99,9 +116,9 @@ export default function OtpScreen() {
     //         console.error(error);
     //       });
     //   };
-
     return (
         <div>
+            <div>
             <form onSubmit={submitHandler}>
             {/* <div class="signinform" style={{position:"relative", top:"65px"}}>
                 <div>
@@ -142,6 +159,7 @@ export default function OtpScreen() {
                 <button type="submit" className="btn" style={{width:"100%", minHeight:"3rem"}}>Next</button>
                 </div>
                 </form>
+        </div>
         </div>
     )
 }

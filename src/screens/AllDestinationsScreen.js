@@ -39,7 +39,7 @@ export default function AllDestinationsScreen(props) {
                 <p><i class="fas fa-chevron-left" style={{ fontSize: "1.2rem" }}></i></p>
                 <p className='connect' style={{color: "#000000"}}>Destinations</p>
             </div>
-            <div className='py-1 px-1' style={{backgroundColor: "#C4C4C4"}}>
+            <div className='py-1 px-1' style={{backgroundColor: "#efefef"}}>
                 <div className="location-container">
                 <div className={props.type==="all"? "location-box-selected" : "location-box"} style={{padding: "3px 7px", marginLeft: "1rem"}}><Link to="/destinations/all">A-Z</Link></div>
                 <div className={props.type==="popular"? "location-box-selected" : "location-box"} style={{padding: "3px 7px", marginLeft: "1rem"}}><Link to="/destinations/popular">Popular First</Link></div>

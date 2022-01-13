@@ -12,7 +12,7 @@ export default function InfluencerScreen() {
     const [image] = useState(process.env.PUBLIC_URL +  '/images/profile.png');
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
-    const [buttonPopup, setTimedPopup] = useState(true);
+    const [buttonPopup, setTimedPopup] = useState(false);
     const [clickedPopup, setClickedPopup] = useState(false);
     const travelExpertInfo = useSelector((state) => state.travelExpertInfo);
     const { travelexpert } = travelExpertInfo;
@@ -24,6 +24,10 @@ export default function InfluencerScreen() {
 
     const setTrigger = () => (
         setClickedPopup(true)
+    )
+
+    const showPopup = () => (
+        setTimedPopup(true)
     )
 
     return (
@@ -47,27 +51,21 @@ export default function InfluencerScreen() {
                 </div>
             </div>
             <div className="influencer-stuff py-1 px-1">
-                <div className="rating-component">
-                    <p className="heading">Rating:</p>
-                    <p className="star-icon"><i class="fas fa-star"></i><span style={{fontWeight: "500", fontSize: "12px", color: "#6F7789", marginLeft: "0.3rem"}}>4.8</span></p>
-                    <p className="reviews"><Link to="/" style={{color: "#FC7E00"}}>Reviews</Link></p>
-                </div>
-                <div className="rating-component">
-                <p className="heading" style={{fontSize: "0.8rem"}}>Languages Known:</p>
-                <p className="city" style={{fontSize: "0.6rem", margin:"0"}}>Hindi, Punjabi, English</p>
-                </div>
-                <div className="city">
+                <div className="city" style={{margin:"2rem 0"}}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non lectus porta urna venenatis tempus. Adipiscing sLorem ipsum dolor sit amet, consectetur adipiscing elit. Non lectus porta urna venenatis tempus. Adipiscing sLorem ipsum dolor sit amet, consectetur adipiscing elit. 
                 </div>
-                <div className="connect-icons">
+                <div className="rating-component">
+                    <p className="heading" style={{fontSize: "14px"}}>Languages Known:</p>
+                    <p className="city" style={{fontSize: "14px", margin:"0"}}>Hindi, Punjabi, English</p>
+                </div>
+                {/* <div className="connect-icons">
                     <Link to="/"><img src={process.env.PUBLIC_URL +  '/images/insta.png'} alt="insta"></img></Link>
                     <Link to="/"><img src={process.env.PUBLIC_URL +  '/images/youtube.png'} alt="youtube"></img></Link>
                     <Link to="/"><img src={process.env.PUBLIC_URL +  '/images/web.png'} alt="web"></img></Link>
-                </div>
+                </div> */}
                 <div>
                     <div class="influencer-travel">
-                        <p>My Best Travel Stories</p>
-                        <a href="/">View All</a>
+                        <p>My Best Travel Story</p>
                     </div>
                     <div className="city">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non lectus porta urna venenatis tempus. Adipiscing sLorem ipsum dolor sit amet, consectetur adipiscing elit. Non lectus porta urna venenatis tempus. Adipiscing sLorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -90,19 +88,31 @@ export default function InfluencerScreen() {
                     <p>Fixed Itenaries</p>
                     <Link to={`/fixeditineraries/${id}`}>View All</Link>
                 </div>
-                <div>
+                <div className='pb-2'>
                 {
                     travelexpert.fixeditinerary?
                     (
-                        travelexpert.fixeditinerary.slice(0,5).map((fixedIt) => (
+                        travelexpert.fixeditinerary.slice(0,2).map((fixedIt) => (
                             <FixedItineraryBox fixedIt={fixedIt}></FixedItineraryBox>
                         ))
-                        ) : " "}
+                        ) : ""
+                }
+                </div>
+                <div className="rating-component pb-2" style={{justifyContent: "space-between"}}>
+                    <div style={{display:"flex"}}>
+                    <p className="heading">Rating:</p>
+                    <p className="star-icon"><i class="fas fa-star"></i><span style={{fontWeight: "700", fontSize: "12px", color: "#6F7789", marginLeft: "0.3rem"}}>4.8</span></p>
+                    </div>
+                    <p className="reviews"><Link to="/" style={{color: "#FC7E00"}}>Reviews</Link></p>
+                </div>
+                <div style={{display:"flex", justifyContent:"space-around"}}>
+                    <div className="location-box"><Link to="/">Youtube</Link></div>
+                    <div className="location-box"><Link to="/">Instagram</Link></div>
                 </div>
                 <div className="fixed-bar">
                     <div>
                     <p style={{marginBottom:"0.5rem"}}>Plan your trip with me</p>
-                    <Link to="/" className="add-new">How it works</Link>
+                    <div className="add-new" onClick={showPopup}>How it works</div>
                     </div>
                     <button className="btn" style={{width: "fit-content", position:"relative", left:"42px"}}><Link to={`/connect/${userInfo.data._id}/${id}`} style={{color: "#ffffff"}}>Connect</Link></button>
                 </div>
