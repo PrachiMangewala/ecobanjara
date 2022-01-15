@@ -36,12 +36,13 @@ export default function OnBoardRoleScreen() {
                 <p style={{fontWeight: "600", fontSize:"0.8rem"}}>Please select what best describes you.</p>
             </div>
             <div className="my-1">
-                <button className="btn my-2" onClick={() => saveRole('TRAVELLER')}>I am a Traveller</button>
+                <button className="btn my-2" style={{width:"100%"}} onClick={() => saveRole('TRAVELLER')}>I am a Traveller</button>
                 <h2><span>OR</span></h2>
-                <div className="btns">
+                {/* <div className="btns">
                     <button className="button" onClick={() => saveRole('INFLUENCER')}><span className="star"><i className="fas fa-star star" style={{padding:"2px"}}></i></span><span style={{marginLeft:"4px"}}>Travel Expert</span></button>
                     <button  className="button" onClick={() => saveRole('LOCAL')}><span><img className="star" src="images/robot.png" alt="robot" style={{padding:"4px"}}></img></span><span style={{marginLeft:"4px"}}>Local Guide</span></button>
-                </div>
+                </div> */}
+                <button className="button" onClick={() => saveRole('INFLUENCER')}><span className="star"><i className="fas fa-star star" style={{padding:"2px"}}></i></span><span style={{marginLeft:"4px"}}>Travel Expert</span></button>
             </div>
             <div className="center-onboard my-1">
                 <p className="font-blue">Already have an account?</p>

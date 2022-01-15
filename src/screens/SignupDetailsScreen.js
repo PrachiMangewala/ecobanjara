@@ -29,7 +29,7 @@ export default function SignupDetailsScreen() {
             setImage(location.state.image);
             setEmail(location.state.email);
         }
-    })
+    }, [location.state])
 
     const imageHandler = (e) => {
         const reader = new FileReader();
@@ -86,7 +86,7 @@ export default function SignupDetailsScreen() {
                 <div className="form-group">
                     <label htmlFor="Name">Name<span className='required' style={{marginLeft:"0.25rem"}}>*</span></label>
                     <input type="text" id="name"  className="form-control" placeholder="Full name" value={name} required 
-                    onChange={ e => setName(e.target.value)}></input>
+                    onChange={ (e) => setName(e.target.value)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="Email">Email<span className='required' style={{marginLeft:"0.25rem"}}>*</span></label>

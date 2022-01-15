@@ -1,7 +1,6 @@
 import Axios from "axios";
 import { VIDEO_DETAILS_FAIL, VIDEO_DETAILS_SUCCESS } from "../constants/videoConstants";
 
-
 export const getvideoDetails = (videoId) => async(dispatch) => {
     // dispatch({type: LOCATION_DETAILS_REQUEST, payload: id})
     try{

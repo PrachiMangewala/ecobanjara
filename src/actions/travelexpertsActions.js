@@ -1,9 +1,11 @@
 import Axios from "axios";
 import { GET_TRAVEL_EXPERT_FAIL, GET_TRAVEL_EXPERT_SUCCESS, SAVED_TRAVELEXPERTS_LIST_FAIL, SAVED_TRAVELEXPERTS_LIST_SUCCESS, TRAVELEXPERTS_LIST_FAIL, TRAVELEXPERTS_LIST_SUCCESS } from "../constants/TravelExpertsConstants";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const listTravelexperts = (userInfo) => async (dispatch) => {
     try {
-      const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/user/top/influencers', 
+      const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT + '/api/user/top/influencers', 
               { headers: {
                   "x-access-token": `${userInfo.accessToken}`,
               }});
@@ -18,7 +20,7 @@ export const listTravelexperts = (userInfo) => async (dispatch) => {
 export const getsavedTravelExperts = (userInfo) => async(dispatch) => {
   try{
       // console.log(userInfo.accessToken);
-      const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/user/saved/influencer',
+      const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT + '/api/user/saved/influencer',
       { headers: {
           "x-access-token": `${userInfo.accessToken}`,
       }});
@@ -34,7 +36,7 @@ export const getsavedTravelExperts = (userInfo) => async(dispatch) => {
 export const getTravelExpert = (influencerId) => async(dispatch) => {
   try{
       // console.log(userInfo.accessToken);
-      const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/profile/byid', {influencerId});
+      const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/user/profile/byid', {influencerId});
       // console.log(data);
     dispatch({type: GET_TRAVEL_EXPERT_SUCCESS, payload: data});
   } catch(error){

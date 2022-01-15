@@ -1,9 +1,11 @@
 import Axios from "axios";
 import { ADD_LOCATION_FAIL, ADD_LOCATION_SUCCESS, LOCATION_DETAILS_FAIL, LOCATION_DETAILS_SUCCESS, LOCATION_LIST_FAIL, LOCATION_LIST_SUCCESS, NEWEST_LOCATION_LIST_FAIL, NEWEST_LOCATION_LIST_SUCCESS, POPULAR_LOCATION_LIST_FAIL, POPULAR_LOCATION_LIST_SUCCESS, SAVED_LOCATION_LIST_FAIL, SAVED_LOCATION_LIST_SUCCESS } from "../constants/locationConstants";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const listLocations = (userInfo) => async (dispatch) => {
   try {
-    const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/destinations/all', 
+    const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT + '/api/destinations/all', 
             { headers: {
                 "x-access-token": `${userInfo.accessToken}`,
             }});
@@ -15,7 +17,7 @@ export const listLocations = (userInfo) => async (dispatch) => {
 
 export const listPopularLocations = (userInfo) => async (dispatch) => {
   try {
-    const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/destination/popular', 
+    const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT + '/api/destination/popular', 
             { headers: {
                 "x-access-token": `${userInfo.accessToken}`,
             }});
@@ -27,7 +29,7 @@ export const listPopularLocations = (userInfo) => async (dispatch) => {
 
 export const listNewestLocations = (userInfo) => async (dispatch) => {
   try {
-    const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/destination/newest', 
+    const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT + '/api/destination/newest', 
             { headers: {
                 "x-access-token": `${userInfo.accessToken}`,
             }});
@@ -41,7 +43,7 @@ export const detailsLocation = (userInfo, id) => async(dispatch) => {
   // dispatch({type: LOCATION_DETAILS_REQUEST, payload: id})
   // console.log(id);
   try{
-      const {data} = await Axios.get(`https://ecobanjarabackend.herokuapp.com/api/destination/single/${id}`,
+      const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT+ `/api/destination/single/${id}`,
       { headers: {
           "x-access-token": `${userInfo.accessToken}`,
       }});
@@ -57,7 +59,7 @@ export const detailsLocation = (userInfo, id) => async(dispatch) => {
 export const getsavedLocations = (userInfo) => async(dispatch) => {
   try{
       // console.log(userInfo.accessToken);
-      const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/user/saved/destinations',
+      const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT + '/api/user/saved/destinations',
       { headers: {
           "x-access-token": `${userInfo.accessToken}`,
       }});
@@ -72,7 +74,7 @@ export const getsavedLocations = (userInfo) => async(dispatch) => {
 
 export const addDestination = (userInfo, name, city, state, address, about, videos, geography, category, images) => async(dispatch) => {
   try{
-      const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/destinations/add', {name, city, state, address, about, videos, geography, category, images},
+      const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/destinations/add', {name, city, state, address, about, videos, geography, category, images},
       { headers: {
           "x-access-token": `${userInfo.accessToken}`,
       }});

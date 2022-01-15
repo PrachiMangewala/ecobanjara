@@ -1,9 +1,11 @@
 import Axios from "axios";
 import { FIXEDITINERARY_LIST_FAIL, FIXEDITINERARY_LIST_SUCCESS, FIXED_ITINERARY_SAVE_FAIL, FIXED_ITINERARY_SAVE_SUCCESS, GET_FIXED_ITINERARY_FAIL, GET_FIXED_ITINERARY_SUCCESS, ITINERARY_PRICE_FAIL, ITINERARY_PRICE_SUCCESS, SAVE_CONTENT_FAIL, SAVE_CONTENT_SUCCESS } from "../constants/fixedItineraryConstants";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const listFixedItinerary = (userInfo) => async (dispatch) => {
     try {
-      const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/fixed/itinerary/user/all', 
+      const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT + '/api/fixed/itinerary/user/all', 
               { headers: {
                   "x-access-token": `${userInfo.accessToken}`,
               }});
@@ -18,7 +20,7 @@ export const getsingleFixedItinerary = (userInfo, itineraryId) => async (dispatc
     try {
     console.log(itineraryId);
     console.log(userInfo.accessToken);
-      const {data} = await Axios.get(`https://ecobanjarabackend.herokuapp.com/api/fixed/itinerary/single/${itineraryId}`, 
+      const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT + `/api/fixed/itinerary/single/${itineraryId}`, 
               { headers: {
                   "x-access-token": `${userInfo.accessToken}`,
               }});
@@ -31,7 +33,7 @@ export const getsingleFixedItinerary = (userInfo, itineraryId) => async (dispatc
 
 export const getItineraryPrice = (userInfo, userId, destinations, trip, type) => async(dispatch) => {
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/itinerary/price', {userId, destinations, trip, type},
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/itinerary/price', {userId, destinations, trip, type},
         { headers: {
             "x-access-token": `${userInfo.accessToken}`,
         }});
@@ -49,7 +51,7 @@ export const getItineraryPrice = (userInfo, userId, destinations, trip, type) =>
 
 export const saveFixedItinerary = (userInfo, destinations, itineraryName, trip, description) => async(dispatch) => {
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/fixed/itinerary/add', {destinations, itineraryName, trip, description},
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/fixed/itinerary/add', {destinations, itineraryName, trip, description},
         { headers: {
             "x-access-token": `${userInfo.accessToken}`,
         }});
@@ -67,7 +69,7 @@ export const saveFixedItinerary = (userInfo, destinations, itineraryName, trip, 
 
 export const saveContent = (userInfo, itineraryId, dayNo, title, description) => async(dispatch) => {
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/fixed/ititnerary/add/content', {itineraryId, dayNo, title, description},
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/fixed/ititnerary/add/content', {itineraryId, dayNo, title, description},
         { headers: {
             "x-access-token": `${userInfo.accessToken}`,
         }});

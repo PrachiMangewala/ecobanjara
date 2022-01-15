@@ -46,17 +46,19 @@ export default function SignInScreen(res) {
             });
     }
 
-    // useEffect(() => {
-    //     if(userInfo){
-    //         if(userInfo.role==="TRAVELLER" || userInfo.role==="LOCAL"){
-    //             navigate("/home")
-    //         }else if(userInfo.role==="INFLUENCER"){
-    //             navigate(`/home/influencer/${userInfo.data._id}`)
-    //         }else{
-    //             navigate("/admin")
-    //         }
-    //     }
-    // },[navigate, userInfo]);
+    useEffect(() => {
+        if(userInfo){
+            if(userInfo.role==="TRAVELLER" || userInfo.role==="LOCAL"){
+                navigate("/home")
+            }else if(userInfo.role==="INFLUENCER"){
+                navigate(`/home/influencer/${userInfo.data._id}`)
+            }else if(userInfo.role==="ADMIN"){
+                navigate("/admin")
+            }else{
+                console.log()
+            }
+        }
+    },[navigate, userInfo]);
 
     const handleOnClick = async (provider) => {
         const res = await socialMediaAuth(provider);
@@ -66,9 +68,10 @@ export default function SignInScreen(res) {
         }
     }
 
-    const signinInsta = () => (
-        dispatch(InstaSignin(state))
-    )
+    const signinInsta = () => {
+        console.log("hello");
+        dispatch(InstaSignin(state));
+    }
 
     return(
         <div>

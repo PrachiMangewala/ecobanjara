@@ -58,7 +58,7 @@ export default function SignupScreen(props) {
     }
 
     useEffect(() => {
-        if(name && email){
+        if(name && email && image){
             navigate('/enterdetails', {state:{name: name, mobileNo:mobileNo, email: email, image: image, role: role}})
         }
     })

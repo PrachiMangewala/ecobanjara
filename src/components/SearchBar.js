@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import Slider from 'react-slick';
+// import Slider from 'react-slick';
 import { listLocations } from '../actions/locationActions';
-import Location from './location';
+// import Location from './location';
 import LocationBox from './LocationBox';
 
 export default function SearchBar({placeholder, data}) {
     const[filteredData, setFilteredData] = useState([]);
     const[wordEntered, setWordEntered] = useState("");
-    const locationsList = useSelector((state) => state.locationsList);
-    const { locations} = locationsList;
+    // const locationsList = useSelector((state) => state.locationsList);
+    // const { locations} = locationsList;
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
@@ -36,47 +36,47 @@ export default function SearchBar({placeholder, data}) {
         setWordEntered("");
     }
 
-    var settings = {
-      dots: true,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 2,
-      initialSlide: 0,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 2,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1.5,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 300,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    };
+    // var settings = {
+    //   dots: true,
+    //   infinite: false,
+    //   speed: 500,
+    //   slidesToShow: 4,
+    //   slidesToScroll: 2,
+    //   initialSlide: 0,
+    //   responsive: [
+    //     {
+    //       breakpoint: 1024,
+    //       settings: {
+    //         slidesToShow: 3,
+    //         slidesToScroll: 2,
+    //         infinite: true,
+    //         dots: true
+    //       }
+    //     },
+    //     {
+    //       breakpoint: 600,
+    //       settings: {
+    //         slidesToShow: 2,
+    //         slidesToScroll: 2,
+    //         initialSlide: 2
+    //       }
+    //     },
+    //     {
+    //       breakpoint: 480,
+    //       settings: {
+    //         slidesToShow: 1.5,
+    //         slidesToScroll: 1
+    //       }
+    //     },
+    //     {
+    //       breakpoint: 300,
+    //       settings: {
+    //         slidesToShow: 1,
+    //         slidesToScroll: 1
+    //       }
+    //     }
+    //   ]
+    // };
 
     return (
         <div>
@@ -90,7 +90,7 @@ export default function SearchBar({placeholder, data}) {
             </div>
             {filteredData.length!==0 && (
             <div className='dataResult'>
-                    <div class="text">
+                    {/* <div class="text">
                     <p style={{margin:"0"}}>Top Destinations</p>
                     </div>
                     <div class="Slide" style={{marginLeft:"1rem"}}>
@@ -101,8 +101,8 @@ export default function SearchBar({placeholder, data}) {
                             ))
                         }
                     </Slider>
-                    </div>
-                    <div className='py-2' style={{paddingBottom:"300px"}}>
+                    </div> */}
+                    <div className='py-1' style={{paddingBottom:"300px"}}>
                     <div class="text">
                     <p style={{margin:"0"}}>Search Results</p>
                     </div>

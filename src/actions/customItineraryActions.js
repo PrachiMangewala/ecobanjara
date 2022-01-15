@@ -1,9 +1,11 @@
 import Axios from "axios";
 import { ADD_ITINERARY_DAY_FAIL, ADD_ITINERARY_DAY_SUCCESS, ADD_ITINERARY_SECTION_FAIL, ADD_ITINERARY_SECTION_SUCCESS, GET_COMMENTS_FAIL, GET_COMMENTS_SUCCESS, GET_CUSTOM_ITINERARY_FAIL, GET_CUSTOM_ITINERARY_SUCCESS } from "../constants/customItineraryConstants";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const getCustomItinerary = (userInfo, customId) => async (dispatch) => {
     try {
-      const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/custom/itinerary/get', {customId}, 
+      const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/custom/itinerary/get', {customId}, 
               { headers: {
                   "x-access-token": `${userInfo.accessToken}`,
               }});
@@ -16,7 +18,7 @@ export const getCustomItinerary = (userInfo, customId) => async (dispatch) => {
 
 export const addSectioninItinerary = (userInfo, customId, dayNo, startTime, endTime, description) => async (dispatch) => {
     try {
-      const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/custom/itinerary/add/section', {customId, dayNo, startTime, endTime, description}, 
+      const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/custom/itinerary/add/section', {customId, dayNo, startTime, endTime, description}, 
               { headers: {
                   "x-access-token": `${userInfo.accessToken}`,
               }});
@@ -29,7 +31,7 @@ export const addSectioninItinerary = (userInfo, customId, dayNo, startTime, endT
 
 export const addDayinItinerary = (userInfo, customId, dayNo) => async (dispatch) => {
     try {
-      const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/custom/itinerary/add/day', {customId, dayNo}, 
+      const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/custom/itinerary/add/day', {customId, dayNo}, 
               { headers: {
                   "x-access-token": `${userInfo.accessToken}`,
               }});
@@ -42,7 +44,7 @@ export const addDayinItinerary = (userInfo, customId, dayNo) => async (dispatch)
 
 export const getComments = (userInfo, sectionId) => async (dispatch) => {
     try {
-      const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/custom/itinerary/section/comments/get', {sectionId}, 
+      const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/custom/itinerary/section/comments/get', {sectionId}, 
               { headers: {
                   "x-access-token": `${userInfo.accessToken}`,
               }});

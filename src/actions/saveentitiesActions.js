@@ -1,9 +1,11 @@
 import Axios from "axios";
 import { REMOVE_ENTITY_FAIL, REMOVE_ENTITY_SUCCESS, SAVE_ENTITY_FAIL, SAVE_ENTITY_SUCCESS } from "../constants/saveentitiesConstants";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const saveEntity = (userInfo, itemId) => async(dispatch) => {
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/add/saved/entities', {itemId},
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/user/add/saved/entities', {itemId},
         { headers: {
             "x-access-token": `${userInfo.accessToken}`,
         }});
@@ -22,7 +24,7 @@ export const saveEntity = (userInfo, itemId) => async(dispatch) => {
 
 export const removeEntity = (userInfo, itemId) => async(dispatch) => {
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/remove/saved/entities', {itemId},
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/user/remove/saved/entities', {itemId},
         { headers: {
             "x-access-token": `${userInfo.accessToken}`,
         }});

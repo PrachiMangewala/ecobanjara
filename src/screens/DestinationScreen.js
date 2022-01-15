@@ -32,31 +32,35 @@ export default function DestinationScreen() {
             if(!locationindex){
                 dispatch(saveEntity(userInfo, locationId))
                 dispatch(getsavedLocations(userInfo));
-                alert('This location has been saved.')
+                alert('This location has been saved.');
+                dispatch(getsavedLocations(userInfo));
             }else{
-                console.log('i am there');
+                dispatch(removeEntity(userInfo, locationId));
+                dispatch(getsavedLocations(userInfo));
+                alert('Location removed');
+                dispatch(getsavedLocations(userInfo));
             }
         }else{
             alert('Saved locations list is empty.')
         }
     }
 
-    const RemoveFromSavedLocations = (locationId) => {
-        if(savedlocations){
-            const locationindex = savedlocations.find((location) => location._id === locationId)
-            if(!locationindex){
-                // dispatch(saveEntity(userInfo, locationId))
-                // dispatch(getsavedLocations(userInfo));
-                alert('This location is already not saved.')
-            }else{
-                dispatch(removeEntity(userInfo, locationId));
-                dispatch(getsavedLocations(userInfo));
-                alert('Location removed')
-            }
-        }else{
-            alert('Saved locations list is empty.')
-        }
-    }
+    // const RemoveFromSavedLocations = (locationId) => {
+    //     if(savedlocations){
+    //         const locationindex = savedlocations.find((location) => location._id === locationId)
+    //         if(!locationindex){
+    //             // dispatch(saveEntity(userInfo, locationId))
+    //             // dispatch(getsavedLocations(userInfo));
+    //             alert('This location is already not saved.')
+    //         }else{
+    //             dispatch(removeEntity(userInfo, locationId));
+    //             dispatch(getsavedLocations(userInfo));
+    //             alert('Location removed')
+    //         }
+    //     }else{
+    //         alert('Saved locations list is empty.')
+    //     }
+    // }
 
     useEffect(()=>{
       dispatch(detailsLocation(userInfo, id));
@@ -102,7 +106,7 @@ export default function DestinationScreen() {
         <div>
             <img src={process.env.PUBLIC_URL +  '/images/tajmahal.jpg'} alt="img" className="dest-backimage"></img>
             {!(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%"}} onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
-                {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay2" style={{padding: "6px 8px 6px 8px", left:"84%"}} onClick={() => RemoveFromSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
+            {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay2" style={{padding: "6px 8px 6px 8px", left:"84%"}} onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
             {/* <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%"}}><i class="fas fa-map-marker-alt loc-icon"></i></span> */}
             <div className="destination-info">
                 <div>
@@ -136,7 +140,7 @@ export default function DestinationScreen() {
                 </Slider>
                 </div>
             </div>
-            <div>
+            {/* <div>
                 <div class="text">
                     <p>Top Locals</p>
                     <a href="/">View All</a>
@@ -150,7 +154,7 @@ export default function DestinationScreen() {
                     }
                      </Slider>
                 </div>
-            </div>
+            </div> */}
             </div>
         </div>
     )

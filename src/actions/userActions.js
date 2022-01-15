@@ -1,10 +1,12 @@
 import Axios from "axios";
 import { USERS_LIST_FAIL, USERS_LIST_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_SUCCESS } from "../constants/userConstants";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const register = (email, password, name, role, mobileNo, profileImg, dob, gender) => async(dispatch) => {
     // dispatch({ type: USER_REGISTER_REQUEST, payload: { mobileNo, password } });
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/auth/signup', {email, password, name, role, mobileNo, profileImg, dob, gender});
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/user/traveller/signup', {email, password, name, role, mobileNo, profileImg, dob, gender});
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         console.log(data);
@@ -22,7 +24,7 @@ export const register = (email, password, name, role, mobileNo, profileImg, dob,
 export const signin = (mobileNo, password) => async(dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: { mobileNo, password } });
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/mobile/password', {mobileNo, password});
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/user/mobile/password', {mobileNo, password});
         console.log(data);
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
@@ -39,7 +41,7 @@ export const signin = (mobileNo, password) => async(dispatch) => {
 export const Otpsignin = (accessToken) => async(dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: { accessToken } });
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/signin/mobile/otp', {accessToken});
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/user/signin/mobile/otp', {accessToken});
         console.log(data);
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
@@ -56,7 +58,7 @@ export const Otpsignin = (accessToken) => async(dispatch) => {
 export const SocialMediasignin = (accessToken) => async(dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: { accessToken } });
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/signin/social/media', {accessToken});
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/user/signin/social/media', {accessToken});
         console.log(data);
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
@@ -73,7 +75,7 @@ export const SocialMediasignin = (accessToken) => async(dispatch) => {
 export const InstaSignin = (state) => async(dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: {state} });
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/insta/auth/url', {state});
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/insta/auth/url', {state});
         console.log(data);
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
@@ -94,7 +96,7 @@ export const signout = () => async(dispatch) => {
 
 export const getAllUsers = (userInfo) => async (dispatch) => {
     try {
-      const {data} = await Axios.get('https://ecobanjarabackend.herokuapp.com/api/users/all');
+      const {data} = await Axios.get(process.env.REACT_APP_API_ENDPOINT + '/api/users/all');
       console.log(data);
       dispatch({ type: USERS_LIST_SUCCESS, payload: data });
     } catch (error) {
@@ -104,7 +106,7 @@ export const getAllUsers = (userInfo) => async (dispatch) => {
 
 export const updateUserProfile = (userInfo, email, name, mobileNo, profileImg, gender) => async(dispatch) => {
     try{
-        const {data} = await Axios.post('https://ecobanjarabackend.herokuapp.com/api/user/profile/update', {email, name, mobileNo, profileImg, gender},
+        const {data} = await Axios.post(process.env.REACT_APP_API_ENDPOINT + '/api/user/profile/update', {email, name, mobileNo, profileImg, gender},
         { headers: {
             "x-access-token": `${userInfo.accessToken}`,
         }});

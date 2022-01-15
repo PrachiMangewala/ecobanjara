@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
-import { getTravelExpert } from '../actions/travelexpertsActions';
+import { removeEntity, saveEntity } from '../actions/saveentitiesActions';
+import { getsavedTravelExperts, getTravelExpert } from '../actions/travelexpertsActions';
 import FixedItineraryBox from '../components/FixedItineraryBox';
 import InfluencerInfoPopup from '../components/InfluencerInfoPopup';
 import Popup from '../components/Popup';
@@ -17,6 +18,12 @@ export default function InfluencerScreen() {
     const travelExpertInfo = useSelector((state) => state.travelExpertInfo);
     const { travelexpert } = travelExpertInfo;
     const dispatch = useDispatch();
+    const savedTravelExpertsList = useSelector((state) => state.savedTravelExpertsList);
+    const {savedTravelexperts} = savedTravelExpertsList;
+
+    useEffect(()=>{
+        dispatch(getsavedTravelExperts(userInfo));
+      },[dispatch, userInfo]);
 
     useEffect(()=>{
         dispatch(getTravelExpert(influencerId));
@@ -30,12 +37,33 @@ export default function InfluencerScreen() {
         setTimedPopup(true)
     )
 
+    const AddToSavedTravelExperts = (expertId) => {
+        if(savedTravelexperts){
+            const expertindex = savedTravelexperts.find((expert) => expert._id === expertId)
+            if(!expertindex){
+                dispatch(saveEntity(userInfo, expertId))
+                dispatch(getsavedTravelExperts(userInfo));
+                alert('This Influencer has been saved.');
+                dispatch(getsavedTravelExperts(userInfo));
+            }else{
+                dispatch(removeEntity(userInfo, expertId));
+                dispatch(getsavedTravelExperts(userInfo));
+                alert('Influencer removed');
+                dispatch(getsavedTravelExperts(userInfo));
+            }
+        }else{
+            alert('Saved influencers list is empty.')
+        }
+    }
+
     return (
         <div>
             {
             travelexpert?
             <div>
             <Popup trigger={buttonPopup} setTrigger={setTimedPopup}></Popup>
+            {!(savedTravelexperts.find((expert) => expert._id === influencerId)) && <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%", backgroundColor:"#efefef"}}  onClick={() => AddToSavedTravelExperts(influencerId)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
+            {(savedTravelexperts.find((expert) => expert._id === influencerId)) && <span className="overlay2" style={{padding: "6px 8px 6px 8px", left:"84%"}}  onClick={() => AddToSavedTravelExperts(influencerId)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
             <div className="display-flex my-1 mx-1">
                 <img src={image} alt="hello" className="image" style={{width:"4rem", height:"4rem"}}></img>
                 <p className="name-i">{
@@ -106,8 +134,8 @@ export default function InfluencerScreen() {
                     <p className="reviews"><Link to="/" style={{color: "#FC7E00"}}>Reviews</Link></p>
                 </div>
                 <div style={{display:"flex", justifyContent:"space-around"}}>
-                    <div className="location-box"><Link to="/">Youtube</Link></div>
-                    <div className="location-box"><Link to="/">Instagram</Link></div>
+                    <div className="location-box" style={{padding:"10px 15px"}}><Link to="/">Youtube</Link></div>
+                    <div className="location-box" style={{padding:"10px 15px"}}><Link to="/">Instagram</Link></div>
                 </div>
                 <div className="fixed-bar">
                     <div>

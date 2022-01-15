@@ -183,24 +183,9 @@ export default function HomeScreen() {
                             <TravelExpert key={Travelexpert._id} TravelExpert={Travelexpert}></TravelExpert>
                         )) : ""
                     }
-                     </Slider>
+                </Slider>
                 </div>
             </div>
-            <div className='pb-5'>
-                <div className="text">
-                    <p>Top Locals</p>
-                    <a href="/">View All</a>
-                </div>
-                <div className="Slide">
-                <Slider {...settings2}>
-                    { locals? 
-                        locals.map((local) => (
-                            <TravelExpert key={local._id} TravelExpert={local}></TravelExpert>
-                        )) : ""
-                    }
-                     </Slider>
-                </div>
-              </div> 
                 <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                 
                   {
