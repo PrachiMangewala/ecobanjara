@@ -47,15 +47,15 @@ export default function DisplayItineraryScreen() {
                 <p className="mx-1 connect my-2"><span class="icon"><i class="fas fa-map-marker-alt marker"></i></span>Locations visited</p>
                 <div className="location-container mx-1">
                 <div className="location-container">
-                    {/* {destinationsWhole? 
-                        destinationsWhole.map((destination) => (
+                    {fixedItinerary.destinations? 
+                        fixedItinerary.destinations.map((destination) => (
                             <div className="location-box" key={destination._id}>{destination.address}</div>
                         ))
                         : 
                         ""
-                    } */}
-                    <div className="location-box">Shimla, HP</div>
-                    <div className="location-box">Agra, UP</div>
+                    }
+                    {/* <div className="location-box">Shimla, HP</div>
+                    <div className="location-box">Agra, UP</div> */}
                 </div>
                 </div>
             </div>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 import { signout } from '../actions/userActions';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default function Sidebar() {
     const [image] = useState(process.env.PUBLIC_URL +  '/images/People.jpg');
@@ -21,7 +23,7 @@ export default function Sidebar() {
             <div className="user-flex mx-1">
                 <div className="form-group">
                     <label htmlFor="image-input"><i className="fas fa-camera camera-icon"  style={{top:"27px", left:"49px"}}></i></label>
-                    <img src={image} alt="profile" className="image" style={{width:"4rem", height:"4rem"}}></img>
+                    <img src={process.env.REACT_APP_API_ENDPOINT + "/api/image/" + userInfo.data.profileImg} alt="profile" className="image" style={{width:"4rem", height:"4rem"}}></img>
                     <input className="display" type="file" name="image-upload" id="image-input" accept="image/*"/>
                 </div>
                 <div>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import Sidebar from '../components/Sidebar';
 import {Link} from 'react-router-dom';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default function ProfileScreen() {
     const[sidebar, setSidebar] = useState(false);
@@ -23,7 +25,7 @@ export default function ProfileScreen() {
             </div>
             <div className='mx-1 my-1'>
             <div style={{display: "flex", alignItems: "center", justifyContent:"space-between"}}>
-            <img src={userInfo? (userInfo.data.profileImg? userInfo.data.profileImg: image) : image} alt="profile" className="image" style={{width:"4rem", height:"4rem"}}></img>
+            <img src={process.env.REACT_APP_API_ENDPOINT + "/api/image/" + userInfo.data.profileImg} alt="profile" className="image" style={{width:"4rem", height:"4rem"}}></img>
             <div className="mx-1 edit-div"><Link to={`/edit/${userInfo.data._id}`} style={{color: "#00365B", marginRight: "0.25rem", fontSize: "0.9rem", fontWeight: "600"}}>Edit</Link><img src={process.env.PUBLIC_URL +  "/images/edit-2.png"} alt="edit"></img></div>
             </div>
             <div className='my-2'>

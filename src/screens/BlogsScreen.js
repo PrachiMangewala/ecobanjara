@@ -11,8 +11,8 @@ import TravelExpert from '../components/TravelExpert';
 
 export default function BlogsScreen() {
     const {id} = useParams();
-    const blogsList = useSelector((state) => state.blogsList);
-    const { error, blogs} = blogsList;
+    // const blogsList = useSelector((state) => state.blogsList);
+    // const { error, blogs} = blogsList;
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
@@ -29,9 +29,9 @@ export default function BlogsScreen() {
         dispatch(listTravelexperts(userInfo));
       },[dispatch, userInfo]);
 
-    useEffect(()=>{
-        dispatch(listBlogs(userInfo, id));
-    },[dispatch, userInfo, id]);
+    // useEffect(()=>{
+    //     dispatch(listBlogs(userInfo, id));
+    // },[dispatch, userInfo, id]);
 
     var settings2 = {
         dots: true,
@@ -70,9 +70,6 @@ export default function BlogsScreen() {
 
     return (
         <div>
-            {error ?
-                (<MessageBox variant="danger">{error}</MessageBox>
-                ) : (
             <div>
             <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%", backgroundColor:"#F3F3F3"}}><i class="fas fa-map-marker-alt loc-icon"></i></span>
             <div className="blog-nav">
@@ -91,10 +88,11 @@ export default function BlogsScreen() {
                     </ul>
             </div>
             <div className="my-2">
-                    {blogs.length===0 ? 
+                    {location.blogs?
+                    location.blogs.length===0 ? 
                     <div style={{color: "#3F3F3F"}} className='mx-1'>No Blogs</div> 
                     :(   
-                    blogs.map((blog) => (
+                    location.blogs.map((blog) => (
                         <div class="mx-175 d-flex my-1">
                         <img src={blog.image[0]} alt="img" className="blog-image"></img>
                         <div>
@@ -107,7 +105,7 @@ export default function BlogsScreen() {
                         </div>
                         </div>
                         </div>
-                    )))}
+                    ))) : ""}
             </div>
             <div>
                 <div className="text">
@@ -125,7 +123,7 @@ export default function BlogsScreen() {
                 </div>
             </div>
             </div>
-            )}
+            )
         </div>
     )
 }

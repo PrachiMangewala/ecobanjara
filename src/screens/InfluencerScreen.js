@@ -6,6 +6,8 @@ import { getsavedTravelExperts, getTravelExpert } from '../actions/travelexperts
 import FixedItineraryBox from '../components/FixedItineraryBox';
 import InfluencerInfoPopup from '../components/InfluencerInfoPopup';
 import Popup from '../components/Popup';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default function InfluencerScreen() {
     const {id} = useParams();
@@ -65,7 +67,7 @@ export default function InfluencerScreen() {
             {!(savedTravelexperts.find((expert) => expert._id === influencerId)) &&  <span className="overlay" style={{left:"87%", fontSize:"20px"}} onClick={() => AddToSavedTravelExperts(influencerId)}><i class="far fa-heart"></i></span>}
             {(savedTravelexperts.find((expert) => expert._id === influencerId)) &&  <span className="overlay" style={{left:"87%", fontSize:"20px"}} onClick={() => AddToSavedTravelExperts(influencerId)}><i class="fas fa-heart"></i></span>}
             <div className="display-flex my-1 mx-1">
-                <img src={image} alt="hello" className="image" style={{width:"4rem", height:"4rem"}}></img>
+                <img src={process.env.REACT_APP_API_ENDPOINT + "/api/image/" + travelexpert.data.profileImg} alt="hello" className="image" style={{width:"4rem", height:"4rem"}}></img>
                 <p className="name-i">{
                     travelexpert.data? travelexpert.data.name: ""}</p>
                 <p className="city">Rohini, Delhi</p>

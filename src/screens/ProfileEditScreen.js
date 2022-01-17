@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserProfile } from '../actions/userActions';
 import MessageBox from '../components/MessageBox';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default function ProfileEditScreen() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -60,7 +62,7 @@ export default function ProfileEditScreen() {
             <form className="signinform" style={{top:"0px"}}>
                 <div className="form-group">
                     <label htmlFor="image-input"><i className="fas fa-camera camera-icon"></i></label>
-                    <img src={profileImg} alt="profile" className="image"></img>
+                    <img src={process.env.REACT_APP_API_ENDPOINT + "/api/image/" + profileImg} alt="profile" className="image"></img>
                     <input className="display" type="file" name="image-upload" id="image-input" accept="image/*" onChange={imageHandler}/>
                 </div>
                 <div className="form-group">

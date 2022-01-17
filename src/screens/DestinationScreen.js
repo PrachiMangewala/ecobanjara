@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import {Link, useParams} from 'react-router-dom';
 import Slider from "react-slick";
-import TravelExperts from '../TravelExperts';
 import TravelExpert from '../components/TravelExpert';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailsLocation, getsavedLocations } from '../actions/locationActions';
 import { removeEntity, saveEntity } from '../actions/saveentitiesActions';
+import { listTravelexperts } from '../actions/travelexpertsActions';
 
 export default function DestinationScreen() {
     // const[image, setImage] = useState('/tajmahal.jpg');
@@ -21,10 +21,16 @@ export default function DestinationScreen() {
     console.log(location);
     const savedLocationsList = useSelector((state) => state.savedLocationsList);
     const {savedlocations} = savedLocationsList;
+    const travelexpertsList = useSelector((state) => state.travelexpertsList);
+    const {travelexperts} = travelexpertsList;
 
     useEffect(()=>{
         dispatch(getsavedLocations(userInfo));
       },[dispatch, userInfo]);
+
+      useEffect(()=>{
+        dispatch(listTravelexperts(userInfo));
+    },[dispatch, userInfo]);
 
     const AddToSavedLocations = (locationId) => {
         if(savedlocations){
@@ -125,16 +131,16 @@ export default function DestinationScreen() {
                 <p className="mx-1 dest-p">{location.about? location.about.substring(0,5): ''}<span><Link to="/" className="font-yellow"> Read More</Link></span></p>
             </div>
             <div>
-                <div class="text">
+                <div className="text">
                     <p>Top Travel Experts</p>
-                    <a href="/">View All</a>
+                    <Link to="/travelexperts/rating">View All</Link>
                 </div>
-                <div class="Slide">
+                <div className="Slide">
                 <Slider {...settings2}>
-                    {
-                        TravelExperts.TravelExp.map((Travelexpert) => (
+                    { travelexperts? 
+                        travelexperts.map((Travelexpert) => (
                             <TravelExpert key={Travelexpert._id} TravelExpert={Travelexpert}></TravelExpert>
-                        ))
+                        )) : ""
                     }
                 </Slider>
                 </div>
