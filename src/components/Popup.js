@@ -34,7 +34,7 @@ export default function Popup(props) {
                         </div>
                     </div>
                     <hr className='mx-1'></hr>
-                    <div className="iten-text" style={{textAlign: "center"}}>**Comment**</div>
+                    <div className="iten-text" style={{textAlign: "center", margin:"0 1rem"}}>**With every personalised itinerary, a traveller gets to connect with travel expert through unlimited chat (valid for duration of the itinerary) and two virtual meetings of 30 minutes each.</div>
                 </div>
             </div>
         </div>

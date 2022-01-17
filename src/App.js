@@ -51,6 +51,8 @@ import SettingsPage from './screens/SettingsPage';
 import PaymentHistoryPage from './screens/PaymentHistoryPage';
 import OrderScreen from './screens/OrderScreen';
 import OtpsigninScreen from './screens/OtpsigninScreen';
+import HelpandSupportScreen from './screens/HelpandSupportScreen';
+import ChangePasswordScreen from './screens/ChangePasswordScreen';
 
 function App() {
   return (
@@ -96,8 +98,10 @@ function App() {
           <Route path="/fixeditinerary/:id/payment" element={<DisplayItineraryAfterPaymentScreen/>} exact></Route>
           <Route path="/fixeditinerary/checkout/:id" element={<FixedItineraryCheckoutScreen/>} exact></Route>
           <Route path="/settings" element={<SettingsPage/>} exact></Route>
+          <Route path="/changepassword" element={<ChangePasswordScreen/>} exact></Route>
           <Route path="/paymenthistory" element={<PaymentHistoryPage/>} exact></Route>
           <Route path="/order/:id" element={<OrderScreen/>} exact></Route>
+          <Route path="/helpandsupport" element={<HelpandSupportScreen/>} exact></Route>
           <Route element={<TravelExpertRoute/>}>
             <Route path="/home/influencer/:id" element={<InfluencerPrivateScreen />} exact></Route>
             <Route path="/itinerary/addlocations/:id" element={<AddLocationsScreen/>} exact></Route>

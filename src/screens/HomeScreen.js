@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MessageBox from '../components/MessageBox';
 import Sidebar from '../components/Sidebar';
 import { listLocals } from '../actions/localsActions';
-import { listLocations } from '../actions/locationActions';
+import { listLocations, listPopularLocations } from '../actions/locationActions';
 import { listTravelexperts } from '../actions/travelexpertsActions';
 import {Link} from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
@@ -29,8 +29,11 @@ export default function HomeScreen() {
     const travelexpertsList = useSelector((state) => state.travelexpertsList);
     const {travelexperts} = travelexpertsList;
     console.log(travelexperts);
+    const popularlocationsList = useSelector((state) => state.popularlocationsList);
+    const { popularlocations } = popularlocationsList;
     const locationsList = useSelector((state) => state.locationsList);
     const { error, locations} = locationsList;
+    const [selected, setSelected] = useState("all");
     useEffect(()=>{
       dispatch(listLocals(userInfo));
     },[dispatch, userInfo]);
@@ -42,6 +45,14 @@ export default function HomeScreen() {
     useEffect(()=>{
       dispatch(listTravelexperts(userInfo));
     },[dispatch, userInfo]);
+
+    useEffect(()=>{
+      dispatch(listPopularLocations(userInfo));
+    },[dispatch, userInfo]);
+
+    const setChange = (value) => {
+      setSelected(value);
+    }
 
     var settings = {
         dots: true,
@@ -127,7 +138,7 @@ export default function HomeScreen() {
             <Sidebar />
           </div>
             <nav className='navigation-bar'>
-                <img src='images/logo.png' alt="logo"></img>
+                <img src='images/logo-change.png' alt="logo" style={{width:"100px", marginBottom:"2rem"}}></img>
             </nav>
             </div>
             <div>
@@ -138,19 +149,19 @@ export default function HomeScreen() {
                 <i className="fas fa-search search-icon"></i>
             </div> */}
             <div>
-                <div className='my-1'>
+                <div className='my-1' style={{marginBottom:"2rem"}}>
                     <ul className="loc-text">
-                        <li><a href="/" className="active">All</a></li>
-                        <li><a href="/" className="loc-hover">Popular</a></li>
-                        <li><a href="/" className="loc-hover">Nearby</a></li>
-                        <li><a href="/" className="loc-hover">Recommended</a></li>
+                        <li className={selected === "all"? "active" : "loc-hover"} onClick={() => setChange("all")}>All</li>
+                        <li className={selected === "popular"? "active" : "loc-hover"} onClick={() => setChange("popular")}>Popular</li>
+                        <li className={selected === "nearby"? "active" : "loc-hover"} onClick={() => setChange("nearby")}>Nearby</li>
+                        <li className={selected === "recommended"? "active" : "loc-hover"} onClick={() => setChange("recommended")}>Recommended</li>
                     </ul>
                 </div>
-                <div className="Slide" style={{marginLeft:"1rem"}}>
+                <div className="Slide" style={{margin:"2rem 0 2rem 1rem"}}>
                 {
                 error? (<MessageBox>{error}</MessageBox>)
                 : 
-                (
+                ( selected === "all"?
                 // {console.log(locations['data'])}
                 <Slider {...settings}>
                     {
@@ -166,6 +177,22 @@ export default function HomeScreen() {
                     </div>
                     </div>
                 </Slider>
+                : selected==="popular"?
+                <Slider {...settings}>
+                    {
+                          popularlocations.slice(0,5).map((location) => (
+                            <Location key={location._id} location={location}></Location>
+                        ))
+                    }
+                    <div>
+                    <div className='card my-1' style={{width:"213px"}}>
+                      <div style={{display:"flex", alignItems:"center", justifyContent:"center", width:"100%", height:"100%"}}>
+                      <Link to="/destinations/popular">View All</Link>
+                      </div>
+                    </div>
+                    </div>
+                </Slider>
+                : ""
               )
               }
                 </div>

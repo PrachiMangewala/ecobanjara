@@ -1,9 +1,13 @@
 // import React, { useState } from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { getItineraryPrice } from '../actions/fixedItineraryActions';
 import { listLocations } from '../actions/locationActions';
+// import LocationBox from '../components/LocationBox';
+// import SearchLocations from '../components/SearchLocations';
+
+
 
 export default function ConnectScreen() {
     // const[bool, setBool] = useState(false);
@@ -14,6 +18,8 @@ export default function ConnectScreen() {
     //         elms[i].style.display = 'none';
     //     }
     // }
+    const[filteredData, setFilteredData] = useState([]);
+    const[wordEntered, setWordEntered] = useState("");
     const[trip, setTrip] = useState("");
     const[destinations, setDestinations] = useState([]);
     const[destinationsWhole, setDestinationsWhole] = useState([]);
@@ -42,6 +48,24 @@ export default function ConnectScreen() {
 
     const saveLocations = () => {
         navigate(`/checkout/${userInfo.data._id}`, {state:{destinations: destinations, destinationsWhole: destinationsWhole, trip: trip, price: price, userId: userId, type:type}});
+    }
+
+    const handleFilter = (event) => {
+        const searchWord = event.target.value;
+        setWordEntered(searchWord);
+        const newFilter = locations.filter((value) => {
+            return value.city.toLowerCase().includes(searchWord.toLowerCase());
+        });
+        if(searchWord === ""){
+            setFilteredData([])
+        }else{
+            setFilteredData(newFilter);
+        }
+    }
+
+    const clearInput = () => {
+        setFilteredData([]);
+        setWordEntered("");
     }
   
     const selectedDestinations = (location) => {
@@ -79,26 +103,86 @@ export default function ConnectScreen() {
                 <p className='connect'>Connect</p>
             </div>
             <div>
-            <p className='heading-locs'>Add Locations</p>
-                <div className='wrap-locs my-1'>
+            <p className='heading-locs' style={{marginBottom:"2rem"}}>Add Locations</p>
+                <div>
+                <div>
+            <div className='search-box my-1' style={{marginBottom:"2rem"}}>
+            <input type="text" placeholder="Search for a location" className='search' value={wordEntered} onChange={handleFilter} style={{width:"100%"}}></input>
+            {filteredData.length === 0 ?
+               <i class="fas fa-search search-icon"></i>
+               :
+               <i class="fas fa-times search-icon" onClick={clearInput}></i>
+            }
+            </div>
+            {filteredData.length!==0? (
+            <div>
+                    <div className='py-1'>
+                    <div class="text">
+                    <p style={{margin:"0"}}>Search Results</p>
+                    </div>
+                    <div>
                     {
-                        locations.map((location) => (
+                    filteredData.slice(0,5).map((value, key) => {
+                        return(
                             <div className='location-comp'>
-                                <div class="container" style={{fontStyle: "normal", fontWeight: "900", fontSize: "12px", display: "flex", alignItems: "center", letterSpacing: "0.03em", color: "#00365B"}}>{location.address}
+                        <div className="container" style={{fontStyle: "normal", fontWeight: "900", fontSize: "12px", display: "flex", alignItems: "center", letterSpacing: "0.03em", color: "#00365B"}}>{value.address}
+                            {(destinations.length===0)? 
+                            (
+                            <span className="checkmark" onClick={() => selectedDestinations(value)} style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}}><i class="fas fa-plus plus"></i></span>
+                            ):  (destinations.find((destination) => destination === value._id))?
+                            (
+                            <span className="checkmark" style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}} onClick={() => selectedDestinations(value)}><i class="fas fa-check" style={{color: "#ffffff", fontWeight: "500"}}></i></span>
+                            ):(
+                            <span className="checkmark" onClick={() => selectedDestinations(value)} style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}}><i class="fas fa-plus plus"></i></span>
+                            )}
+                        </div>
+                    </div>
+                        )
+                    })
+                }
+                </div>
+                </div>
+            </div>
+            ): <div className='wrap-locs my-1'>
+            {
+                locations.slice(0,5).map((location) => (
+                    <div className='location-comp'>
+                        <div className="container" style={{fontStyle: "normal", fontWeight: "900", fontSize: "12px", display: "flex", alignItems: "center", letterSpacing: "0.03em", color: "#00365B"}}>{location.address}
+                            {(destinations.length===0)? 
+                            (
+                            <span className="checkmark" onClick={() => selectedDestinations(location)} style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}}><i class="fas fa-plus plus"></i></span>
+                            ):  (destinations.find((destination) => destination === location._id))?
+                            (
+                            <span className="checkmark" style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}} onClick={() => selectedDestinations(location)}><i class="fas fa-check" style={{color: "#ffffff", fontWeight: "500"}}></i></span>
+                            ):(
+                            <span className="checkmark" onClick={() => selectedDestinations(location)} style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}}><i class="fas fa-plus plus"></i></span>
+                            )}
+                        </div>
+                    </div>
+                ))
+            }
+    </div>}
+        </div>
+                </div>
+                {/* <div className='wrap-locs my-1'>
+                    {
+                        locations.slice(0,5).map((location) => (
+                            <div className='location-comp'>
+                                <div className="container" style={{fontStyle: "normal", fontWeight: "900", fontSize: "12px", display: "flex", alignItems: "center", letterSpacing: "0.03em", color: "#00365B"}}>{location.address}
                                     {(destinations.length===0)? 
                                     (
-                                    <span class="checkmark" onClick={() => selectedDestinations(location)} style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}}><i class="fas fa-plus plus"></i></span>
+                                    <span className="checkmark" onClick={() => selectedDestinations(location)} style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}}><i class="fas fa-plus plus"></i></span>
                                     ):  (destinations.find((destination) => destination === location._id))?
                                     (
-                                    <span class="checkmark" style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}} onClick={() => selectedDestinations(location)}><i class="fas fa-check" style={{color: "#ffffff", fontWeight: "500"}}></i></span>
+                                    <span className="checkmark" style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}} onClick={() => selectedDestinations(location)}><i class="fas fa-check" style={{color: "#ffffff", fontWeight: "500"}}></i></span>
                                     ):(
-                                    <span class="checkmark" onClick={() => selectedDestinations(location)} style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}}><i class="fas fa-plus plus"></i></span>
+                                    <span className="checkmark" onClick={() => selectedDestinations(location)} style={{backgroundColor: "#00365B", display:"flex", justifyContent: "center", alignItems: "center"}}><i class="fas fa-plus plus"></i></span>
                                     )}
                                 </div>
                             </div>
                         ))
                     }
-            </div>
+            </div> */}
             </div>
             <div style={{marginBottom: "2rem"}}>
                 <p className='heading-locs'>Timeline</p>
@@ -134,8 +218,8 @@ export default function ConnectScreen() {
                     <button type="submit" className="btn" style={{ marginBottom: "1rem", padding: "0" }} onClick={saveLocations}>Plan your trip</button>
                 }
                 <p className='heading-locs' style={{justifyContent: "center"}}>Or</p>
-                <button type="submit" className="btn" style={{ backgroundColor: "#DEDEDE", color: "#8B7F7F", padding: "0"
-                }}>Explore Fixed Itenary</button>
+                <Link to={`/fixeditineraries/${influencer}`}><button type="submit" className="btn" style={{ backgroundColor: "#DEDEDE", color: "#8B7F7F", padding: "0"
+                }}>Explore Fixed Itinerary</button></Link>
             </div>
         </div>
     )

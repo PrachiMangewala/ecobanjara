@@ -4,7 +4,7 @@ import { addDayinItinerary, getCustomItinerary } from '../actions/customItinerar
 import {Link} from 'react-router-dom';
 import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
-import ChatBox from '../components/ChatBox';
+// import ChatBox from '../components/ChatBox';
 
 export default function AddCustomItineraryScreen() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -15,12 +15,12 @@ export default function AddCustomItineraryScreen() {
     const { loading, error, customItinerary } = customItineraryDetails;
     console.log(customItinerary);
     const dispatch = useDispatch();
-    const [chat, setChat] = useState(false);
+    // const [chat, setChat] = useState(false);
     const customId = '61b7134715eeeafa6e68c91d';
     // const days = useState(String(customItinerary.journey.endDate));
     // console.log(days); 
     const [dayNo, setN] = useState(customItinerary && customItinerary.content? customItinerary.content.length : "");
-    const length=0;
+    // const length=0;
     const [EditScreen, setEditScreen] = useState(false);
 
     useEffect(()=>{
@@ -31,9 +31,9 @@ export default function AddCustomItineraryScreen() {
         setEditScreen(!EditScreen);
     }
 
-    const showChatBox = () => {
-        setChat(!chat);
-    }
+    // const showChatBox = () => {
+    //     setChat(!chat);
+    // }
 
     const increaseDay = () => {
         console.log(dayNo)
@@ -108,7 +108,7 @@ export default function AddCustomItineraryScreen() {
                         ))
                         }
                         </div>
-                        {
+                        {/* {
                             chat?
                             <div className='bg-white comment' style={{cursor:"pointer", display:"flex", flexDirection:"column", alignItems:"flex-start", width:"93%"}}>
                                 <div style={{display:"flex", alignItems:"center"}}>
@@ -140,7 +140,7 @@ export default function AddCustomItineraryScreen() {
                                 <img src={process.env.PUBLIC_URL +  '/images/comment.png'} alt="img" style={{width:"12px", height:"12px", marginRight:"5px"}}></img>
                                 Comments
                             </div>
-                        }
+                        } */}
                     </div>
                     :
                     <div style={{borderLeft: "3px dashed #FC7E00", paddingLeft: "30px", position:"relative", left:"14px", paddingTop:"10px", paddingBottom:"30px"}}>

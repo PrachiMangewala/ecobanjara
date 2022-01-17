@@ -5,7 +5,7 @@ import { listLocations } from '../actions/locationActions';
 // import Location from './location';
 import LocationBox from './LocationBox';
 
-export default function SearchBar({placeholder, data}) {
+export default function SearchLocations({placeholder, data}) {
     const[filteredData, setFilteredData] = useState([]);
     const[wordEntered, setWordEntered] = useState("");
     // const locationsList = useSelector((state) => state.locationsList);
@@ -36,52 +36,10 @@ export default function SearchBar({placeholder, data}) {
         setWordEntered("");
     }
 
-    // var settings = {
-    //   dots: true,
-    //   infinite: false,
-    //   speed: 500,
-    //   slidesToShow: 4,
-    //   slidesToScroll: 2,
-    //   initialSlide: 0,
-    //   responsive: [
-    //     {
-    //       breakpoint: 1024,
-    //       settings: {
-    //         slidesToShow: 3,
-    //         slidesToScroll: 2,
-    //         infinite: true,
-    //         dots: true
-    //       }
-    //     },
-    //     {
-    //       breakpoint: 600,
-    //       settings: {
-    //         slidesToShow: 2,
-    //         slidesToScroll: 2,
-    //         initialSlide: 2
-    //       }
-    //     },
-    //     {
-    //       breakpoint: 480,
-    //       settings: {
-    //         slidesToShow: 1.5,
-    //         slidesToScroll: 1
-    //       }
-    //     },
-    //     {
-    //       breakpoint: 300,
-    //       settings: {
-    //         slidesToShow: 1,
-    //         slidesToScroll: 1
-    //       }
-    //     }
-    //   ]
-    // };
-
     return (
         <div>
             <div className='search-box my-1' style={{marginBottom:"2rem"}}>
-            <input type="text" placeholder="Search" className='search' value={wordEntered} onChange={handleFilter}></input>
+            <input type="text" placeholder="Search for a location" className='search' value={wordEntered} onChange={handleFilter} style={{width:"100%"}}></input>
             {filteredData.length === 0 ?
                <i class="fas fa-search search-icon"></i>
                :
@@ -90,18 +48,6 @@ export default function SearchBar({placeholder, data}) {
             </div>
             {filteredData.length!==0 && (
             <div className='dataResult'>
-                    {/* <div class="text">
-                    <p style={{margin:"0"}}>Top Destinations</p>
-                    </div>
-                    <div class="Slide" style={{marginLeft:"1rem"}}>
-                    <Slider {...settings}>
-                        {
-                              locations.slice(0,5).map((location) => (
-                                <Location key={location._id} location={location}></Location>
-                            ))
-                        }
-                    </Slider>
-                    </div> */}
                     <div className='py-1' style={{paddingBottom:"300px"}}>
                     <div class="text">
                     <p style={{margin:"0"}}>Search Results</p>

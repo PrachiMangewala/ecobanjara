@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { detailsLocation } from '../actions/locationActions';
 import { Link } from 'react-router-dom';
 import VideoBox from '../components/VideoBox';
+import Slider from 'react-slick';
+import TravelExpert from '../components/TravelExpert';
+import { listTravelexperts } from '../actions/travelexpertsActions';
 
 export default function VideosScreen() {
     const { id } = useParams();
@@ -12,10 +15,51 @@ export default function VideosScreen() {
     const dispatch = useDispatch();
     const locationDetails = useSelector((state) => state.locationDetails);
     const { location } = locationDetails;
+    const travelexpertsList = useSelector((state) => state.travelexpertsList);
+    const {travelexperts} = travelexpertsList;
 
     useEffect(() => {
         dispatch(detailsLocation(userInfo, id));
     }, [dispatch, userInfo, id]);
+
+    useEffect(()=>{
+        dispatch(listTravelexperts(userInfo));
+      },[dispatch, userInfo]);
+
+      var settings2 = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 8,
+        slidesToScroll: 4,
+        initialSlide: 0,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 8,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 5,
+              slidesToScroll: 2,
+              initialSlide: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      };
 
     return (
         <div>
@@ -47,6 +91,21 @@ export default function VideosScreen() {
                                 ))))
                     : ""
                 }
+            </div>
+            <div>
+                <div className="text">
+                    <p>Top Travel Experts</p>
+                    <Link to="/travelexperts/rating">View All</Link>
+                </div>
+                <div className="Slide">
+                <Slider {...settings2}>
+                    { travelexperts? 
+                        travelexperts.slice(0,20).map((Travelexpert) => (
+                            <TravelExpert key={Travelexpert._id} TravelExpert={Travelexpert}></TravelExpert>
+                        )) : ""
+                    }
+                </Slider>
+                </div>
             </div>
         </div>
     )

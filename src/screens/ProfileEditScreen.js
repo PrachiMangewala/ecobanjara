@@ -39,17 +39,19 @@ export default function ProfileEditScreen() {
         console.log(email);
         console.log(gender);
         console.log(mobileNo);
-        dispatch(updateUserProfile(userInfo, profileImg, name, email, gender, mobileNo));
+        dispatch(updateUserProfile(userInfo, email, name, mobileNo, profileImg, gender));
     }
+    
+    console.log(gender)
 
     return (
         <div className='my-1'>
             <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}} className="mx-1">
                 <div className='py-1' style={{ display: "flex", alignItems: "center", backgroundColor: "#FFFFFF" }}>
-                    <p><i class="fas fa-chevron-left" style={{ fontSize: "1.2rem" }}></i></p>
+                    <p><i className="fas fa-chevron-left" style={{ fontSize: "1.2rem" }}></i></p>
                     <p className='connect' style={{color: "#000000"}}>Edit Profile</p>
                 </div>
-                    <p className='heading-dest' style={{color: "#9C9C9C"}} onClick={updateInfo}>Save</p>
+                    <p className='heading-dest' style={{color: "#9C9C9C", cursor:"pointer"}} onClick={updateInfo}>Save</p>
             </div>
             <div className='px-1' style={{backgroundColor: "#F2F4F6", height: "100vh"}}>
             {
@@ -57,7 +59,7 @@ export default function ProfileEditScreen() {
                 :
             <form className="signinform" style={{top:"0px"}}>
                 <div className="form-group">
-                    <label htmlFor="image-input"><i class="fas fa-camera camera-icon"></i></label>
+                    <label htmlFor="image-input"><i className="fas fa-camera camera-icon"></i></label>
                     <img src={profileImg} alt="profile" className="image"></img>
                     <input className="display" type="file" name="image-upload" id="image-input" accept="image/*" onChange={imageHandler}/>
                 </div>
@@ -72,9 +74,14 @@ export default function ProfileEditScreen() {
                     onChange={ e => setEmail(e.target.value)} style={{backgroundColor: "#ffffff"}}></input>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="gender">Gender</label>
-                    <input type="text" id="gender"  className="form-control" placeholder="Enter Gender" value={gender} required 
-                    onChange={ e => setGender(e.target.value)} style={{backgroundColor: "#ffffff"}}></input>
+                    <label htmlFor="gender">Select Gender</label>
+                    {/* <input type="text" id="gender"  className="form-control" placeholder="Enter Gender" value={gender} required 
+                    onChange={ e => setGender(e.target.value)} style={{backgroundColor: "#ffffff"}}></input> */}
+                    <select className="form-control" style={{backgroundColor: "#ffffff"}} onChange={e => setGender(e.target.value)}>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="gender">Phone Number</label>

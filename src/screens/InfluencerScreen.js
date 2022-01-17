@@ -62,8 +62,8 @@ export default function InfluencerScreen() {
             travelexpert?
             <div>
             <Popup trigger={buttonPopup} setTrigger={setTimedPopup}></Popup>
-            {!(savedTravelexperts.find((expert) => expert._id === influencerId)) && <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%", backgroundColor:"#efefef"}}  onClick={() => AddToSavedTravelExperts(influencerId)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
-            {(savedTravelexperts.find((expert) => expert._id === influencerId)) && <span className="overlay2" style={{padding: "6px 8px 6px 8px", left:"84%"}}  onClick={() => AddToSavedTravelExperts(influencerId)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
+            {!(savedTravelexperts.find((expert) => expert._id === influencerId)) &&  <span className="overlay" style={{left:"87%", fontSize:"20px"}} onClick={() => AddToSavedTravelExperts(influencerId)}><i class="far fa-heart"></i></span>}
+            {(savedTravelexperts.find((expert) => expert._id === influencerId)) &&  <span className="overlay" style={{left:"87%", fontSize:"20px"}} onClick={() => AddToSavedTravelExperts(influencerId)}><i class="fas fa-heart"></i></span>}
             <div className="display-flex my-1 mx-1">
                 <img src={image} alt="hello" className="image" style={{width:"4rem", height:"4rem"}}></img>
                 <p className="name-i">{
@@ -102,7 +102,7 @@ export default function InfluencerScreen() {
                 <div class="influencer-travel" style={{fontWeight: "400", padding: "0 1rem"}}>
                     <p>Instagram</p>
                     <p>|</p>
-                    <p>Trivago</p>
+                    <p>Triponvo</p>
                 </div>
                 <div class="influencer-travel">
                     <p>Destinations Travelled</p>
@@ -133,9 +133,9 @@ export default function InfluencerScreen() {
                     </div>
                     <p className="reviews"><Link to="/" style={{color: "#FC7E00"}}>Reviews</Link></p>
                 </div>
-                <div style={{display:"flex", justifyContent:"space-around"}}>
-                    <div className="location-box" style={{padding:"10px 15px"}}><Link to="/">Youtube</Link></div>
-                    <div className="location-box" style={{padding:"10px 15px"}}><Link to="/">Instagram</Link></div>
+                <div style={{display:"flex", justifyContent:"space-around", paddingBottom:"2rem"}}>
+                    <div className="location-box" style={{padding:"10px 20px"}}><Link to="/">Youtube</Link></div>
+                    <div className="location-box" style={{padding:"10px 20px"}}><Link to="/">Instagram</Link></div>
                 </div>
                 <div className="fixed-bar">
                     <div>

@@ -65,7 +65,7 @@ export default function DestinationScreen() {
     useEffect(()=>{
       dispatch(detailsLocation(userInfo, id));
     },[dispatch, userInfo, id]);
-    console.log(error);
+    // console.log(error);
 
     var settings2 = {
         dots: true,
@@ -105,9 +105,8 @@ export default function DestinationScreen() {
     return (
         <div>
             <img src={process.env.PUBLIC_URL +  '/images/tajmahal.jpg'} alt="img" className="dest-backimage"></img>
-            {!(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%"}} onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
-            {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay2" style={{padding: "6px 8px 6px 8px", left:"84%"}} onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-map-marker-alt loc-icon"></i></span>}
-            {/* <span className="overlay" style={{padding: "6px 8px 6px 8px", left:"84%"}}><i class="fas fa-map-marker-alt loc-icon"></i></span> */}
+            {!(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" style={{left:"87%", fontSize:"20px"}} onClick={() => AddToSavedLocations(location._id)}><i class="far fa-heart"></i></span>}
+            {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" style={{left:"87%", fontSize:"20px"}} onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-heart"></i></span>}
             <div className="destination-info">
                 <div>
                 <p className="mx-1 dest-name">{location.city}</p>

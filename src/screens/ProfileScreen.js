@@ -32,7 +32,7 @@ export default function ProfileScreen() {
             </div>
             <div className='my-2'>
                 <div className='profile-heading my-1'>Your Gender</div>
-                <div className='profile-value'>{userInfo.data.gender}</div>
+                <div className='profile-value'>{userInfo.data.gender? userInfo.data.gender : "Not saved"}</div>
             </div>
             <div className='my-2'>
                 <div className='profile-heading my-1'>Your E-mail</div>
@@ -40,7 +40,7 @@ export default function ProfileScreen() {
             </div>
             <div className='my-2'>
                 <div className='profile-heading my-1'>Your phone number</div>
-                <div className='profile-value'>{userInfo.data.mobileNo}</div>
+                <div className='profile-value'>{userInfo.data.mobileNo? userInfo.data.mobileNo : "Not saved"}</div>
             </div>
             </div>
 

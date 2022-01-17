@@ -98,7 +98,7 @@ export default function CheckoutScreen() {
                 <p className='connect'>Checkout</p>
             </div>
             <div>
-                <p className='heading-locs' style={{ fontSize: "16px", textDecoration: "underline" }}>Custom Itinerary Summary</p>
+                <p className='heading-locs' style={{ fontSize: "16px", textDecoration: "underline" }}>Personalized Itinerary Summary</p>
                 <p className='heading-locs mt-2' style={{ fontSize: "14px" }}>Travel Expert:</p>
                 <div style={{ display: "flex" }}>
                     <img className="expertImage" src={TravelExpert.profileImg ? TravelExpert.profileImg : image} alt="img"></img>

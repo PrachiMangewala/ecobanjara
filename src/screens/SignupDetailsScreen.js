@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { register } from '../actions/userActions';
+import prettyName from 'pretty-name';
 
 export default function SignupDetailsScreen() {
     const location = useLocation();
@@ -25,7 +26,7 @@ export default function SignupDetailsScreen() {
         if(location.state){
             setRole(location.state.role);
             setMobile(location.state.mobileNo);
-            setName(location.state.name);
+            setName(prettyName(location.state.name));
             setImage(location.state.image);
             setEmail(location.state.email);
         }
@@ -100,9 +101,14 @@ export default function SignupDetailsScreen() {
                     onChange={ e => setBirthday(e.target.value)}></input>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="gender">Gender</label>
-                    <input type="text" id="gender"  className="form-control" placeholder="Enter Gender" 
-                    onChange={ e => setGender(e.target.value)}></input>
+                    <label htmlFor="gender">Select Gender</label>
+                    {/* <input type="text" id="gender"  className="form-control" placeholder="Enter Gender" 
+                    onChange={ e => setGender(e.target.value)}></input> */}
+                    <select className="form-control" onChange={e => setGender(e.target.value)}>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
                 </div>
                 <div className="form-group" style={{position: "relative"}}>
                     <label htmlFor="Password">Password</label>
