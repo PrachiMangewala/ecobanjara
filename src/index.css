@@ -369,6 +369,7 @@ input:focus{
   height: 54px;
   /* display: block; */
   border-radius: 50% 50%;
+  object-fit: cover;
 }
 
 .Name{

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { getsavedLocations } from '../actions/locationActions';
 import { removeEntity, saveEntity } from '../actions/saveentitiesActions';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default function Location(props){
     const userSignin = useSelector((state) => state.userSignin);
@@ -56,7 +58,7 @@ export default function Location(props){
     return(
     <div key={location._id} className="card my-1">
               <div>
-                <img src={location.images} alt={location.name}></img>
+                <img src={process.env.REACT_APP_API_ENDPOINT + "/api/image/" + location.images} alt={location.name}></img>
                 {!(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" onClick={() => AddToSavedLocations(location._id)}><i class="far fa-heart"></i></span>}
                 {(savedlocations.find((loc) => loc._id === location._id)) &&  <span className="overlay" onClick={() => AddToSavedLocations(location._id)}><i class="fas fa-heart"></i></span>}
               </div>
